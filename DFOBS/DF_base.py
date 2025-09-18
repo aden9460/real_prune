@@ -1,4 +1,4 @@
-###由于全尺度评估需要的输入较多 会爆显存 所以进行更改 逐block即时获得hessian 算完释放
+ ###由于全尺度评估需要的输入较多 会爆显存 所以进行更改 逐block即时获得hessian 算完释放
 #发现代码不需要这么复杂 slimgpt的钩子写好之后 直接前向传播即可
 import time
 import os
@@ -8,8 +8,6 @@ import numpy as np
 import argparse
 from transformers import set_seed
 import os.path as osp
-from dataclasses import dataclass
-from typing import List, Sequence, Dict, Optional, Tuple
 
 from slim_utils.slimgpt import SlimGPT
 from slim_utils.slim_dataset import get_loaders
@@ -88,100 +86,6 @@ def get_module_by_name(layer, name):
     for attr in name.split('.'):
         module = getattr(module, attr)
     return module
-
-
-# Add Fisher trace config and related functions
-@dataclass 
-class VarTraceConfig:
-    gamma: float = 0.5            
-    ema_rho: float = 0.95         
-    use_exact_per_scale: bool = True   
-    damping_mu: float = 0.0        
-    hutchinson_K: int = 4          
-    fisher_weight_per_token: bool = True  
-    device: Optional[torch.device] = None
-
-class FisherTraceEMA:
-    def __init__(self, num_layers: int, rho: float = 0.95, device: Optional[torch.device] = None):
-        self.ema = torch.zeros(num_layers, device=device)
-        self.rho = rho
-
-    def update(self, current: torch.Tensor):
-        self.ema = self.rho * self.ema + (1.0 - self.rho) * current
-        return self.ema
-
-    def value(self) -> torch.Tensor:
-        return self.ema
-        
-def _zero_grads(model: nn.Module):
-    for p in model.parameters():
-        if p.grad is not None:
-            p.grad.zero_()
-
-def squared_grad_per_layer_from_loss(
-    loss: torch.Tensor,
-    modules_per_layer: List[List[nn.Parameter]], 
-    retain_graph: bool,
-) -> torch.Tensor:
-    _zero_grads(loss.grad_fn.__self__ if hasattr(loss.grad_fn, "__self__") else None)
-    loss.backward(retain_graph=retain_graph)
-    sq = []
-    for layer_params in modules_per_layer:
-        s = 0.0
-        for p in layer_params:
-            if p.grad is not None:
-                s += (p.grad.detach()**2).sum()
-        sq.append(torch.as_tensor(s, device=loss.device))
-    return torch.stack(sq)
-
-def fisher_trace_per_layer(
-    losses_by_scale: Sequence[torch.Tensor],
-    tokens_by_scale: Sequence[int],
-    omega_by_scale: Optional[Sequence[float]], 
-    modules_per_layer: List[List[nn.Parameter]],
-    cfg: VarTraceConfig,
-) -> torch.Tensor:
-    device = losses_by_scale[0].device
-    S = len(losses_by_scale)
-    if omega_by_scale is None:
-        omega_by_scale = [1.0] * S
-
-    if cfg.use_exact_per_scale:
-        sq_sum = torch.zeros(len(modules_per_layer), device=device)
-        for s in range(S):
-            loss_s = losses_by_scale[s]
-            if cfg.fisher_weight_per_token and tokens_by_scale[s] > 0:
-                loss_s = loss_s / float(tokens_by_scale[s]) 
-            sq_l = squared_grad_per_layer_from_loss(loss_s, modules_per_layer, retain_graph=True)
-            sq_sum += float(omega_by_scale[s]) * sq_l
-        return sq_sum
-    else:
-        total = torch.zeros((), device=device)
-        for s in range(S):
-            loss_s = losses_by_scale[s]
-            if cfg.fisher_weight_per_token and tokens_by_scale[s] > 0:
-                loss_s = loss_s / float(tokens_by_scale[s])
-            total = total + float(omega_by_scale[s]) * loss_s
-        sq_l = squared_grad_per_layer_from_loss(total, modules_per_layer, retain_graph=False)
-        return sq_l
-
-def allocate_pruning_rates(
-    traces: torch.Tensor,
-    dims: torch.Tensor,                
-    global_keep_ratio: float,           
-    gamma: float = 0.5,                   
-    min_alpha: float = 0.0,               
-    max_alpha: float = 1.0,               
-    protect_layers: Optional[Sequence[int]] = None, 
-) -> torch.Tensor:
-    eps = 1e-12
-    score = traces.clamp_min(eps).pow(gamma) / dims.clamp_min(1.0)
-    alpha = score / score.sum() * (global_keep_ratio * len(traces))
-    alpha = alpha.clamp(min=min_alpha, max=max_alpha)
-    if protect_layers:
-        for li in protect_layers:
-            alpha[li] = 1.0 
-    return alpha
 
 
 # @torch.no_grad()
@@ -306,65 +210,6 @@ def model_slimming(model, dataloader, args):
 
             del layer
             torch.cuda.empty_cache()
-
-    if args.prune_method == "fisher":
-        # Prepare modules per layer
-        num_layers = len(model.blocks)
-        modules_per_layer = []
-        for i in range(num_layers):
-            layer_params = []
-            layer = model.blocks[i] 
-            for name, module in layer.named_modules():
-                if isinstance(module, (nn.Linear)):
-                    layer_params.extend(module.parameters())
-            modules_per_layer.append(layer_params)
-            
-        # Get parameter dimensions
-        dims = torch.tensor([sum(p.numel() for p in g) for g in modules_per_layer], 
-                          device=next(model.parameters()).device,
-                          dtype=torch.float)
-                          
-        # Setup Fisher trace config and EMA
-        cfg = VarTraceConfig(gamma=0.5, ema_rho=0.95, use_exact_per_scale=True,
-                           device=next(model.parameters()).device)
-        fisher_ema = FisherTraceEMA(num_layers=len(modules_per_layer), 
-                                   rho=cfg.ema_rho,
-                                   device=dims.device)
-                                   
-        # Calculate Fisher trace
-        with torch.enable_grad():
-            losses = []
-            tokens = []
-            for batch_idx, batch in enumerate(dataloader):
-                model(batch)
-                # Collect losses and token numbers
-                loss = model.losses
-                num_tokens = batch.shape[1]
-                losses.append(loss)
-                tokens.append(num_tokens)
-
-            fisher_now = fisher_trace_per_layer(
-                losses_by_scale=[torch.stack(losses)],
-                tokens_by_scale=[sum(tokens)],
-                omega_by_scale=None,
-                modules_per_layer=modules_per_layer,
-                cfg=cfg
-            )
-            
-        fisher_smoothed = fisher_ema.update(fisher_now)
-        
-        # Allocate pruning rates
-        alpha = allocate_pruning_rates(
-            traces=fisher_smoothed,
-            dims=dims, 
-            global_keep_ratio=1.0-args.sparsity,
-            gamma=cfg.gamma,
-            min_alpha=0.1,
-            max_alpha=1.0
-        )
-        
-        # Use alpha as sparsity for each layer
-        args.sparsity = [1.0 - a.item() for a in alpha]
 
     print("本次评估用用时为{}".format(time.time()-t1))
     
@@ -579,9 +424,9 @@ if __name__ == "__main__":
         help="Seed for sampling the calibration data."
     ) 
     parser.add_argument(
-        "--prune_method", type=str, default="slimgpt", 
-        choices=["slimgpt","magnitude","taylor","fisher"],
-        help="Pruning method")
+        "--prune_method", type=str, default="slmipgpt", 
+        help="method.",
+    )
     parser.add_argument(
         "--specific_layer", type=int, default=0, 
         help="choose which layer to evaluate",
