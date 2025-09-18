@@ -113,24 +113,27 @@ class FisherTraceEMA:
     def value(self) -> torch.Tensor:
         return self.ema
         
-def _zero_grads(model: nn.Module):
-    for p in model.parameters():
+def _zero_grads(parameters: Optional[Sequence[nn.Parameter]]):
+    if parameters is None:
+        return
+    for p in parameters:
         if p.grad is not None:
             p.grad.zero_()
 
 def squared_grad_per_layer_from_loss(
     loss: torch.Tensor,
-    modules_per_layer: List[List[nn.Parameter]], 
+    modules_per_layer: List[List[nn.Parameter]],
     retain_graph: bool,
 ) -> torch.Tensor:
-    _zero_grads(loss.grad_fn.__self__ if hasattr(loss.grad_fn, "__self__") else None)
+    flat_params: List[nn.Parameter] = [p for group in modules_per_layer for p in group]
+    _zero_grads(flat_params)
     loss.backward(retain_graph=retain_graph)
     sq = []
     for layer_params in modules_per_layer:
         s = 0.0
         for p in layer_params:
             if p.grad is not None:
-                s += (p.grad.detach()**2).sum()
+                s += (p.grad.detach() ** 2).sum()
         sq.append(torch.as_tensor(s, device=loss.device))
     return torch.stack(sq)
 
@@ -167,9 +170,9 @@ def fisher_trace_per_layer(
 
 def allocate_pruning_rates(
     traces: torch.Tensor,
-    dims: torch.Tensor,                
-    global_keep_ratio: float,           
-    gamma: float = 0.5,                   
+    dims: torch.Tensor,
+    global_keep_ratio: float,
+    gamma: float = 0.5,
     min_alpha: float = 0.0,               
     max_alpha: float = 1.0,               
     protect_layers: Optional[Sequence[int]] = None, 
@@ -184,17 +187,130 @@ def allocate_pruning_rates(
     return alpha
 
 
+def _prepare_batch(batch, device):
+    if isinstance(batch, (list, tuple)):
+        if len(batch) == 0:
+            raise ValueError("Empty batch received from dataloader")
+        batch = batch[0]
+    return batch.to(device)
+
+
+def compute_layerwise_fisher(
+    model: nn.Module,
+    dataloader: DataLoader,
+    args,
+    device: torch.device,
+) -> List[float]:
+    num_layers = len(model.blocks)
+    modules_per_layer: List[List[nn.Parameter]] = []
+    protect_layers: List[int] = []
+    for i, block in enumerate(model.blocks):
+        layer_params: List[nn.Parameter] = []
+        if hasattr(block, "attn") and hasattr(block.attn, "proj"):
+            layer_params.extend(list(block.attn.proj.parameters()))
+        if hasattr(block, "ffn") and hasattr(block.ffn, "fc2"):
+            layer_params.extend(list(block.ffn.fc2.parameters()))
+        if len(layer_params) == 0:
+            layer_params = []
+        modules_per_layer.append(layer_params)
+        if not (args.minlayer <= i < args.maxlayer):
+            protect_layers.append(i)
+
+    if not any(modules_per_layer):
+        return [args.sparsity if not isinstance(args.sparsity, list) else 0.0] * num_layers
+
+    for params in modules_per_layer:
+        for p in params:
+            p.requires_grad_(True)
+
+    dims = torch.tensor(
+        [sum(p.numel() for p in params) for params in modules_per_layer],
+        device=device,
+        dtype=torch.float,
+    )
+
+    cfg = VarTraceConfig(
+        gamma=0.5,
+        ema_rho=0.95,
+        use_exact_per_scale=True,
+        device=device,
+    )
+    fisher_sum = torch.zeros(len(modules_per_layer), device=device)
+    fisher_ema = FisherTraceEMA(len(modules_per_layer), rho=cfg.ema_rho, device=device)
+    total_weight = 0.0
+
+    model.eval()
+    forward_fn = getattr(model.forward, "__wrapped__", None)
+    for batch in dataloader:
+        inputs = _prepare_batch(batch, device)
+        with torch.autograd.enable_grad():
+            if forward_fn is not None:
+                outputs = forward_fn(model, inputs)
+            else:
+                outputs = model(inputs)
+            if isinstance(outputs, (list, tuple)):
+                tensor_outputs = [o for o in outputs if torch.is_tensor(o)]
+                if len(tensor_outputs) == 0:
+                    raise RuntimeError("Model outputs contain no tensors to build a loss from")
+                loss = sum(t.float().pow(2).mean() for t in tensor_outputs) / len(tensor_outputs)
+            else:
+                if not torch.is_tensor(outputs):
+                    raise RuntimeError("Model output is not a tensor and cannot be used to compute Fisher information")
+                loss = outputs.float().pow(2).mean()
+
+        tokens = inputs.shape[0] if inputs.ndim > 0 else 1
+        if cfg.fisher_weight_per_token and tokens > 0:
+            loss = loss / float(tokens)
+
+        sq = squared_grad_per_layer_from_loss(loss, modules_per_layer, retain_graph=False)
+        fisher_sum += sq
+        total_weight += 1.0
+
+    if total_weight == 0:
+        raise RuntimeError("No data available to compute Fisher information")
+
+    fisher_now = fisher_sum / total_weight
+    fisher_smoothed = fisher_ema.update(fisher_now)
+
+    if isinstance(args.sparsity, list):
+        target_keep_ratio = 1.0 - float(sum(args.sparsity) / max(len(args.sparsity), 1))
+    else:
+        target_keep_ratio = 1.0 - float(args.sparsity)
+
+    alpha = allocate_pruning_rates(
+        traces=fisher_smoothed,
+        dims=dims,
+        global_keep_ratio=target_keep_ratio,
+        gamma=cfg.gamma,
+        min_alpha=0.1,
+        max_alpha=1.0,
+        protect_layers=protect_layers,
+    )
+
+    sparsity_per_layer = [1.0 - a.item() for a in alpha]
+
+    for params in modules_per_layer:
+        for p in params:
+            p.requires_grad_(False)
+
+    return sparsity_per_layer
+
+
 # @torch.no_grad()
 def model_slimming(model, dataloader, args):
 
     batch = len(dataloader)
 
-    
+
 
     dev = "cuda" if torch.cuda.is_available() else 'cpu'
+    device_obj = torch.device(dev)
 
     layers = model.blocks
 
+
+    if args.prune_method == "fisher":
+        args.sparsity = compute_layerwise_fisher(model, dataloader, args, device_obj)
 
     with torch.no_grad():
 
@@ -203,15 +319,16 @@ def model_slimming(model, dataloader, args):
         #     args, model, dataloader, dev )
         num_batches = len(dataloader)
         print("pruning...")
-        caches = [None for _ in range(num_batches*10)]
-        outs = [None for _ in range(num_batches*10)] 
         for i in range(len(layers)):
-            
-            layer = layers[i].to(dev)
-            if args.minlayer <= i < args.maxlayer:
-                all_module_dict = find_layers(layer)
 
-            sequential = [####################################
+            layer = layers[i].to(dev)
+            if not (args.minlayer <= i < args.maxlayer):
+                del layer
+                continue
+
+            all_module_dict = find_layers(layer)
+
+            sequential = [
                 ["attn.proj"],
                 ["ffn.fc2"],
             ]
@@ -226,24 +343,24 @@ def model_slimming(model, dataloader, args):
                         pruner_dict[name].add_batch(inp[0].data, out.data)  # calculate H
                     return func
 
-
-
-
                 handles = []
                 for name in module_dict:
                     handles.append(module_dict[name].register_forward_hook(add_batch(name))) #注册钩子
-                for b in model.blocks: b.attn.kv_caching(True)
+                for b in model.blocks:
+                    b.attn.kv_caching(True)
 
                 for batch_idx, batch in enumerate(dataloader):
-                    model(batch)
-                for b in model.blocks: b.attn.kv_caching(False)
+                    inputs = _prepare_batch(batch, device_obj)
+                    model(inputs)
+                for b in model.blocks:
+                    b.attn.kv_caching(False)
                 for h in handles:
                     h.remove()
-                
+
                 for name in module_dict:
                     sparsity = args.sparsity[i] if isinstance(args.sparsity, list) else args.sparsity
                     print(f"layer {i}: {name} sparsity {sparsity}")
-                    if args.prune_method == "slimgpt":
+                    if args.prune_method == "slimgpt" or args.prune_method == "fisher":
                         idx = pruner_dict[name].struct_prune(    #执行剪枝操作
                             sparsity=sparsity,
                             percdamp=args.percdamp,
@@ -269,13 +386,12 @@ def model_slimming(model, dataloader, args):
                     if name == "ffn.fc2":
                         target_layer_b = get_module_by_name(model.blocks[i], "ffn.fc1")
                         idx = idx.tolist()
-                        tp.prune_linear_in_channels(target_layer,idx)
-                        tp.prune_linear_out_channels(target_layer_b,idx)
+                        tp.prune_linear_in_channels(target_layer, idx)
+                        tp.prune_linear_out_channels(target_layer_b, idx)
                     elif name == "attn.proj" :
-                        # model.blocks[i].attn.pruned_indices.copy_(idx.int())
                         sparsity = args.sparsity[i] if isinstance(args.sparsity, list) else args.sparsity
                         model.blocks[i].attn.num_heads = torch.round(torch.tensor(model.num_heads*(1-sparsity))).int()
-                        idx_m = idx.to(dtype=torch.long)    
+                        idx_m = idx.to(dtype=torch.long)
                         idx = idx.tolist()
                         keep_idxs = list(set(range(target_layer.in_features)) - set(idx))
                         model.blocks[i].attn.q_bias = nn.Parameter(model.blocks[i].attn.q_bias.data[keep_idxs])
@@ -283,22 +399,27 @@ def model_slimming(model, dataloader, args):
                         model.blocks[i].attn.register_buffer('zero_k_bias', zero_k_bias)
                         model.blocks[i].attn.v_bias = nn.Parameter(model.blocks[i].attn.v_bias.data[keep_idxs])
                         model.blocks[i].attn.scale_mul_1H11 = nn.Parameter(
-                        torch.full(size=(1, model.blocks[i].attn.num_heads, 1, 1),fill_value=4.0,device='cuda').log(),requires_grad=True)
+                            torch.full(
+                                size=(1, model.blocks[i].attn.num_heads, 1, 1),
+                                fill_value=4.0,
+                                device=device_obj,
+                            ).log(),
+                            requires_grad=True,
+                        )
                         target_layer_b = get_module_by_name(model.blocks[i], "attn.mat_qkv")
                         tp.prune_linear_in_channels(target_layer, idx) #proj的inchannel
-                        
+
                         hidden = 16 * 64
 
                         rm_feat_q = idx_m                                # 直接就是单段里的通道
-                        # 映射到合并 QKV 的 out 索引（mat_qkv 的第0维）
                         rm_qkv = torch.cat([rm_feat_q,
                                             rm_feat_q + hidden,
                                             rm_feat_q + 2*hidden], dim=0)   # [3m]
 
                         rm_qkv_list = torch.unique(rm_qkv.to("cpu")).sort().values.tolist()
-                        tp.prune_linear_out_channels(target_layer_b,rm_qkv_list )
+                        tp.prune_linear_out_channels(target_layer_b, rm_qkv_list )
 
-            del pruner_dict   
+            del pruner_dict
             print(model.blocks[i].ffn.fc1.weight.shape)
             print(model.blocks[i].ffn.fc2.weight.shape)
             print(model.blocks[i].attn.mat_qkv.weight.shape)
@@ -306,65 +427,6 @@ def model_slimming(model, dataloader, args):
 
             del layer
             torch.cuda.empty_cache()
-
-    if args.prune_method == "fisher":
-        # Prepare modules per layer
-        num_layers = len(model.blocks)
-        modules_per_layer = []
-        for i in range(num_layers):
-            layer_params = []
-            layer = model.blocks[i] 
-            for name, module in layer.named_modules():
-                if isinstance(module, (nn.Linear)):
-                    layer_params.extend(module.parameters())
-            modules_per_layer.append(layer_params)
-            
-        # Get parameter dimensions
-        dims = torch.tensor([sum(p.numel() for p in g) for g in modules_per_layer], 
-                          device=next(model.parameters()).device,
-                          dtype=torch.float)
-                          
-        # Setup Fisher trace config and EMA
-        cfg = VarTraceConfig(gamma=0.5, ema_rho=0.95, use_exact_per_scale=True,
-                           device=next(model.parameters()).device)
-        fisher_ema = FisherTraceEMA(num_layers=len(modules_per_layer), 
-                                   rho=cfg.ema_rho,
-                                   device=dims.device)
-                                   
-        # Calculate Fisher trace
-        with torch.enable_grad():
-            losses = []
-            tokens = []
-            for batch_idx, batch in enumerate(dataloader):
-                model(batch)
-                # Collect losses and token numbers
-                loss = model.losses
-                num_tokens = batch.shape[1]
-                losses.append(loss)
-                tokens.append(num_tokens)
-
-            fisher_now = fisher_trace_per_layer(
-                losses_by_scale=[torch.stack(losses)],
-                tokens_by_scale=[sum(tokens)],
-                omega_by_scale=None,
-                modules_per_layer=modules_per_layer,
-                cfg=cfg
-            )
-            
-        fisher_smoothed = fisher_ema.update(fisher_now)
-        
-        # Allocate pruning rates
-        alpha = allocate_pruning_rates(
-            traces=fisher_smoothed,
-            dims=dims, 
-            global_keep_ratio=1.0-args.sparsity,
-            gamma=cfg.gamma,
-            min_alpha=0.1,
-            max_alpha=1.0
-        )
-        
-        # Use alpha as sparsity for each layer
-        args.sparsity = [1.0 - a.item() for a in alpha]
 
     print("本次评估用用时为{}".format(time.time()-t1))
     
