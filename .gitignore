@@ -1,0 +1,38 @@
+# 忽略图片文件
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+
+# 忽略模型文件
+*.pth
+*.h5
+*.ckpt
+*.pb
+*.pt
+*.gz
+*.npz
+*.txt
+
+# 忽略数据文件
+*.csv
+*.tsv
+*.xlsx
+*.xls
+*.npz
+*.npy
+*.mlpackage
+events*
+*.tmp
+# 忽略整个文件夹（如images、model等）
+images/
+model/
+data/
+ImageNet-1K/
+model_zoo/
+image/
+sparsity_model/
+datasets/
+*output*/
+

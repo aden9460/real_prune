@@ -1,0 +1,310 @@
+nohup: 忽略输入
+GPU7 第一次检测显存占用为 0 MiB，3 秒后再次确认...
+GPU7 连续两次显存占用为 0 MiB，执行 Python 程序...
+W0903 22:03:19.294600 140424708908096 torch/distributed/run.py:757] 
+W0903 22:03:19.294600 140424708908096 torch/distributed/run.py:757] *****************************************
+W0903 22:03:19.294600 140424708908096 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0903 22:03:19.294600 140424708908096 torch/distributed/run.py:757] *****************************************
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[lrk=4, rk=4]
+[lrk=0, rk=0]
+[lrk=2, rk=2]
+[dist initialize] mp method=spawn
+[lrk=7, rk=7]
+[lrk=1, rk=1]
+[lrk=3, rk=3]
+[lrk=6, rk=6]
+[lrk=5, rk=5]
+[09-03 22:03:24] (_train/utils/arg_util.py, line 179)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[09-03 22:03:24] (_train/utils/arg_util.py, line 180)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[09-03 22:03:24] (_train/utils/arg_util.py, line 181)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[09-03 22:03:24] (prune/VAR_train/train.py, line  41)=> global bs=600, local bs=75
+[09-03 22:03:24] (prune/VAR_train/train.py, line  42)=> initial args:
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00023437500000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 600
+  batch_size          : 75
+  glb_batch_size      : 600
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  cmd                 : --depth=16 --bs=600 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b600ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[09-03 22:03:24] (prune/VAR_train/train.py, line  46)=> [build PT data] ...
+
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f9a640075e0>
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f9a640075e0>
+[09-03 22:03:46] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-03 22:03:46] (prune/VAR_train/train.py, line  69)=> [auto_resume] no ckpt found @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/ar-ckpt*.pth
+[09-03 22:03:46] (prune/VAR_train/train.py, line  69)=> [auto_resume quit]
+[09-03 22:03:46] (prune/VAR_train/train.py, line  70)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[09-03 22:03:46] (prune/VAR_train/train.py, line  76)=> [dataloader] gbs=600, lbs=75, iters_train=2136, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[09-03 22:03:46] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[09-03 22:03:46] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[09-03 22:03:48] (prune/VAR_train/train.py, line 108)=> 加载原始模型权重...
+[09-03 22:03:48] (prune/VAR_train/train.py, line 124)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)
+
+
+[09-03 22:03:48] (prune/VAR_train/train.py, line 126)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[09-03 22:03:48] (prune/VAR_train/train.py, line 127)=> [INIT][#para] VAR=231.41
+
+
+[09-03 22:03:48] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank1] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank2] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank3] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank4] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank5] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank6] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:48] (rain/utils/lr_control.py, line 105)=> 
+[09-03 22:03:48] (prune/VAR_train/train.py, line 142)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00023437500000000002, 'weight_decay': 0}
+
+[09-03 22:03:48] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank7] type(model).__name__='VAR' count=202, numel=231405120
+[09-03 22:03:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [   0/2136]  eta: 4:48:01  tlr: 1.2e-06  tnm: 34.13  Lm: 9.916 (9.916)  Lt: 9.086 (9.086)  Accm: 0.06 (0.06)  Acct: 0.08 (0.08)  time: 8.0906  data: 3.2863
+[09-03 22:26:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [ 533/2136]  eta: 1:06:41  tlr: 0.00015  tnm: 0.73  Lm: 8.558 (8.558)  Lt: 8.101 (8.101)  Accm: 0.66 (0.66)  Acct: 0.67 (0.67)  time: 2.3706  data: 0.9009
+[09-03 22:47:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [1067/2136]  eta: 0:43:27  tlr: 0.00023  tnm: 0.71  Lm: 7.201 (7.996)  Lt: 7.117 (7.598)  Accm: 1.26 (1.14)  Acct: 1.26 (1.32)  time: 2.4093  data: 0.9743
+[09-03 23:08:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [1601/2136]  eta: 0:21:26  tlr: 0.00023  tnm: 0.42  Lm: 7.036 (7.660)  Lt: 6.855 (7.239)  Accm: 1.68 (1.53)  Acct: 1.93 (2.02)  time: 2.3351  data: 0.9040
+[09-03 23:28:29] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [2135/2136]  eta: 0:00:02  tlr: 0.00023  tnm: 0.38  Lm: 6.872 (7.415)  Lt: 6.593 (6.992)  Accm: 2.10 (1.93)  Acct: 2.61 (2.51)  time: 2.3469  data: 0.8778
+[09-03 23:28:29] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/20]   Total time:      1:24:41   (2.379 s / it)
+[09-03 23:30:10] (prune/VAR_train/train.py, line 236)=>  [*] [ep0]  (val 50000)  Lm: 7.4257, Lt: 7.0025, Acc m&t: 2.00 2.53,  Val cost: 100.70s
+[09-03 23:30:10] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/ar-ckpt-last.pth
+[09-03 23:30:14] (prune/VAR_train/train.py, line 253)=>      [ep0]  (training )  Lm: 7.426 (7.426), Lt: 7.003 (7.003),  Acc m&t: 2.00 2.53,  Remain: 1 day, 2:27:58,  Finish: 2025-09-05 01:56
+[09-03 23:30:17] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [   0/2136]  eta: 1:41:29  tlr: 0.00023  tnm: 0.38  Lm: 6.519 (6.519)  Lt: 6.026 (6.026)  Accm: 3.07 (3.07)  Acct: 4.26 (4.26)  time: 2.8509  data: 1.3614
+[09-03 23:50:43] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [ 533/2136]  eta: 1:01:30  tlr: 0.00023  tnm: 0.37  Lm: 6.452 (6.452)  Lt: 5.974 (5.974)  Accm: 3.41 (3.41)  Acct: 4.72 (4.72)  time: 2.1876  data: 0.8388
+[09-04 00:11:17] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [1067/2136]  eta: 0:41:05  tlr: 0.00023  tnm: 0.35  Lm: 6.487 (6.464)  Lt: 5.922 (5.950)  Accm: 3.37 (3.40)  Acct: 5.19 (4.88)  time: 2.3094  data: 0.9371
+[09-04 00:31:44] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [1601/2136]  eta: 0:20:32  tlr: 0.00023  tnm: 0.31  Lm: 6.436 (6.422)  Lt: 5.912 (5.891)  Accm: 3.56 (3.66)  Acct: 5.20 (5.22)  time: 2.3953  data: 0.9305
+[09-04 00:52:06] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [2135/2136]  eta: 0:00:02  tlr: 0.00023  tnm: 0.34  Lm: 6.416 (6.421)  Lt: 5.901 (5.886)  Accm: 3.41 (3.61)  Acct: 5.19 (5.16)  time: 2.3165  data: 0.9134
+[09-04 00:52:06] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   1/20]   Total time:      1:21:52   (2.300 s / it)
+[09-04 00:53:39] (prune/VAR_train/train.py, line 236)=>  [*] [ep1]  (val 50000)  Lm: 6.4263, Lt: 5.8704, Acc m&t: 3.59 5.17,  Val cost: 92.68s
+[09-04 00:53:39] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/ar-ckpt-last.pth
+[09-04 00:53:42] (prune/VAR_train/train.py, line 253)=>      [ep1]  (training )  Lm: 6.426 (6.426), Lt: 5.870 (5.870),  Acc m&t: 3.59 5.17,  Remain: 1 day, 1:20:32,  Finish: 2025-09-05 02:12
+[09-04 00:53:44] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [   0/2136]  eta: 1:20:49  tlr: 0.00023  tnm: 0.33  Lm: 6.383 (6.383)  Lt: 5.783 (5.783)  Accm: 3.74 (3.74)  Acct: 5.63 (5.63)  time: 2.2704  data: 0.7038
+[09-04 01:14:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [ 533/2136]  eta: 1:01:35  tlr: 0.00022  tnm: 0.34  Lm: 6.379 (6.379)  Lt: 5.779 (5.779)  Accm: 3.68 (3.68)  Acct: 5.65 (5.65)  time: 2.3030  data: 0.9241
+[09-04 01:34:41] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [1067/2136]  eta: 0:41:00  tlr: 0.00022  tnm: 0.31  Lm: 6.380 (6.379)  Lt: 5.782 (5.780)  Accm: 3.74 (3.70)  Acct: 5.63 (5.61)  time: 2.3683  data: 0.9649
+[09-04 01:55:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [1601/2136]  eta: 0:20:31  tlr: 0.00022  tnm: 0.30  Lm: 6.377 (6.372)  Lt: 5.779 (5.779)  Accm: 3.75 (3.76)  Acct: 5.62 (5.61)  time: 2.2636  data: 0.8355
+[09-04 02:15:30] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [2135/2136]  eta: 0:00:02  tlr: 0.00022  tnm: 0.30  Lm: 6.375 (6.359)  Lt: 5.775 (5.759)  Accm: 3.75 (3.85)  Acct: 5.63 (5.73)  time: 2.2461  data: 0.8480
+[09-04 02:15:30] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   2/20]   Total time:      1:21:48   (2.298 s / it)
+[09-04 02:16:59] (prune/VAR_train/train.py, line 236)=>  [*] [ep2]  (val 50000)  Lm: 6.3546, Lt: 5.7600, Acc m&t: 3.86 5.66,  Val cost: 88.51s
+[09-04 02:16:59] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.4_d16_real_20epoch_150i_8_512_slim/ar-ckpt-last.pth
+[09-04 02:17:03] (prune/VAR_train/train.py, line 253)=>      [ep2]  (training )  Lm: 6.355 (6.355), Lt: 5.760 (5.760),  Acc m&t: 3.86 5.66,  Remain: 22:10:44,  Finish: 2025-09-05 00:26
+[09-04 02:17:06] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [   0/2136]  eta: 1:47:55  tlr: 0.00022  tnm: 0.31  Lm: 6.340 (6.340)  Lt: 5.716 (5.716)  Accm: 3.89 (3.89)  Acct: 6.01 (6.01)  time: 3.0317  data: 0.8046
+[09-04 02:37:38] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [ 533/2136]  eta: 1:01:47  tlr: 0.00021  tnm: 0.31  Lm: 6.343 (6.343)  Lt: 5.725 (5.725)  Accm: 3.85 (3.85)  Acct: 5.84 (5.84)  time: 2.2682  data: 0.8861
+[09-04 02:58:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [1067/2136]  eta: 0:41:00  tlr: 0.00021  tnm: 0.32  Lm: 6.345 (6.346)  Lt: 5.728 (5.726)  Accm: 3.82 (3.84)  Acct: 5.68 (5.74)  time: 2.2819  data: 0.8722
+[09-04 03:18:26] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [1601/2136]  eta: 0:20:29  tlr: 0.00021  tnm: 0.30  Lm: 6.343 (6.336)  Lt: 5.722 (5.714)  Accm: 3.85 (3.91)  Acct: 5.84 (5.88)  time: 2.2800  data: 0.8836
+W0904 03:21:28.117172 140424708908096 torch/distributed/elastic/agent/server/api.py:741] Received Signals.SIGHUP death signal, shutting down workers
+W0904 03:21:28.131407 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445040 closing signal SIGHUP
+W0904 03:21:28.131567 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445041 closing signal SIGHUP
+W0904 03:21:28.131973 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445042 closing signal SIGHUP
+W0904 03:21:28.132723 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445043 closing signal SIGHUP
+W0904 03:21:28.132888 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445044 closing signal SIGHUP
+W0904 03:21:28.133064 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445045 closing signal SIGHUP
+W0904 03:21:28.133251 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445046 closing signal SIGHUP
+W0904 03:21:28.133397 140424708908096 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 445047 closing signal SIGHUP
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/common/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 879, in main
+    run(args)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 870, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 254, in launch_agent
+    result = agent.run()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 733, in run
+    result = self._invoke_run(role)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 876, in _invoke_run
+    time.sleep(monitor_interval)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/api.py", line 76, in _terminate_process_handler
+    raise SignalException(f"Process {os.getpid()} got signal: {sigval}", sigval=sigval)
+torch.distributed.elastic.multiprocessing.api.SignalException: Process 444965 got signal: 1

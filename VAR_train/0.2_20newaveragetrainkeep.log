@@ -1,0 +1,399 @@
+nohup: 忽略输入
+GPU7 第一次检测显存占用为 0 MiB，3 秒后再次确认...
+GPU7 连续两次显存占用为 0 MiB，执行 Python 程序...
+W0916 23:50:17.567138 139907638776896 torch/distributed/run.py:757] 
+W0916 23:50:17.567138 139907638776896 torch/distributed/run.py:757] *****************************************
+W0916 23:50:17.567138 139907638776896 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0916 23:50:17.567138 139907638776896 torch/distributed/run.py:757] *****************************************
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[lrk=4, rk=4]
+[dist initialize] mp method=spawn
+[lrk=6, rk=6]
+[lrk=2, rk=2]
+[lrk=5, rk=5]
+[lrk=1, rk=1]
+[lrk=3, rk=3][lrk=7, rk=7]
+
+[lrk=0, rk=0]
+[09-16 23:50:21] (_train/utils/arg_util.py, line 179)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[09-16 23:50:21] (_train/utils/arg_util.py, line 180)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[09-16 23:50:21] (_train/utils/arg_util.py, line 181)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[09-16 23:50:34] (prune/VAR_train/train.py, line  41)=> global bs=496, local bs=62
+[09-16 23:50:34] (prune/VAR_train/train.py, line  42)=> initial args:
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.2
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00019375000000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 496
+  batch_size          : 62
+  glb_batch_size      : 496
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  cmd                 : --depth=16 --bs=500 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b496ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[09-16 23:50:34] (prune/VAR_train/train.py, line  46)=> [build PT data] ...
+
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f81606aa670>
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f81606aa670>
+[09-16 23:51:06] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-16 23:51:06] (prune/VAR_train/train.py, line  69)=> [auto_resume] load ckpt from @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-best.pth ...
+[09-16 23:51:06] (prune/VAR_train/train.py, line  69)=> [auto_resume success] resume from ep7, it0
+[09-16 23:51:06] (prune/VAR_train/train.py, line  70)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[09-16 23:51:06] (prune/VAR_train/train.py, line  76)=> [dataloader] gbs=496, lbs=62, iters_train=2583, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[09-16 23:51:06] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[09-16 23:51:07] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[09-16 23:51:09] (prune/VAR_train/train.py, line 108)=> 加载原始模型权重...
+[09-16 23:51:11] (prune/VAR_train/train.py, line 124)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=2496, bias=False)
+        (proj): Linear(in_features=832, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=3277, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=3277, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=2496, bias=False)
+        (proj): Linear(in_features=832, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=3277, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=3277, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)
+
+
+[09-16 23:51:11] (prune/VAR_train/train.py, line 126)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[09-16 23:51:11] (prune/VAR_train/train.py, line 127)=> [INIT][#para] VAR=270.84
+
+
+[09-16 23:51:11] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank1] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank2] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank3] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank4] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank5] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank6] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (rain/utils/lr_control.py, line 105)=> 
+[09-16 23:51:11] (prune/VAR_train/train.py, line 142)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00019375000000000002, 'weight_decay': 0}
+
+[09-16 23:51:11] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank7] type(model).__name__='VAR' count=202, numel=270844320
+[09-16 23:51:11] (une/VAR_train/trainer.py, line 189)=> [VARTrainer.load_state_dict] var_wo_ddp missing:  []
+[09-16 23:51:11] (une/VAR_train/trainer.py, line 190)=> [VARTrainer.load_state_dict] var_wo_ddp unexpected:  []
+[09-16 23:51:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [   0/2583]  eta: 3:19:35  tlr: 0.00014  tnm: 0.30  Lm: 6.264 (6.264)  Lt: 5.622 (5.622)  Accm: 4.12 (4.12)  Acct: 6.35 (6.35)  time: 4.6363  data: 0.7826
+[09-17 00:21:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [ 645/2583]  eta: 1:32:18  tlr: 0.00014  tnm: 0.31  Lm: 6.171 (6.171)  Lt: 5.562 (5.562)  Accm: 4.59 (4.59)  Acct: 6.60 (6.60)  time: 2.7034  data: 1.2949
+[09-17 00:52:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [1291/2583]  eta: 1:01:13  tlr: 0.00014  tnm: 0.33  Lm: 6.215 (6.185)  Lt: 5.502 (5.541)  Accm: 4.48 (4.56)  Acct: 6.85 (6.77)  time: 3.1153  data: 1.6609
+[09-17 01:22:50] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [1936/2583]  eta: 0:30:36  tlr: 0.00013  tnm: 0.31  Lm: 6.182 (6.176)  Lt: 5.519 (5.540)  Accm: 4.60 (4.60)  Acct: 6.90 (6.82)  time: 2.3886  data: 1.0326
+[09-17 01:53:23] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [2582/2583]  eta: 0:00:02  tlr: 0.00013  tnm: 0.31  Lm: 6.215 (6.198)  Lt: 5.537 (5.548)  Accm: 4.48 (4.49)  Acct: 6.85 (6.70)  time: 3.2477  data: 1.7161
+[09-17 01:53:23] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   7/20]   Total time:      2:02:11   (2.838 s / it)
+[09-17 01:55:09] (prune/VAR_train/train.py, line 236)=>  [*] [ep7]  (val 50000)  Lm: 6.1949, Lt: 5.5305, Acc m&t: 4.47 6.75,  Val cost: 106.56s
+[09-17 01:55:09] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 01:55:13] (prune/VAR_train/train.py, line 253)=>      [ep7]  (training )  Lm: 6.195 (6.195), Lt: 5.530 (5.530),  Acc m&t: 4.47 6.75,  Remain: 1 day, 2:24:44,  Finish: 2025-09-18 04:18
+[09-17 01:55:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [   0/2583]  eta: 1:25:34  tlr: 0.00013  tnm: 0.30  Lm: 6.164 (6.164)  Lt: 5.446 (5.446)  Accm: 4.48 (4.48)  Acct: 6.95 (6.95)  time: 1.9879  data: 0.5537
+[09-17 02:25:41] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [ 645/2583]  eta: 1:31:22  tlr: 0.00013  tnm: 0.33  Lm: 6.175 (6.175)  Lt: 5.494 (5.494)  Accm: 4.58 (4.58)  Acct: 6.95 (6.95)  time: 2.5855  data: 1.1806
+[09-17 02:56:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [1291/2583]  eta: 1:01:01  tlr: 0.00013  tnm: 0.32  Lm: 6.164 (6.162)  Lt: 5.516 (5.501)  Accm: 4.68 (4.67)  Acct: 6.95 (6.93)  time: 3.3272  data: 1.8642
+[09-17 03:26:19] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [1936/2583]  eta: 0:30:25  tlr: 0.00012  tnm: 0.32  Lm: 6.151 (6.151)  Lt: 5.489 (5.492)  Accm: 4.72 (4.69)  Acct: 6.95 (6.97)  time: 2.2295  data: 0.8770
+[09-17 03:56:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [2582/2583]  eta: 0:00:02  tlr: 0.00012  tnm: 0.31  Lm: 6.164 (6.163)  Lt: 5.502 (5.494)  Accm: 4.68 (4.62)  Acct: 6.95 (6.91)  time: 3.3017  data: 1.8766
+[09-17 03:56:56] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   8/20]   Total time:      2:01:43   (2.827 s / it)
+[09-17 03:58:33] (prune/VAR_train/train.py, line 236)=>  [*] [ep8]  (val 50000)  Lm: 6.1853, Lt: 5.5031, Acc m&t: 4.50 6.90,  Val cost: 96.22s
+[09-17 03:58:33] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 03:58:37] (prune/VAR_train/train.py, line 253)=>      [ep8]  (training )  Lm: 6.185 (6.185), Lt: 5.503 (5.503),  Acc m&t: 4.50 6.90,  Remain: 1 day, 3:05:20,  Finish: 2025-09-18 07:02
+[09-17 03:58:40] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [   0/2583]  eta: 2:22:27  tlr: 0.00012  tnm: 0.32  Lm: 6.192 (6.192)  Lt: 5.495 (5.495)  Accm: 4.57 (4.57)  Acct: 7.21 (7.21)  time: 3.3093  data: 1.2536
+[09-17 04:28:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [ 645/2583]  eta: 1:31:02  tlr: 0.00012  tnm: 0.33  Lm: 6.165 (6.165)  Lt: 5.464 (5.464)  Accm: 4.54 (4.54)  Acct: 7.07 (7.07)  time: 2.3079  data: 0.9742
+[09-17 05:00:12] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [1291/2583]  eta: 1:01:34  tlr: 0.00012  tnm: 0.31  Lm: 6.150 (6.160)  Lt: 5.470 (5.466)  Accm: 4.57 (4.60)  Acct: 6.96 (7.04)  time: 3.3965  data: 1.8926
+[09-17 05:31:07] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [1936/2583]  eta: 0:30:53  tlr: 0.00012  tnm: 0.31  Lm: 6.153 (6.159)  Lt: 5.483 (5.480)  Accm: 4.64 (4.65)  Acct: 7.08 (7.08)  time: 2.2182  data: 0.8745
+[09-17 06:01:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [2582/2583]  eta: 0:00:02  tlr: 0.00011  tnm: 0.31  Lm: 6.157 (6.165)  Lt: 5.495 (5.484)  Accm: 4.57 (4.62)  Acct: 6.96 (7.04)  time: 3.3124  data: 1.8931
+[09-17 06:01:45] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   9/20]   Total time:      2:03:07   (2.860 s / it)
+[09-17 06:03:12] (prune/VAR_train/train.py, line 236)=>  [*] [ep9]  (val 50000)  Lm: 6.1619, Lt: 5.4766, Acc m&t: 4.61 7.05,  Val cost: 86.90s
+[09-17 06:03:12] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 06:03:17] (prune/VAR_train/train.py, line 253)=>      [ep9]  (training )  Lm: 6.162 (6.162), Lt: 5.477 (5.477),  Acc m&t: 4.61 7.05,  Remain: 1 day, 0:09:58,  Finish: 2025-09-18 06:11
+[09-17 06:03:21] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [   0/2583]  eta: 3:18:46  tlr: 0.00011  tnm: 0.31  Lm: 6.175 (6.175)  Lt: 5.543 (5.543)  Accm: 4.61 (4.61)  Acct: 6.73 (6.73)  time: 4.6173  data: 3.3797
+[09-17 06:33:39] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [ 645/2583]  eta: 1:31:07  tlr: 0.00011  tnm: 0.31  Lm: 6.234 (6.234)  Lt: 5.552 (5.552)  Accm: 4.36 (4.36)  Acct: 6.67 (6.67)  time: 3.2770  data: 1.8054
+[09-17 07:04:03] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [1291/2583]  eta: 1:00:46  tlr: 0.00011  tnm: 0.31  Lm: 6.175 (6.182)  Lt: 5.543 (5.508)  Accm: 4.61 (4.54)  Acct: 6.73 (6.78)  time: 2.3684  data: 0.9523
+[09-17 07:34:53] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [1936/2583]  eta: 0:30:35  tlr: 0.00011  tnm: 0.33  Lm: 6.145 (6.165)  Lt: 5.491 (5.491)  Accm: 4.73 (4.62)  Acct: 6.86 (6.92)  time: 3.2695  data: 1.7886
+[09-17 08:05:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [2582/2583]  eta: 0:00:02  tlr: 0.0001  tnm: 0.32  Lm: 6.175 (6.180)  Lt: 5.543 (5.514)  Accm: 4.61 (4.54)  Acct: 6.73 (6.81)  time: 2.2687  data: 0.8802
+[09-17 08:05:13] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  10/20]   Total time:      2:01:55   (2.832 s / it)
+[09-17 08:06:56] (prune/VAR_train/train.py, line 236)=>  [*] [ep10]  (val 50000)  Lm: 6.1610, Lt: 5.4837, Acc m&t: 4.68 7.07,  Val cost: 103.09s
+[09-17 08:06:56] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 08:07:00] (prune/VAR_train/train.py, line 253)=>      [ep10]  (training )  Lm: 6.161 (6.161), Lt: 5.477 (5.484),  Acc m&t: 4.68 7.07,  Remain: 13:18:14,  Finish: 2025-09-17 21:23
+[09-17 08:07:03] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [   0/2583]  eta: 2:00:59  tlr: 0.0001  tnm: 0.31  Lm: 6.302 (6.302)  Lt: 5.573 (5.573)  Accm: 3.91 (3.91)  Acct: 6.16 (6.16)  time: 2.8103  data: 1.3767
+[09-17 08:38:02] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [ 645/2583]  eta: 1:33:06  tlr: 0.0001  tnm: 0.32  Lm: 6.213 (6.213)  Lt: 5.536 (5.536)  Accm: 4.67 (4.67)  Acct: 6.84 (6.84)  time: 3.3253  data: 1.8936
+[09-17 09:08:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [1291/2583]  eta: 1:01:15  tlr: 9.9e-05  tnm: 0.32  Lm: 6.125 (6.176)  Lt: 5.500 (5.506)  Accm: 4.82 (4.72)  Acct: 7.04 (6.91)  time: 2.1155  data: 0.7766
+[09-17 09:39:22] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [1936/2583]  eta: 0:30:51  tlr: 9.7e-05  tnm: 0.32  Lm: 6.139 (6.170)  Lt: 5.496 (5.503)  Accm: 4.73 (4.70)  Acct: 7.06 (6.95)  time: 3.0807  data: 1.6816
+[09-17 10:10:06] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [2582/2583]  eta: 0:00:02  tlr: 9.4e-05  tnm: 0.32  Lm: 6.129 (6.162)  Lt: 5.493 (5.492)  Accm: 4.65 (4.69)  Acct: 7.06 (6.97)  time: 3.2721  data: 1.7975
+[09-17 10:10:06] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  11/20]   Total time:      2:03:05   (2.859 s / it)
+[09-17 10:11:48] (prune/VAR_train/train.py, line 236)=>  [*] [ep11]  (val 50000)  Lm: 6.1514, Lt: 5.4788, Acc m&t: 4.67 7.03,  Val cost: 102.47s
+[09-17 10:11:50] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 10:11:54] (prune/VAR_train/train.py, line 253)=>      [ep11]  (training )  Lm: 6.151 (6.151), Lt: 5.477 (5.479),  Acc m&t: 4.68 7.07,  Remain: 17:21:26,  Finish: 2025-09-18 03:31
+[09-17 10:11:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [   0/2583]  eta: 1:25:51  tlr: 9.4e-05  tnm: 0.32  Lm: 6.163 (6.163)  Lt: 5.442 (5.442)  Accm: 4.83 (4.83)  Acct: 7.39 (7.39)  time: 1.9943  data: 0.6013
+[09-17 10:42:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [ 645/2583]  eta: 1:33:11  tlr: 9.2e-05  tnm: 0.34  Lm: 6.140 (6.140)  Lt: 5.441 (5.441)  Accm: 4.82 (4.82)  Acct: 7.39 (7.39)  time: 2.1160  data: 0.7799
+[09-17 11:14:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [1291/2583]  eta: 1:02:18  tlr: 9e-05  tnm: 0.33  Lm: 6.117 (6.123)  Lt: 5.441 (5.439)  Accm: 4.83 (4.84)  Acct: 7.39 (7.34)  time: 3.1023  data: 1.6032
+[09-17 11:44:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [1936/2583]  eta: 0:31:04  tlr: 8.7e-05  tnm: 0.32  Lm: 6.140 (6.141)  Lt: 5.441 (5.452)  Accm: 4.82 (4.74)  Acct: 7.31 (7.24)  time: 3.4493  data: 1.9741
+[09-17 12:15:23] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [2582/2583]  eta: 0:00:02  tlr: 8.5e-05  tnm: 0.33  Lm: 6.117 (6.134)  Lt: 5.441 (5.444)  Accm: 4.83 (4.77)  Acct: 7.38 (7.27)  time: 2.3226  data: 0.9166
+[09-17 12:15:23] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  12/20]   Total time:      2:03:28   (2.868 s / it)
+[09-17 12:17:08] (prune/VAR_train/train.py, line 236)=>  [*] [ep12]  (val 50000)  Lm: 6.1528, Lt: 5.4724, Acc m&t: 4.68 7.11,  Val cost: 105.75s
+[09-17 12:17:08] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 12:17:13] (prune/VAR_train/train.py, line 253)=>      [ep12]  (training )  Lm: 6.151 (6.153), Lt: 5.472 (5.472),  Acc m&t: 4.68 7.11,  Remain: 10:18:01,  Finish: 2025-09-17 22:33
+[09-17 12:17:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [   0/2583]  eta: 1:22:17  tlr: 8.5e-05  tnm: 0.33  Lm: 6.068 (6.068)  Lt: 5.399 (5.399)  Accm: 5.23 (5.23)  Acct: 7.53 (7.53)  time: 1.9115  data: 0.6755
+[09-17 12:48:08] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [ 645/2583]  eta: 1:32:46  tlr: 8.3e-05  tnm: 0.34  Lm: 6.126 (6.126)  Lt: 5.419 (5.419)  Accm: 4.94 (4.94)  Acct: 7.37 (7.37)  time: 2.9101  data: 1.4832
+[09-17 13:18:49] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [1291/2583]  eta: 1:01:35  tlr: 8e-05  tnm: 0.33  Lm: 6.088 (6.113)  Lt: 5.409 (5.416)  Accm: 4.97 (4.95)  Acct: 7.21 (7.31)  time: 3.3149  data: 1.8150
+[09-17 13:50:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [1936/2583]  eta: 0:30:59  tlr: 7.8e-05  tnm: 0.33  Lm: 6.103 (6.114)  Lt: 5.424 (5.430)  Accm: 4.91 (4.92)  Acct: 7.27 (7.31)  time: 3.1736  data: 1.7117
+[09-17 14:20:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [2582/2583]  eta: 0:00:02  tlr: 7.6e-05  tnm: 0.32  Lm: 6.118 (6.130)  Lt: 5.439 (5.447)  Accm: 4.85 (4.82)  Acct: 7.21 (7.22)  time: 3.2742  data: 1.8825
+[09-17 14:20:15] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  13/20]   Total time:      2:03:02   (2.858 s / it)
+[09-17 14:21:54] (prune/VAR_train/train.py, line 236)=>  [*] [ep13]  (val 50000)  Lm: 6.1491, Lt: 5.4638, Acc m&t: 4.67 7.08,  Val cost: 99.01s
+[09-17 14:21:54] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 14:21:58] (prune/VAR_train/train.py, line 253)=>      [ep13]  (training )  Lm: 6.149 (6.149), Lt: 5.464 (5.464),  Acc m&t: 4.68 7.11,  Remain: 13:20:44,  Finish: 2025-09-18 03:40
+[09-17 14:22:00] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [   0/2583]  eta: 1:34:16  tlr: 7.6e-05  tnm: 0.33  Lm: 6.165 (6.165)  Lt: 5.461 (5.461)  Accm: 4.53 (4.53)  Acct: 7.14 (7.14)  time: 2.1898  data: 0.9558
+[09-17 14:52:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [ 645/2583]  eta: 1:32:40  tlr: 7.3e-05  tnm: 0.33  Lm: 6.163 (6.163)  Lt: 5.462 (5.462)  Accm: 4.60 (4.60)  Acct: 7.21 (7.21)  time: 2.4287  data: 1.0754
+[09-17 15:23:51] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [1291/2583]  eta: 1:01:52  tlr: 7.1e-05  tnm: 0.33  Lm: 6.162 (6.142)  Lt: 5.461 (5.446)  Accm: 4.67 (4.69)  Acct: 7.24 (7.22)  time: 2.2168  data: 0.8491
+[09-17 15:55:00] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [1936/2583]  eta: 0:31:04  tlr: 6.9e-05  tnm: 0.33  Lm: 6.163 (6.149)  Lt: 5.462 (5.458)  Accm: 4.78 (4.74)  Acct: 7.21 (7.21)  time: 3.2838  data: 1.7676
+[09-17 16:25:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [2582/2583]  eta: 0:00:02  tlr: 6.6e-05  tnm: 0.34  Lm: 6.165 (6.154)  Lt: 5.463 (5.468)  Accm: 4.68 (4.73)  Acct: 7.20 (7.21)  time: 2.8981  data: 1.4901
+[09-17 16:25:54] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  14/20]   Total time:      2:03:55   (2.879 s / it)
+[09-17 16:27:40] (prune/VAR_train/train.py, line 236)=>  [*] [ep14]  (val 50000)  Lm: 6.1317, Lt: 5.4496, Acc m&t: 4.78 7.19,  Val cost: 105.76s
+[09-17 16:27:40] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 16:27:44] (prune/VAR_train/train.py, line 253)=>      [ep14]  (training )  Lm: 6.132 (6.132), Lt: 5.450 (5.450),  Acc m&t: 4.78 7.19,  Remain: 8:18:12,  Finish: 2025-09-18 00:44
+[09-17 16:27:46] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [   0/2583]  eta: 1:24:22  tlr: 6.6e-05  tnm: 0.33  Lm: 6.031 (6.031)  Lt: 5.361 (5.361)  Accm: 5.23 (5.23)  Acct: 7.75 (7.75)  time: 1.9599  data: 0.6428
+[09-17 16:58:30] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [ 645/2583]  eta: 1:32:17  tlr: 6.4e-05  tnm: 0.34  Lm: 6.044 (6.044)  Lt: 5.355 (5.355)  Accm: 5.44 (5.44)  Acct: 8.00 (8.00)  time: 2.5897  data: 1.1632
+[09-17 17:29:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [1291/2583]  eta: 1:01:26  tlr: 6.2e-05  tnm: 0.34  Lm: 6.057 (6.094)  Lt: 5.361 (5.410)  Accm: 5.23 (5.15)  Acct: 7.75 (7.61)  time: 3.3862  data: 1.9554
+[09-17 17:59:23] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [1936/2583]  eta: 0:30:36  tlr: 5.9e-05  tnm: 0.34  Lm: 6.125 (6.125)  Lt: 5.437 (5.436)  Accm: 4.90 (4.96)  Acct: 7.35 (7.44)  time: 2.3554  data: 1.0287
+[09-17 18:30:24] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [2582/2583]  eta: 0:00:02  tlr: 5.7e-05  tnm: 0.33  Lm: 6.192 (6.139)  Lt: 5.469 (5.442)  Accm: 4.58 (4.82)  Acct: 6.94 (7.29)  time: 3.2423  data: 1.6916
+[09-17 18:30:24] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  15/20]   Total time:      2:02:39   (2.849 s / it)
+[09-17 18:31:55] (prune/VAR_train/train.py, line 236)=>  [*] [ep15]  (val 50000)  Lm: 6.1418, Lt: 5.4477, Acc m&t: 4.72 7.20,  Val cost: 90.85s
+[09-17 18:31:55] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 18:31:59] (prune/VAR_train/train.py, line 253)=>      [ep15]  (training )  Lm: 6.132 (6.142), Lt: 5.448 (5.448),  Acc m&t: 4.78 7.20,  Remain: 9:11:44,  Finish: 2025-09-18 03:42
+[09-17 18:32:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [   0/2583]  eta: 3:22:15  tlr: 5.7e-05  tnm: 0.33  Lm: 6.052 (6.052)  Lt: 5.364 (5.364)  Accm: 5.28 (5.28)  Acct: 7.85 (7.85)  time: 4.6982  data: 3.2674
+[09-17 19:02:27] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [ 645/2583]  eta: 1:31:25  tlr: 5.4e-05  tnm: 0.34  Lm: 6.056 (6.056)  Lt: 5.387 (5.387)  Accm: 5.11 (5.11)  Acct: 7.69 (7.69)  time: 3.2021  data: 1.7482
+[09-17 19:32:55] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [1291/2583]  eta: 1:00:56  tlr: 5.2e-05  tnm: 0.34  Lm: 6.059 (6.092)  Lt: 5.411 (5.421)  Accm: 4.94 (4.91)  Acct: 7.52 (7.50)  time: 2.4496  data: 1.0273
+[09-17 20:03:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [1936/2583]  eta: 0:30:43  tlr: 5e-05  tnm: 0.34  Lm: 6.112 (6.119)  Lt: 5.450 (5.451)  Accm: 4.73 (4.78)  Acct: 7.33 (7.31)  time: 3.1788  data: 1.6839
+[09-17 20:34:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [2582/2583]  eta: 0:00:02  tlr: 4.7e-05  tnm: 0.34  Lm: 6.165 (6.133)  Lt: 5.477 (5.456)  Accm: 4.54 (4.73)  Acct: 7.14 (7.27)  time: 3.3300  data: 1.9071
+[09-17 20:34:42] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  16/20]   Total time:      2:02:42   (2.850 s / it)
+[09-17 20:36:11] (prune/VAR_train/train.py, line 236)=>  [*] [ep16]  (val 50000)  Lm: 6.1254, Lt: 5.4408, Acc m&t: 4.78 7.25,  Val cost: 89.07s
+[09-17 20:36:11] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 20:39:25] (prune/VAR_train/train.py, line 253)=>      [ep16]  (training )  Lm: 6.125 (6.125), Lt: 5.441 (5.441),  Acc m&t: 4.78 7.25,  Remain: 6:59:01,  Finish: 2025-09-18 03:33
+[09-17 20:39:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [   0/2583]  eta: 1:44:22  tlr: 4.7e-05  tnm: 0.35  Lm: 6.129 (6.129)  Lt: 5.466 (5.466)  Accm: 4.58 (4.58)  Acct: 7.25 (7.25)  time: 2.4244  data: 0.8055
+[09-17 21:10:33] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [ 645/2583]  eta: 1:33:23  tlr: 4.5e-05  tnm: 0.35  Lm: 6.097 (6.097)  Lt: 5.426 (5.426)  Accm: 4.83 (4.83)  Acct: 7.48 (7.48)  time: 2.6766  data: 1.2744
+[09-17 21:41:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [1291/2583]  eta: 1:02:15  tlr: 4.3e-05  tnm: 0.35  Lm: 6.129 (6.118)  Lt: 5.434 (5.429)  Accm: 4.59 (4.75)  Acct: 7.57 (7.51)  time: 3.3734  data: 1.8770
+[09-17 22:12:38] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [1936/2583]  eta: 0:31:07  tlr: 4e-05  tnm: 0.35  Lm: 6.133 (6.123)  Lt: 5.450 (5.441)  Accm: 4.68 (4.76)  Acct: 7.41 (7.38)  time: 2.8110  data: 1.4254
+[09-17 22:43:34] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [2582/2583]  eta: 0:00:02  tlr: 3.8e-05  tnm: 0.35  Lm: 6.137 (6.129)  Lt: 5.466 (5.457)  Accm: 4.59 (4.68)  Acct: 7.25 (7.22)  time: 2.2262  data: 0.8509
+[09-17 22:43:34] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  17/20]   Total time:      2:04:08   (2.884 s / it)
+[09-17 22:45:19] (prune/VAR_train/train.py, line 236)=>  [*] [ep17]  (val 50000)  Lm: 6.1157, Lt: 5.4232, Acc m&t: 4.82 7.34,  Val cost: 105.45s
+[09-17 22:45:19] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-17 22:48:47] (prune/VAR_train/train.py, line 253)=>      [ep17]  (training )  Lm: 6.116 (6.116), Lt: 5.423 (5.423),  Acc m&t: 4.82 7.34,  Remain: 2:55:45,  Finish: 2025-09-18 01:39
+[09-17 22:48:49] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [   0/2583]  eta: 1:47:24  tlr: 3.8e-05  tnm: 0.34  Lm: 6.191 (6.191)  Lt: 5.482 (5.482)  Accm: 4.37 (4.37)  Acct: 6.85 (6.85)  time: 2.4948  data: 1.2662
+[09-17 23:20:07] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [ 645/2583]  eta: 1:33:59  tlr: 3.6e-05  tnm: 0.35  Lm: 6.095 (6.095)  Lt: 5.403 (5.403)  Accm: 4.78 (4.78)  Acct: 7.29 (7.29)  time: 2.8812  data: 1.4453
+[09-17 23:51:09] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [1291/2583]  eta: 1:02:22  tlr: 3.3e-05  tnm: 0.35  Lm: 6.180 (6.123)  Lt: 5.482 (5.438)  Accm: 4.56 (4.71)  Acct: 7.01 (7.20)  time: 2.1514  data: 0.7788
+[09-18 00:23:19] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [1936/2583]  eta: 0:31:34  tlr: 3.1e-05  tnm: 0.35  Lm: 6.144 (6.119)  Lt: 5.458 (5.437)  Accm: 4.60 (4.69)  Acct: 7.09 (7.19)  time: 3.3710  data: 1.9034
+[09-18 00:54:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [2582/2583]  eta: 0:00:02  tlr: 2.9e-05  tnm: 0.36  Lm: 6.168 (6.129)  Lt: 5.482 (5.456)  Accm: 4.56 (4.63)  Acct: 7.01 (7.05)  time: 2.3546  data: 0.9871
+[09-18 00:54:25] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  18/20]   Total time:      2:05:38   (2.918 s / it)
+[09-18 00:56:11] (prune/VAR_train/train.py, line 236)=>  [*] [ep18]  (val 50000)  Lm: 6.1121, Lt: 5.4265, Acc m&t: 4.80 7.27,  Val cost: 105.71s
+[09-18 00:56:11] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i/ar-ckpt-last.pth
+[09-18 00:59:29] (prune/VAR_train/train.py, line 253)=>      [ep18]  (training )  Lm: 6.112 (6.112), Lt: 5.423 (5.427),  Acc m&t: 4.82 7.34,  Remain: 1:26:48,  Finish: 2025-09-18 02:21
+[09-18 00:59:34] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [   0/2583]  eta: 3:46:00  tlr: 2.9e-05  tnm: 0.35  Lm: 6.110 (6.110)  Lt: 5.435 (5.435)  Accm: 4.65 (4.65)  Acct: 7.02 (7.02)  time: 5.2499  data: 2.8344
+[09-18 01:30:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [ 645/2583]  eta: 1:34:13  tlr: 2.6e-05  tnm: 0.35  Lm: 6.069 (6.069)  Lt: 5.410 (5.410)  Accm: 4.99 (4.99)  Acct: 7.45 (7.45)  time: 3.0771  data: 1.6714
+[09-18 02:02:21] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [1291/2583]  eta: 1:02:51  tlr: 2.4e-05  tnm: 0.36  Lm: 6.110 (6.107)  Lt: 5.435 (5.437)  Accm: 4.65 (4.80)  Acct: 7.02 (7.23)  time: 2.9709  data: 1.5420
+[09-18 02:33:26] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [1936/2583]  eta: 0:31:22  tlr: 2.2e-05  tnm: 0.35  Lm: 6.069 (6.087)  Lt: 5.437 (5.437)  Accm: 4.87 (4.87)  Acct: 7.05 (7.19)  time: 2.7832  data: 1.3908
+W0918 02:44:44.478630 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580147 closing signal SIGTERM
+W0918 02:44:44.486994 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580148 closing signal SIGTERM
+W0918 02:44:44.489681 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580149 closing signal SIGTERM
+W0918 02:44:44.492382 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580150 closing signal SIGTERM
+W0918 02:44:44.494971 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580156 closing signal SIGTERM
+W0918 02:44:44.498120 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580157 closing signal SIGTERM
+W0918 02:44:44.501280 139907638776896 torch/distributed/elastic/multiprocessing/api.py:851] Sending process 1580158 closing signal SIGTERM
+E0918 02:44:45.849209 139907638776896 torch/distributed/elastic/multiprocessing/api.py:826] failed (exitcode: -9) local_rank: 7 (pid: 1580159) of binary: /root/miniconda3/envs/common/bin/python3.9
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/common/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 879, in main
+    run(args)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 870, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 263, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+========================================================
+train.py FAILED
+--------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+--------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2025-09-18_02:44:44
+  host      : suanba
+  rank      : 7 (local_rank: 7)
+  exitcode  : -9 (pid: 1580159)
+  error_file: <N/A>
+  traceback : Signal 9 (SIGKILL) received by PID 1580159
+========================================================

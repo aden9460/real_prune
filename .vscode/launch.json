@@ -1,0 +1,140 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+
+        {
+        "name": "Prune SlimGPT ",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/prune_v7.py",
+        "console": "integratedTerminal",
+        "justMyCode": false,
+        "env": {
+        "CUDA_VISIBLE_DEVICES": "0"
+        },
+        "args": [
+        "--minlayer", "0",
+        "--maxlayer", "16",
+        "--num_samples", "15",
+        "--percdamp", "1e-2",
+        "--prune_method", "slimgpt",
+        "--sparsity", "0.2",
+        "--specific_layer", "256",
+        "--model_name", "prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth"
+        ]
+},
+{
+    "name": "Prune analyze ",
+    "type": "debugpy",
+    "request": "launch",
+    "program": "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/prune_v8.py",
+    "console": "integratedTerminal",
+    "justMyCode": false,
+    "env": {
+    "CUDA_VISIBLE_DEVICES": "1"
+    },
+    "args": [
+    "--minlayer", "0",
+    "--maxlayer", "16",
+    "--num_samples", "150",
+    "--percdamp", "1e-2",
+    "--prune_method", "slimgpt",
+    "--sparsity", "0.2",
+    "--specific_layer", "256",
+    "--model_name", "prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth",
+    "--curv_enable",
+    "--curv_outdir","/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/hessian_curv_report_proj_cfg=1",
+    "--curv_tap_regex", ".*attn\\.proj.*",
+    ]
+},
+{
+    "name": "v9 analyze attn",
+    "type": "debugpy",
+    "request": "launch",
+    "program": "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/prune_v9.py",
+    "console": "integratedTerminal",
+    "justMyCode": false,
+    "env": {
+    "CUDA_VISIBLE_DEVICES": "1"
+    },
+    "args": [
+    "--minlayer", "0",
+    "--maxlayer", "16",
+    "--num_samples", "150",
+    "--percdamp", "1e-2",
+    "--prune_method", "slimgpt",
+    "--sparsity", "0.2",
+    "--specific_layer", "256",
+    "--model_name", "prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth",
+    "--curv_enable",
+    "--curv_tap", "proj",
+    "--curv_max_full_dim", "1024",
+    "--curv_store_device", "cpu",
+    "--curv_work_device", "cuda",
+    "--curv_stat_dtype", "float32",
+    "--curv_stream_chunk", "8192",
+    "--curv_scales", "1,4,9,16,25,36,64,100,169,256",
+    "--curv_regex_layer", "blocks\\.(\\d+)\\.",
+    "--curv_outdir", "analyze_image/hcurv_proj_v9_full",
+    "--curv_ckpt_every", "5",
+    "--curv_fair_how", "equal_scales",
+    "--curv_fair_norm", "none",
+    "--curv_headsize", "64",
+    "--curv_damping", "0.02",
+    "--curv_plot_convergence",
+        "--curv_plot_diag_heatmap",
+        "--curv_plot_damping",
+        "--curv_damping_layer", "0",
+        "--curv_damping_sweep", "0,0.005,0.01,0.02,0.05,0.1",
+        "--curv_damping_fname", "damping_lcurve.png",
+        "--curv_diag_mode", "cv",
+    ]
+},
+{
+    "name": "v9 analyze ffn",
+    "type": "debugpy",
+    "request": "launch",
+    "program": "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/prune_v9.py",
+    "console": "integratedTerminal",
+    "justMyCode": false,
+    "env": {
+    "CUDA_VISIBLE_DEVICES": "0"
+    },
+    "args": [
+    "--minlayer", "0",
+    "--maxlayer", "16",
+    "--num_samples", "150",
+    "--percdamp", "1e-2",
+    "--prune_method", "slimgpt",
+    "--sparsity", "0.2",
+    "--specific_layer", "256",
+    "--model_name", "prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth",
+    "--curv_enable",
+    "--curv_tap", "fc2",
+    "--curv_max_full_dim", "4096",             // 按你要求：fc2 存整块 H
+    "--curv_store_device", "cpu",              // H 存 CPU，避免显存爆
+    "--curv_work_device", "cuda",              // 分块 GEMM 在 GPU 跑
+    "--curv_stat_dtype", "float32",
+    "--curv_stream_chunk", "4096",             // 更小块，进一步控峰值
+    "--curv_scales", "1,4,9,16,25,36,64,100,169,256",
+    "--curv_regex_layer", "blocks\\.(\\d+)\\.",
+    "--curv_outdir", "analyze_image/hcurv_fc2_v9_full_equal_tokens",
+    "--curv_ckpt_every", "5",
+    "--curv_fair_how", "equal_tokens",
+    "--curv_fair_norm", "corr",                // fc2 建议相关化更公平
+    "--curv_headsize", "1",                    // fc2 按列聚合
+    "--curv_damping", "0.03",                  // fc2 阻尼略大更稳
+    "--curv_plot_convergence",
+        "--curv_plot_diag_heatmap",
+        "--curv_plot_damping",
+        "--curv_damping_layer", "0",
+        "--curv_damping_sweep", "0,0.005,0.01,0.02,0.05,0.1",
+        "--curv_damping_fname", "damping_lcurve.png",
+        "--curv_diag_mode", "cv",
+    ]
+}
+    ]
+}

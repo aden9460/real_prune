@@ -1,0 +1,936 @@
+nohup: 忽略输入
+GPU7 第一次检测显存占用为 0 MiB，3 秒后再GPU7 第一次检测占用为 29628 MiB，等待中...
+GPU7 第一次检测占用为 24562 MiB，等待中...
+GPU7 第一次检测占用为 40122 MiB，等待中...
+GPU7 第一次检测占用为 23416 MiB，等待中...
+GPU7 第一次检测占用为 33878 MiB，等待中...
+GPU7 第一次检测占用为 22192 MiB，等待中...
+GPU7 第一次检测占用为 39468 MiB，等待中...
+GPU7 第一次检测占用为 28238 MiB，等待中...
+GPU7 第一次检测占用为 37332 MiB，等待中...
+GPU7 第一次检测占用为 30564 MiB，等待中...
+GPU7 第一次检测占用为 45024 MiB，等待中...
+GPU7 第一次检测占用为 48174 MiB，等待中...
+GPU7 第一次检测占用为 41020 MiB，等待中...
+GPU7 第一次检测占用为 46000 MiB，等待中...
+GPU7 第一次检测占用为 21702 MiB，等待中...
+GPU7 第一次检测显存占用为 0 MiB，3 秒后再次确认...
+GPU7 连续两次显存占用为 0 MiB，执行 Python 程序...
+W0903 01:34:20.461891 140654144074816 torch/distributed/run.py:757] 
+W0903 01:34:20.461891 140654144074816 torch/distributed/run.py:757] *****************************************
+W0903 01:34:20.461891 140654144074816 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0903 01:34:20.461891 140654144074816 torch/distributed/run.py:757] *****************************************
+[W socket.cpp:464] [c10d] The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use).
+[W socket.cpp:464] [c10d] The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+[E socket.cpp:500] [c10d] The server socket has failed to listen on any local network address.
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/common/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 879, in main
+    run(args)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 870, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 254, in launch_agent
+    result = agent.run()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 733, in run
+    result = self._invoke_run(role)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    self._initialize_workers(self._worker_group)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 705, in _initialize_workers
+    self._rendezvous(worker_group)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 548, in _rendezvous
+    store, group_rank, group_world_size = spec.rdzv_handler.next_rendezvous()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/rendezvous/static_tcp_rendezvous.py", line 55, in next_rendezvous
+    self._store = TCPStore(  # type: ignore[call-arg]
+torch.distributed.DistNetworkError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+W0903 01:34:21.557362 140192919704640 torch/distributed/run.py:757] 
+W0903 01:34:21.557362 140192919704640 torch/distributed/run.py:757] *****************************************
+W0903 01:34:21.557362 140192919704640 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0903 01:34:21.557362 140192919704640 torch/distributed/run.py:757] *****************************************
+[W socket.cpp:464] [c10d] The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use).
+[W socket.cpp:464] [c10d] The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+[E socket.cpp:500] [c10d] The server socket has failed to listen on any local network address.
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/common/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 879, in main
+    run(args)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 870, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 254, in launch_agent
+    result = agent.run()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 733, in run
+    result = self._invoke_run(role)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    self._initialize_workers(self._worker_group)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 705, in _initialize_workers
+    self._rendezvous(worker_group)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 548, in _rendezvous
+    store, group_rank, group_world_size = spec.rdzv_handler.next_rendezvous()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/rendezvous/static_tcp_rendezvous.py", line 55, in next_rendezvous
+    self._store = TCPStore(  # type: ignore[call-arg]
+torch.distributed.DistNetworkError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+W0903 01:34:22.643784 140283135194176 torch/distributed/run.py:757] 
+W0903 01:34:22.643784 140283135194176 torch/distributed/run.py:757] *****************************************
+W0903 01:34:22.643784 140283135194176 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0903 01:34:22.643784 140283135194176 torch/distributed/run.py:757] *****************************************
+[W socket.cpp:464] [c10d] The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use).
+[W socket.cpp:464] [c10d] The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+[E socket.cpp:500] [c10d] The server socket has failed to listen on any local network address.
+Traceback (most recent call last):
+  File "/root/miniconda3/envs/common/bin/torchrun", line 8, in <module>
+    sys.exit(main())
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/multiprocessing/errors/__init__.py", line 347, in wrapper
+    return f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 879, in main
+    run(args)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/run.py", line 870, in run
+    elastic_launch(
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 132, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 254, in launch_agent
+    result = agent.run()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 733, in run
+    result = self._invoke_run(role)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 870, in _invoke_run
+    self._initialize_workers(self._worker_group)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 705, in _initialize_workers
+    self._rendezvous(worker_group)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/metrics/api.py", line 123, in wrapper
+    result = f(*args, **kwargs)
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/agent/server/api.py", line 548, in _rendezvous
+    store, group_rank, group_world_size = spec.rdzv_handler.next_rendezvous()
+  File "/root/miniconda3/envs/common/lib/python3.9/site-packages/torch/distributed/elastic/rendezvous/static_tcp_rendezvous.py", line 55, in next_rendezvous
+    self._store = TCPStore(  # type: ignore[call-arg]
+torch.distributed.DistNetworkError: The server socket has failed to listen on any local network address. The server socket has failed to bind to [::]:29500 (errno: 98 - Address already in use). The server socket has failed to bind to 0.0.0.0:29500 (errno: 98 - Address already in use).
+train_var.bash: 行 124: 未预期的记号 "done" 附近有语法错误
+train_var.bash: 行 124: `done'
+n.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank1] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank2] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank3] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank4] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank5] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:25] (rain/utils/lr_control.py, line 105)=> 
+[09-02 23:26:25] (prune/VAR_train/train.py, line 142)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00018046875000000002, 'weight_decay': 0}
+
+[09-02 23:26:25] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank6] type(model).__name__='VAR' count=202, numel=270844320
+[09-02 23:26:30] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [   0/2774]  eta: 3:52:20  tlr: 9e-07  tnm: 5.32  Lm: 8.319 (8.319)  Lt: 8.245 (8.245)  Accm: 0.10 (0.10)  Acct: 0.05 (0.05)  time: 5.0256  data: 0.9269
+[09-03 00:00:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [ 693/2774]  eta: 1:43:19  tlr: 0.00015  tnm: 0.78  Lm: 7.445 (7.445)  Lt: 7.203 (7.203)  Accm: 1.64 (1.64)  Acct: 1.96 (1.96)  time: 3.3230  data: 1.8480
+[09-03 00:34:49] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [1386/2774]  eta: 1:08:27  tlr: 0.00011  tnm: 0.53  Lm: 6.572 (7.068)  Lt: 6.160 (6.750)  Accm: 3.18 (2.49)  Acct: 3.88 (3.14)  time: 2.9531  data: 1.4984
+[09-03 01:08:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [2079/2774]  eta: 0:34:05  tlr: 6.2e-05  tnm: 0.49  Lm: 6.481 (6.899)  Lt: 6.002 (6.514)  Accm: 3.51 (2.83)  Acct: 4.57 (3.67)  time: 3.3703  data: 1.9140
+[09-03 01:43:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [2773/2774]  eta: 0:00:02  tlr: 1.8e-05  tnm: 0.42  Lm: 6.390 (6.778)  Lt: 5.845 (6.342)  Accm: 3.85 (3.08)  Acct: 5.26 (4.18)  time: 3.3489  data: 1.8556
+[09-03 01:43:13] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/1]   Total time:      2:16:48   (2.959 s / it)
+[09-03 01:45:10] (prune/VAR_train/train.py, line 236)=>  [*] [ep0]  (val 50000)  Lm: 6.7948, Lt: 6.3469, Acc m&t: 2.97 4.18,  Val cost: 116.88s
+[09-03 01:45:10] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_15i_8_512_slim/ar-ckpt-last.pth
+[09-03 01:45:16] (prune/VAR_train/train.py, line 253)=>      [ep0]  (training )  Lm: 6.795 (6.795), Lt: 6.347 (6.347),  Acc m&t: 2.97 4.18,  Remain: 0:00:47,  Finish: 2025-09-03 01:44
+[09-03 01:45:16] (prune/VAR_train/train.py, line 259)=> 
+
+
+[09-03 01:45:16] (prune/VAR_train/train.py, line 260)=>   [*] [PT finished]  Total cost: 2.3h,   Lm: 6.795 (6.794810322352818),   Lt: 6.347 (6.346930680956159)
+[09-03 01:45:16] (prune/VAR_train/train.py, line 261)=> 
+
+
+[09-03 01:45:22] (prune/VAR_train/train.py, line 268)=> final args:
+
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15i_full_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.2
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00018046875000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 462
+  batch_size          : 66
+  glb_batch_size      : 462
+  ac                  : 1
+  ep                  : 1
+  wp                  : 0.02
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.0033333333333333335
+  cmd                 : --depth=16 --bs=460 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_15i_8_512_slim --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15i_full_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : 2.9718614629070674
+  acc_tail            : 4.182393248691889
+  L_mean              : 6.794810322352818
+  L_tail              : 6.346930680956159
+  vacc_mean           : 4.135047435760498
+  vacc_tail           : 6.270437240600586
+  vL_mean             : 6.268237113952637
+  vL_tail             : 5.617942810058594
+  grad_norm           : 1.5062658190727234
+  cur_lr              : 1.8046875000000003e-05
+  cur_wd              : 0.05
+  cur_it              : 2774/2774
+  cur_ep              : 1/1
+  remain_time         : -
+  finish_time         : 2025-09-03 01:44
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_15i_8_512_slim
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_15i_8_512_slim/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b462ep1adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_15i_8_512_slim/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_15i_8_512_slim/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+W0903 01:45:25.688259 140331617408064 torch/distributed/run.py:757] 
+W0903 01:45:25.688259 140331617408064 torch/distributed/run.py:757] *****************************************
+W0903 01:45:25.688259 140331617408064 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0903 01:45:25.688259 140331617408064 torch/distributed/run.py:757] *****************************************
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[lrk=3, rk=3]
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[lrk=1, rk=1]
+[lrk=4, rk=4]
+[lrk=6, rk=6]
+[lrk=0, rk=0]
+[lrk=5, rk=5]
+[lrk=2, rk=2]
+[09-03 01:45:29] (_train/utils/arg_util.py, line 179)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[09-03 01:45:29] (_train/utils/arg_util.py, line 180)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[09-03 01:45:29] (_train/utils/arg_util.py, line 181)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[09-03 01:45:29] (prune/VAR_train/train.py, line  41)=> global bs=462, local bs=66
+[09-03 01:45:29] (prune/VAR_train/train.py, line  42)=> initial args:
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15-3i_full_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.2
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00018046875000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 462
+  batch_size          : 66
+  glb_batch_size      : 462
+  ac                  : 1
+  ep                  : 1
+  wp                  : 0.02
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.0033333333333333335
+  cmd                 : --depth=16 --bs=460 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15-3i_full_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b462ep1adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[09-03 01:45:29] (prune/VAR_train/train.py, line  46)=> [build PT data] ...
+
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f6eec3775e0>
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f6eec3775e0>
+[09-03 01:45:47] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-03 01:45:47] (prune/VAR_train/train.py, line  69)=> [auto_resume] no ckpt found @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/ar-ckpt*.pth
+[09-03 01:45:47] (prune/VAR_train/train.py, line  69)=> [auto_resume quit]
+[09-03 01:45:47] (prune/VAR_train/train.py, line  70)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[09-03 01:45:47] (prune/VAR_train/train.py, line  76)=> [dataloader] gbs=462, lbs=66, iters_train=2774, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[09-03 01:45:48] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[09-03 01:45:48] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[09-03 01:45:51] (prune/VAR_train/train.py, line 108)=> 加载原始模型权重...
+[09-03 01:45:52] (prune/VAR_train/train.py, line 124)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=2496, bias=False)
+        (proj): Linear(in_features=832, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=3277, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=3277, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=2496, bias=False)
+        (proj): Linear(in_features=832, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=3277, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=3277, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)
+
+
+[09-03 01:45:52] (prune/VAR_train/train.py, line 126)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[09-03 01:45:52] (prune/VAR_train/train.py, line 127)=> [INIT][#para] VAR=270.84
+
+
+[09-03 01:45:52] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank1] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank2] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank3] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank4] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank5] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:52] (rain/utils/lr_control.py, line 105)=> 
+[09-03 01:45:52] (prune/VAR_train/train.py, line 142)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00018046875000000002, 'weight_decay': 0}
+
+[09-03 01:45:52] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank6] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 01:45:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [   0/2774]  eta: 3:47:23  tlr: 9e-07  tnm: 7.06  Lm: 8.391 (8.391)  Lt: 8.265 (8.265)  Accm: 0.10 (0.10)  Acct: 0.08 (0.08)  time: 4.9184  data: 0.6994
+[09-03 02:20:31] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [ 693/2774]  eta: 1:43:52  tlr: 0.00015  tnm: 0.63  Lm: 7.496 (7.496)  Lt: 7.239 (7.239)  Accm: 1.57 (1.57)  Acct: 2.01 (2.01)  time: 3.3157  data: 1.8271
+[09-03 02:54:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [1386/2774]  eta: 1:08:25  tlr: 0.00011  tnm: 0.49  Lm: 6.602 (7.116)  Lt: 6.212 (6.786)  Accm: 3.04 (2.35)  Acct: 3.95 (3.07)  time: 2.2371  data: 0.7771
+[09-03 03:28:18] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [2079/2774]  eta: 0:34:13  tlr: 6.2e-05  tnm: 0.46  Lm: 6.500 (6.937)  Lt: 6.046 (6.538)  Accm: 3.41 (2.71)  Acct: 4.57 (3.66)  time: 3.3191  data: 1.7958
+[09-03 04:01:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [2773/2774]  eta: 0:00:02  tlr: 1.8e-05  tnm: 0.42  Lm: 6.399 (6.811)  Lt: 5.879 (6.374)  Accm: 3.78 (2.95)  Acct: 5.20 (4.03)  time: 2.7455  data: 1.2571
+[09-03 04:01:57] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/1]   Total time:      2:16:04   (2.943 s / it)
+[09-03 04:03:55] (prune/VAR_train/train.py, line 236)=>  [*] [ep0]  (val 50000)  Lm: 6.8205, Lt: 6.3633, Acc m&t: 2.92 4.15,  Val cost: 118.35s
+[09-03 04:03:55] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/ar-ckpt-last.pth
+[09-03 04:04:00] (prune/VAR_train/train.py, line 253)=>      [ep0]  (training )  Lm: 6.820 (6.820), Lt: 6.363 (6.363),  Acc m&t: 2.92 4.15,  Remain: 0:00:32,  Finish: 2025-09-03 04:02
+[09-03 04:04:00] (prune/VAR_train/train.py, line 259)=> 
+
+
+[09-03 04:04:00] (prune/VAR_train/train.py, line 260)=>   [*] [PT finished]  Total cost: 2.3h,   Lm: 6.820 (6.8204692840576175),   Lt: 6.363 (6.363253157479423)
+[09-03 04:04:00] (prune/VAR_train/train.py, line 261)=> 
+
+
+[09-03 04:04:06] (prune/VAR_train/train.py, line 268)=> final args:
+
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15-3i_full_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.2
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00018046875000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 462
+  batch_size          : 66
+  glb_batch_size      : 462
+  ac                  : 1
+  ep                  : 1
+  wp                  : 0.02
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.0033333333333333335
+  cmd                 : --depth=16 --bs=460 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15-3i_full_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : 2.9190857844826366
+  acc_tail            : 4.152800476378096
+  L_mean              : 6.8204692840576175
+  L_tail              : 6.363253157479423
+  vacc_mean           : 4.10300350189209
+  vacc_tail           : 6.2381486892700195
+  vL_mean             : 6.278232574462891
+  vL_tail             : 5.626144886016846
+  grad_norm           : 1.809539359807968
+  cur_lr              : 1.8046875000000003e-05
+  cur_wd              : 0.05
+  cur_it              : 2774/2774
+  cur_ep              : 1/1
+  remain_time         : -
+  finish_time         : 2025-09-03 04:03
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b462ep1adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-3_1epoch_15i_8_512_slim/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+W0903 04:04:10.318048 140376346686528 torch/distributed/run.py:757] 
+W0903 04:04:10.318048 140376346686528 torch/distributed/run.py:757] *****************************************
+W0903 04:04:10.318048 140376346686528 torch/distributed/run.py:757] Setting OMP_NUM_THREADS environment variable for each process to be 1 in default, to avoid your system being overloaded, please further tune the variable for optimal performance in your application as needed. 
+W0903 04:04:10.318048 140376346686528 torch/distributed/run.py:757] *****************************************
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[dist initialize] mp method=spawn
+[lrk=1, rk=1]
+[lrk=6, rk=6]
+[lrk=5, rk=5]
+[lrk=3, rk=3]
+[lrk=0, rk=0]
+[lrk=4, rk=4]
+[lrk=2, rk=2]
+[09-03 04:04:14] (_train/utils/arg_util.py, line 179)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[09-03 04:04:14] (_train/utils/arg_util.py, line 180)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[09-03 04:04:14] (_train/utils/arg_util.py, line 181)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[09-03 04:04:14] (prune/VAR_train/train.py, line  41)=> global bs=462, local bs=66
+[09-03 04:04:14] (prune/VAR_train/train.py, line  42)=> initial args:
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_150i_full_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.2
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00018046875000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 462
+  batch_size          : 66
+  glb_batch_size      : 462
+  ac                  : 1
+  ep                  : 1
+  wp                  : 0.02
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.0033333333333333335
+  cmd                 : --depth=16 --bs=460 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_150i_full_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b462ep1adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[09-03 04:04:14] (prune/VAR_train/train.py, line  46)=> [build PT data] ...
+
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f5b6c65a5e0>
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f5b6c65a5e0>
+[09-03 04:05:16] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[09-03 04:05:16] (prune/VAR_train/train.py, line  69)=> [auto_resume] no ckpt found @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/ar-ckpt*.pth
+[09-03 04:05:16] (prune/VAR_train/train.py, line  69)=> [auto_resume quit]
+[09-03 04:05:16] (prune/VAR_train/train.py, line  70)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[09-03 04:05:16] (prune/VAR_train/train.py, line  76)=> [dataloader] gbs=462, lbs=66, iters_train=2774, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[09-03 04:05:17] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[09-03 04:05:17] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[09-03 04:05:20] (prune/VAR_train/train.py, line 108)=> 加载原始模型权重...
+[09-03 04:05:21] (prune/VAR_train/train.py, line 124)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=2496, bias=False)
+        (proj): Linear(in_features=832, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=3277, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=3277, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=2496, bias=False)
+        (proj): Linear(in_features=832, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=3277, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=3277, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)
+
+
+[09-03 04:05:21] (prune/VAR_train/train.py, line 126)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[09-03 04:05:21] (prune/VAR_train/train.py, line 127)=> [INIT][#para] VAR=270.84
+
+
+[09-03 04:05:21] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank1] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank2] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank3] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank4] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank5] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:21] (rain/utils/lr_control.py, line 105)=> 
+[09-03 04:05:21] (prune/VAR_train/train.py, line 142)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00018046875000000002, 'weight_decay': 0}
+
+[09-03 04:05:21] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank6] type(model).__name__='VAR' count=202, numel=270844320
+[09-03 04:05:26] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [   0/2774]  eta: 3:52:46  tlr: 9e-07  tnm: 5.85  Lm: 8.332 (8.332)  Lt: 8.232 (8.232)  Accm: 0.12 (0.12)  Acct: 0.08 (0.08)  time: 5.0349  data: 0.9241
+[09-03 04:39:38] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [ 693/2774]  eta: 1:42:47  tlr: 0.00015  tnm: 0.66  Lm: 7.455 (7.455)  Lt: 7.212 (7.212)  Accm: 1.63 (1.63)  Acct: 2.02 (2.02)  time: 2.3026  data: 0.9032
+[09-03 05:13:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [1386/2774]  eta: 1:08:26  tlr: 0.00011  tnm: 0.53  Lm: 6.578 (7.075)  Lt: 6.192 (6.747)  Accm: 3.14 (2.48)  Acct: 3.97 (3.20)  time: 3.3783  data: 1.8487
+[09-03 05:47:24] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [2079/2774]  eta: 0:34:05  tlr: 6.2e-05  tnm: 0.47  Lm: 6.480 (6.901)  Lt: 6.010 (6.517)  Accm: 3.43 (2.79)  Acct: 4.60 (3.71)  time: 2.6217  data: 1.1607
+[09-03 06:21:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/1]  [2773/2774]  eta: 0:00:02  tlr: 1.8e-05  tnm: 0.41  Lm: 6.382 (6.790)  Lt: 5.828 (6.360)  Accm: 3.73 (2.99)  Acct: 5.24 (4.12)  time: 3.0659  data: 1.5391
+[09-03 06:21:28] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/1]   Total time:      2:16:06   (2.944 s / it)
+[09-03 06:23:23] (prune/VAR_train/train.py, line 236)=>  [*] [ep0]  (val 50000)  Lm: 6.8002, Lt: 6.3510, Acc m&t: 2.96 4.18,  Val cost: 114.46s
+[09-03 06:23:23] (prune/VAR_train/train.py, line 241)=> [saving ckpt] ...     [saving ckpt](*) finished!  @ /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/ar-ckpt-last.pth
+[09-03 06:23:27] (prune/VAR_train/train.py, line 253)=>      [ep0]  (training )  Lm: 6.800 (6.800), Lt: 6.351 (6.351),  Acc m&t: 2.96 4.18,  Remain: 0:00:37,  Finish: 2025-09-03 06:22
+[09-03 06:23:27] (prune/VAR_train/train.py, line 259)=> 
+
+
+[09-03 06:23:27] (prune/VAR_train/train.py, line 260)=>   [*] [PT finished]  Total cost: 2.3h,   Lm: 6.800 (6.8002259799412315),   Lt: 6.351 (6.351026957375662)
+[09-03 06:23:27] (prune/VAR_train/train.py, line 261)=> 
+
+
+[09-03 06:23:33] (prune/VAR_train/train.py, line 268)=> final args:
+
+{
+  data_path           : /home/suanba/datasets/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_150i_full_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.2
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00018046875000000002
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 462
+  batch_size          : 66
+  glb_batch_size      : 462
+  ac                  : 1
+  ep                  : 1
+  wp                  : 0.02
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.0033333333333333335
+  cmd                 : --depth=16 --bs=460 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path=/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim --data_path=/home/suanba/datasets/ImageNet-1K --var_path=/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_150i_full_scale.pth --vae_path=/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth
+  branch              : main
+  commit_id           : 3011c066ecd17fd236eb1237cb23e132b995e187
+  commit_msg          : real
+  acc_mean            : 2.9600840153372183
+  acc_tail            : 4.184084291503366
+  L_mean              : 6.8002259799412315
+  L_tail              : 6.351026957375662
+  vacc_mean           : 4.136964797973633
+  vacc_tail           : 6.267703533172607
+  vL_mean             : 6.267467975616455
+  vL_tail             : 5.618292808532715
+  grad_norm           : 1.5836317420005799
+  cur_lr              : 1.8046875000000003e-05
+  cur_wd              : 0.05
+  cur_it              : 2774/2774
+  cur_ep              : 1/1
+  remain_time         : -
+  finish_time         : 2025-09-03 06:22
+  local_out_dir_path  : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim
+  tb_log_dir_path     : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b462ep1adamlr0.0001wd0.05
+  log_txt_path        : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/log.txt
+  last_ckpt_path      : /home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_mul-2_1epoch_150i_8_512_slim/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
