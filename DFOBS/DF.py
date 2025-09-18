@@ -589,7 +589,7 @@ if __name__ == "__main__":
 
     parser.add_argument(
         "--model_name", type=str, default="model", 
-        help="choose which layer to evaluate",
+        help="choose which layer to evaluate just for saving model",
     )
     args = parser.parse_args()
     print(args)
