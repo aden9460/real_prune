@@ -21,7 +21,7 @@ assert MODEL_DEPTH in {12,16, 20, 24, 30}
 # download checkpoint
 hf_home = 'https://huggingface.co/FoundationVision/var/resolve/main'
 # vae_ckpt, var_ckpt = '/wanghuan/data/wangzefang/slim_VAR_copy/VAR/model_zoo/vae_ch160v4096z32.pth', f'/wanghuan/data/wangzefang/slim_VAR_copy/VAR/model_zoo/var_d{MODEL_DEPTH}.pth'
-vae_ckpt = '/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth'
+vae_ckpt = '/home/waas/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth'
 var_ckpt = args.var_model
 print(var_ckpt)
 #    /home/wangzefang/Projects/project/slim_VAR/slimgpt_pub/sparsity_model/d24_0.4var_1i_256input.pth
@@ -150,7 +150,7 @@ print(f'prepare finished.')
 seed = 0 #@param {type:"number"}
 torch.manual_seed(seed)
 num_sampling_steps = 250 #@param {type:"slider", min:0, max:1000, step:1}
-cfg = 1.5 #@param {type:"slider", min:1, max:10, step:0.1}
+cfg = 1.5 #@param {type:"slider", min:1, max:10, step:0.1}#之前一直是1.5
 class_labels = (980, 980, 437, 437, 22, 22, 562, 562)  #@param {type:"raw"}
 class_num = 0
 more_smooth = False # True for more smooth output
@@ -168,7 +168,7 @@ torch.backends.cudnn.allow_tf32 = bool(tf32)
 torch.backends.cuda.matmul.allow_tf32 = bool(tf32)
 torch.set_float32_matmul_precision('high' if tf32 else 'highest')
 output_name = args.output_name
-save_dir = f"/home/suanba/EdgeVAR/real_prune/VAR_FIDtest/output/{output_name}"
+save_dir = f"/home/suanba/real_prune/VAR_FIDtest/output/{output_name}"
 os.makedirs(save_dir,exist_ok=True)
 # sample
 progress_bar = tqdm(total=1000, desc="生成FID样本")

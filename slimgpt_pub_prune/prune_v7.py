@@ -8,7 +8,7 @@ import argparse
 from transformers import set_seed
 import os.path as osp
 from eval import eval_ppl
-from slim_utils.slimgpt import SlimGPT
+from DFOBS.slim_utils.slimgpt import SlimGPT
 from slim_utils.slim_dataset import get_loaders
 from slim_utils.params_remove import LLaMAParamsPruner
 from ppl_eval.ppl_eval import ppl_metric

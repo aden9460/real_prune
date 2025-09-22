@@ -23,7 +23,7 @@ INCEPTION_V3_PATH = "classify_image_graph_def.pb"
 FID_POOL_NAME = "pool_3:0"
 FID_SPATIAL_NAME = "mixed_6/conv:0"
 
-# /home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/VIRTUAL_imagenet256_labeled.npz
+# /home/waas/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/VIRTUAL_imagenet256_labeled.npz
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("ref_batch", help="path to reference batch npz file")

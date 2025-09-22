@@ -86,8 +86,8 @@ while true; do
             --nproc_per_node=8 \
             --node_rank=0 \
             train.py \
-            --depth=16 --bs=500 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.2 --local_out_dir_path="/home/suanba/EdgeVAR/real_prune/VAR_train/0.2_d16_real_20epoch_new_average_slimgpt_15i" --data_path="/home/suanba/datasets/ImageNet-1K" \
-            --var_path="/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth" \
+            --depth=16 --bs=600 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path="/home/suanba/real_prune/VAR_train/real_d16_0.4sparsity_10i_256eva_scale_woodtaylor" --data_path="/home/suanba/datasets/ImageNet-1K" \
+            --var_path="/home/suanba/real_prune/DFOBS/output/real_d16_0.4sparsity_10i_256eva_scale_woodtaylor.pth" \
             --vae_path='/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth'
 
 
