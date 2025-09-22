@@ -134,7 +134,7 @@ class VAR(nn.Module):
             h = h_or_h_and_residual
         return self.head(self.head_nm(h.float(), cond_BD).float()).float()
     
-    @torch.no_grad()
+    # @torch.no_grad()
     # def autoregressive_infer_cfg(
     #     self, B: int, label_B: Optional[Union[int, torch.LongTensor]],
     #     g_seed: Optional[int] = None, cfg=1.5, top_k=0, top_p=0.0,

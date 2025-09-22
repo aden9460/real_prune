@@ -146,13 +146,13 @@ class VAR(nn.Module):
         :param more_smooth: smoothing the pred using gumbel softmax; only used in visualization, not used in FID/IS benchmarking
         :return: if returns_vemb: list of embedding h_BChw := vae_embed(idx_Bl), else: list of idx_Bl
         """
-        B = len(label_B)
-        # # label_B: torch.LongTensor = torch.tensor(class_labels, device=device)
-        g_seed: Optional[int] =None
-        cfg=4
-        top_k=900
-        top_p=0.95
-        more_smooth=False
+        # B = len(label_B)
+        # label_B: torch.LongTensor = torch.tensor(class_labels, device=device)
+        # g_seed: Optional[int] =None
+        # cfg=4
+        # top_k=900
+        # top_p=0.95
+        # more_smooth=False
         
         if g_seed is None: rng = None
         else: self.rng.manual_seed(g_seed); rng = self.rng
