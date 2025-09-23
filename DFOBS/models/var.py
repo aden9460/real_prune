@@ -135,12 +135,12 @@ class VAR(nn.Module):
         return self.head(self.head_nm(h.float(), cond_BD).float()).float()
     
     # @torch.no_grad()
-    # def autoregressive_infer_cfg(
-    #     self, B: int, label_B: Optional[Union[int, torch.LongTensor]],
-    #     g_seed: Optional[int] = None, cfg=1.5, top_k=0, top_p=0.0,
-    #     more_smooth=False,
-    def forward(
-        self, label_B: Optional[Union[int, torch.LongTensor, torch.Tensor]]
+    def autoregressive_infer_cfg(
+        self, B: int, label_B: Optional[Union[int, torch.LongTensor]],
+        g_seed: Optional[int] = None, cfg=1.5, top_k=900, top_p=0.95,
+        more_smooth=False,
+    # def forward(
+    #     self, label_B: Optional[Union[int, torch.LongTensor, torch.Tensor]]
     ) -> torch.Tensor:   # returns reconstructed image (B, 3, H, W) in [0, 1]
         """
         only used for inference, on autoregressive mode
@@ -153,21 +153,21 @@ class VAR(nn.Module):
         :param more_smooth: smoothing the pred using gumbel softmax; only used in visualization, not used in FID/IS benchmarking
         :return: if returns_vemb: list of embedding h_BChw := vae_embed(idx_Bl), else: list of idx_Bl
         """
-        if label_B.dim()==0:
-            label_B = label_B.unsqueeze(0)
-        B = len(label_B)
-        # label_B: torch.LongTensor = torch.tensor(class_labels, device=device)
-        g_seed: Optional[int] =None
-        cfg=4   ####之前一直是4 2025.9.8
-        # cfg=1.5
-        top_k=900
-        top_p=0.95
-        more_smooth=False
-        seed = 1 #@param {type:"number"}
-        torch.manual_seed(seed)
-        random.seed(seed)
-        np.random.seed(seed)
-        g_seed = seed
+        # if label_B.dim()==0:
+        #     label_B = label_B.unsqueeze(0)
+        # B = len(label_B)
+        # # label_B: torch.LongTensor = torch.tensor(class_labels, device=device)
+        # g_seed: Optional[int] =None
+        # cfg=4   ####之前一直是4 2025.9.8
+        # # cfg=1.5
+        # top_k=900
+        # top_p=0.95
+        # more_smooth=False
+        # seed = 1 #@param {type:"number"}
+        # torch.manual_seed(seed)
+        # random.seed(seed)
+        # np.random.seed(seed)
+        # g_seed = seed
         # print("yesssss")
         if g_seed is None: rng = None
         else: self.rng.manual_seed(g_seed); rng = self.rng
@@ -226,7 +226,7 @@ class VAR(nn.Module):
         # return self.vae_proxy[0].fhat_to_img(f_hat).add_(1).mul_(0.5)   # de-normalize, from [-1, 1] to [0, 1]
         
     
-    def forward_000(self, label_B: torch.LongTensor, x_BLCv_wo_first_l: torch.Tensor) -> torch.Tensor:  # returns logits_BLV
+    def forward(self, label_B: torch.LongTensor, x_BLCv_wo_first_l: torch.Tensor) -> torch.Tensor:  # returns logits_BLV
         """
         :param label_B: label_B
         :param x_BLCv_wo_first_l: teacher forcing input (B, self.L-self.first_l, self.Cvae)
