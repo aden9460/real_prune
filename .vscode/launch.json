@@ -135,6 +135,41 @@
         "--curv_damping_fname", "damping_lcurve.png",
         "--curv_diag_mode", "cv",
     ]
-}
+},
+      {
+        "name": "DF_v3 固定参数调试",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "/home/waas/real_prune/DFOBS/DF_v3.py",
+        "console": "integratedTerminal",
+        "justMyCode": false,
+        "cwd": "${workspaceFolder}",
+        "env": {
+          "CUDA_VISIBLE_DEVICES": "0"
+        },
+        "args": [
+          "--minlayer", "0",
+          "--maxlayer", "16",
+          "--model_depth", "16",
+          "--num_samples", "1000",
+          "--percdamp", "1e-2",
+          "--skip_evaluate",
+          "--prune_method", "woodtaylor",
+          "--sparsity", "0.4",
+          "--specific_layer", "256",
+          "--model_name", "new_real_d16_0.4sparsity_1000_i_256eva_scale_woodtaylor_fisher.pth",
+          "--H_mode", "fisher",
+          "--save_dir", "/home/waas/real_prune/DFOBS/output",
+          "--fisher_batches", "1000",
+          "--fisher_loss_scope", "local"
+          /* 需要时可追加：
+          "--seqlen", "....",
+          "--min_sparsity", "0.0625",
+          "--max_sparsity", "0.3",
+          "--non_uniform",
+          "--non_uniform_strategy", "linear_decrease"
+          */
+        ]
+      }
     ]
 }
