@@ -81,12 +81,12 @@ while true; do
 
         if [ "$MEM2" -lt 10 ]; then
             echo "GPU7 连续两次显存占用为 0 MiB，执行 Python 程序..."
-            CUDA_VISIBLE_DEVICES=1,2,3,4,5,6,7 torchrun  \
+            CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 torchrun  \
             --nnodes=1 \
-            --nproc_per_node=7 \
+            --nproc_per_node=8 \
             --node_rank=0 \
             train.py \
-            --depth=16 --bs=512 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path="/home/waas/real_prune/VAR_train/real_d16_0.4sparsity_150i_newwoodtaylor_xtx" --data_path="/home/waas/datasets/ImageNet-1K" \
+            --depth=16 --bs=600 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path="/home/waas/real_prune/VAR_train/real_d16_0.4sparsity_150i_newwoodtaylor_xtx" --data_path="/home/waas/datasets/ImageNet-1K" \
             --var_path="/home/waas/real_prune/DFOBS/output/new_real_d16_0.4sparsity_150_i_256eva_scale_woodtaylor_xtx.pth" \
             --vae_path='/home/waas/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth'
 
