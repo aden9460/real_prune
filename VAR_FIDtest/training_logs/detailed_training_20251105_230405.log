@@ -1,0 +1,81 @@
+========================================
+详细训练日志
+开始时间: 2025年 11月 05日 星期三 23:04:05 CST
+日志文件: /home/project/real_prune/VAR_FIDtest/training_logs/detailed_training_20251105_230405.log
+========================================
+
+当前训练快照 (2025年 11月 05日 星期三 23:04:05 CST):
+----------------------------------------
+已完成的模型:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+统计: Chain KFAC=5, SlimGPT=0, 总计=5/16
+
+GPU 状态:
+Wed Nov  5 23:04:05 2025       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 575.57.08              Driver Version: 575.57.08      CUDA Version: 12.9     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA GeForce RTX 5090        On  |   00000000:16:00.0 Off |                  N/A |
+| 42%   60C    P1            286W /  575W |   21006MiB /  32607MiB |     99%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA GeForce RTX 5090        On  |   00000000:27:00.0 Off |                  N/A |
+| 58%   63C    P1            379W /  575W |   29510MiB /  32607MiB |    100%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA GeForce RTX 5090        On  |   00000000:38:00.0 Off |                  N/A |
+| 48%   57C    P1            336W /  575W |   29510MiB /  32607MiB |      0%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA GeForce RTX 5090        On  |   00000000:5A:00.0 Off |                  N/A |
+| 52%   63C    P1            417W /  575W |   29510MiB /  32607MiB |     71%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA GeForce RTX 5090        On  |   00000000:98:00.0 Off |                  N/A |
+| 32%   51C    P1            340W /  575W |   29510MiB /  32607MiB |    100%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   5  NVIDIA GeForce RTX 5090        On  |   00000000:A8:00.0 Off |                  N/A |
+| 39%   58C    P1            369W /  575W |   29510MiB /  32607MiB |    100%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   6  NVIDIA GeForce RTX 5090        On  |   00000000:B8:00.0 Off |                  N/A |
+| 56%   62C    P1            353W /  575W |   29510MiB /  32607MiB |    100%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+|   7  NVIDIA GeForce RTX 5090        On  |   00000000:D8:00.0 Off |                  N/A |
+| 46%   61C    P1            398W /  575W |   29510MiB /  32607MiB |    100%      Default |
+|                                         |                        |                  N/A |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI              PID   Type   Process name                        GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|    0   N/A  N/A         3312708      C   python                                20996MiB |
+|    1   N/A  N/A         3008837      C   ...onda3/envs/var/bin/python3.10      29500MiB |
+|    2   N/A  N/A         3008838      C   ...onda3/envs/var/bin/python3.10      29500MiB |
+|    3   N/A  N/A         3008839      C   ...onda3/envs/var/bin/python3.10      29500MiB |
+|    4   N/A  N/A         3008840      C   ...onda3/envs/var/bin/python3.10      29500MiB |
+|    5   N/A  N/A         3008841      C   ...onda3/envs/var/bin/python3.10      29500MiB |
+|    6   N/A  N/A         3008842      C   ...onda3/envs/var/bin/python3.10      29500MiB |
+|    7   N/A  N/A         3008843      C   ...onda3/envs/var/bin/python3.10      29500MiB |
++-----------------------------------------------------------------------------------------+
+
+正在运行的训练进程:
+root     3307204  0.0  0.0  10116  3764 ?        Ss   22:49   0:00 /bin/bash -c -l source /root/.claude/shell-snapshots/snapshot-bash-1762291945769-6eqypu.sh && eval 'cd /home/project/real_prune/slimgpt_pub_prune && chmod +x batch_train_sequential.bash && ./batch_train_sequential.bash' \< /dev/null && pwd -P >| /tmp/claude-d6c8-cwd
+root     3307208  0.0  0.0  10116  3676 ?        S    22:49   0:00 /bin/bash ./batch_train_sequential.bash
+root     3312708  108  0.2 55656108 2230604 ?    Rl   23:01   2:39 python prune_chain.py --sparsity 0.1 --scale_weight_strategy sqrt --prune_method chain_kfac --maxlayer 16 --num_samples 50 --save_pruned_weights --save_dir /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac --model_name var_d16_chain_kfac_s0.1_sqrt_n50.pth
+
+========================================
+========================================

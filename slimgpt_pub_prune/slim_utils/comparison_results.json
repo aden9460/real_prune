@@ -1,0 +1,86 @@
+[
+  {
+    "sparsity": 0.125,
+    "head_prune": {
+      "mse": 0.055741649121046066,
+      "relative_error": 0.1673904199967173,
+      "weight_change": 6.53820276260376,
+      "time": 0.27413511276245117,
+      "flops_reduction": 0.16666666666666666,
+      "structure": "10 heads \u00d7 64 dim",
+      "remaining_heads": 10.0
+    },
+    "head_dim_prune": {
+      "mse": 0.03939802944660187,
+      "relative_error": 0.11831104389804895,
+      "weight_change": 5.508184909820557,
+      "time": 0.015197515487670898,
+      "flops_reduction": 0.125,
+      "structure": "12 heads \u00d7 56 dim",
+      "remaining_dim_per_head": 56.0
+    }
+  },
+  {
+    "sparsity": 0.25,
+    "head_prune": {
+      "mse": 0.08379334211349487,
+      "relative_error": 0.2516287722103064,
+      "weight_change": 8.010822296142578,
+      "time": 0.02071976661682129,
+      "flops_reduction": 0.25,
+      "structure": "9 heads \u00d7 64 dim",
+      "remaining_heads": 9.0
+    },
+    "head_dim_prune": {
+      "mse": 0.07974880188703537,
+      "relative_error": 0.2394831450558156,
+      "weight_change": 7.8393874168396,
+      "time": 0.01815056800842285,
+      "flops_reduction": 0.25,
+      "structure": "12 heads \u00d7 48 dim",
+      "remaining_dim_per_head": 48.0
+    }
+  },
+  {
+    "sparsity": 0.375,
+    "head_prune": {
+      "mse": 0.11150422692298889,
+      "relative_error": 0.3348436881642463,
+      "weight_change": 9.247970581054688,
+      "time": 0.026298046112060547,
+      "flops_reduction": 0.3333333333333333,
+      "structure": "8 heads \u00d7 64 dim",
+      "remaining_heads": 8.0
+    },
+    "head_dim_prune": {
+      "mse": 0.12093405425548553,
+      "relative_error": 0.3631611632044163,
+      "weight_change": 9.640413284301758,
+      "time": 0.021949052810668945,
+      "flops_reduction": 0.375,
+      "structure": "12 heads \u00d7 40 dim",
+      "remaining_dim_per_head": 40.0
+    }
+  },
+  {
+    "sparsity": 0.5,
+    "head_prune": {
+      "mse": 0.16690990328788757,
+      "relative_error": 0.501225192536009,
+      "weight_change": 11.322367668151855,
+      "time": 0.03752470016479492,
+      "flops_reduction": 0.5,
+      "structure": "6 heads \u00d7 64 dim",
+      "remaining_heads": 6.0
+    },
+    "head_dim_prune": {
+      "mse": 0.16224220395088196,
+      "relative_error": 0.4872082381623938,
+      "weight_change": 11.169774055480957,
+      "time": 0.025099515914916992,
+      "flops_reduction": 0.5,
+      "structure": "12 heads \u00d7 32 dim",
+      "remaining_dim_per_head": 32.0
+    }
+  }
+]

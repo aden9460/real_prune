@@ -9,7 +9,7 @@ import argparse
 from transformers import set_seed
 import os.path as osp
 from eval import eval_ppl
-from DFOBS.slim_utils.slimgpt import SlimGPT
+from slim_utils.slimgpt import SlimGPT
 from slim_utils.slim_dataset import get_loaders
 from slim_utils.params_remove import LLaMAParamsPruner
 from ppl_eval.ppl_eval import ppl_metric
@@ -435,6 +435,7 @@ def model_slimming(model, dataloader, args):
         print("pruning...")
         caches = [None for _ in range(num_batches*10)]
         outs = [None for _ in range(num_batches*10)] 
+        device = "cuda" if torch.cuda.is_available() else 'cpu'
         for i in range(len(layers)):
             
             layer = layers[i].to(dev)
@@ -529,8 +530,26 @@ def model_slimming(model, dataloader, args):
                         zero_k_bias = model.blocks[i].attn.zero_k_bias.data[keep_idxs]
                         model.blocks[i].attn.register_buffer('zero_k_bias', zero_k_bias)
                         model.blocks[i].attn.v_bias = nn.Parameter(model.blocks[i].attn.v_bias.data[keep_idxs])
+                        # model.blocks[i].attn.scale_mul_1H11 = nn.Parameter(
+                        # torch.full(size=(1, model.blocks[i].attn.num_heads, 1, 1),fill_value=4.0,device='cuda').log(),requires_grad=True)
+
+                        # Update scale parameter - FIXED: Preserve original learned values
+                        head_dim = 64  # VAR uses fixed head_dim=64
+                        old_num_heads = target_layer.in_features // head_dim
+
+                        # Calculate which heads are removed (idx contains channel indices to remove)
+                        removed_heads = set((idx_m // head_dim).tolist())
+                        all_heads = set(range(old_num_heads))
+                        keep_heads = sorted(list(all_heads - removed_heads))
+
+                        # Preserve the learned scale_mul values for remaining heads
+                        old_scale_mul = model.blocks[i].attn.scale_mul_1H11.data  # (1, old_num_heads, 1, 1)
+                        new_scale_mul = old_scale_mul[0, keep_heads, 0, 0].view(1, -1, 1, 1)
+
                         model.blocks[i].attn.scale_mul_1H11 = nn.Parameter(
-                        torch.full(size=(1, model.blocks[i].attn.num_heads, 1, 1),fill_value=4.0,device='cuda').log(),requires_grad=True)
+                            new_scale_mul.clone().to(device),
+                            requires_grad=True
+                        )
                         target_layer_b = get_module_by_name(model.blocks[i], "attn.mat_qkv")
                         tp.prune_linear_in_channels(target_layer, idx) #proj的inchannel
                         
@@ -582,7 +601,7 @@ def main(args):
     MODEL_DEPTH =  args.maxlayer   # TODO: =====> please specify MODEL_DEPTH <=====
     assert MODEL_DEPTH in {12,16, 20, 24, 30}
     hf_home = 'https://huggingface.co/FoundationVision/var/resolve/main'
-    vae_ckpt, var_ckpt = '/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth', f'/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/var_d{MODEL_DEPTH}.pth'
+    vae_ckpt, var_ckpt = '/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth', f'/home/project/daily/AR/model_zoo/var_d{MODEL_DEPTH}.pth'
     if not osp.exists(vae_ckpt): print("var not exist")
     if not osp.exists(var_ckpt): print("var not exist")
     # if not osp.exists(vae_ckpt): os.system(f'wget {hf_home}/{vae_ckpt}')
@@ -695,7 +714,7 @@ def main(args):
 
     # save_dir = "/home/wangzefang/edgevar/EdgeVAR/VAR_FIDtest/output/FID_test/d24_test_0.2_200i_temporary"
     # os.makedirs(save_dir,exist_ok=True)
-    save_model = "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model"
+    save_model = "./sparsity_model"
     os.makedirs(save_model,exist_ok=True)
     save_path = os.path.join(save_model, args.model_name)
     torch.save(model.state_dict(), save_path)

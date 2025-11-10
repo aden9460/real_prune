@@ -209,7 +209,7 @@ class SlimGPT(object):
             
             error[column_mask] = torch.inf
             if headsize > 1:
-                head_sort_idx = error.view(-1, headsize).sum(1).argsort()
+                head_sort_idx = error.view(-1, headsize).sum(1).argsort() #[head_num]
                 column_sort_idx = torch.hstack([torch.arange(x * headsize, x * headsize + headsize) for x in head_sort_idx])
                 cnt = headsize
             else:
@@ -267,6 +267,158 @@ class SlimGPT(object):
         pruned_indices = torch.where(column_mask)[0]
 
         return pruned_indices
+
+    def head_dim_prune(
+        self, sparsity, headsize=64, percdamp=0.0, layer_idx=None
+    ):
+        """
+        Head维度剪枝：对每个head独立评估，删除相同数量的维度
+
+        与struct_prune的区别：
+        - struct_prune: 删除完整的head（12 heads × 64 dim → 9 heads × 64 dim）
+        - head_dim_prune: 减少每个head的维度（12 heads × 64 dim → 12 heads × 48 dim）
+
+        优势：
+        - 每个head独立评估，保留各自最重要的维度（个性化）
+        - 无需Global Update（head内操作，计算效率更高）
+        - 保持多头结构（reshape兼容）
+
+        Args:
+            sparsity: 稀疏度（例如0.25表示每个head删除25%维度）
+            headsize: 每个head的维度（默认64）
+            percdamp: Hessian对角线阻尼系数
+            layer_idx: 层索引（用于日志）
+
+        Returns:
+            pruned_indices: 被删除的列索引（全局索引）
+        """
+        assert self.columns % headsize == 0, \
+            f"columns ({self.columns}) must be divisible by headsize ({headsize})"
+
+        num_heads = self.columns // headsize
+        dims_to_remove_per_head = round(headsize * sparsity)
+
+        if dims_to_remove_per_head == 0:
+            print(f"Warning: sparsity too low, no dimensions to remove. sparsity={sparsity}, headsize={headsize}")
+            return torch.tensor([], dtype=torch.long, device=self.dev)
+
+        tick = time.time()
+
+        # 准备权重和Hessian
+        W = self.layer.weight.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            W = W.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        W = W.float()
+
+        H = self.H
+        del self.H
+
+        # 处理死节点
+        dead = torch.diag(H) == 0
+        H[dead, dead] = 1
+        W[:, dead] = 0
+
+        # 添加阻尼
+        if percdamp > 0:
+            damp = percdamp * torch.mean(torch.diag(H))
+            diag = torch.arange(H.size(0), device=self.dev)
+            H[diag, diag] += damp
+
+        # 用于记录所有被删除的维度（全局索引）
+        all_pruned_indices = []
+
+        # 逐个head处理
+        for head_idx in range(num_heads):
+            start_col = head_idx * headsize
+            end_col = start_col + headsize
+
+            # 提取该head的权重和Hessian子矩阵
+            W_head = W[:, start_col:end_col]  # [rows, headsize]
+            H_head = H[start_col:end_col, start_col:end_col]  # [headsize, headsize]
+
+            # 计算该head内的Hessian逆和误差
+            try:
+                Hinv_head = torch.cholesky_inverse(torch.linalg.cholesky(H_head))
+            except RuntimeError:
+                # 如果Cholesky分解失败，跳过这个head
+                print(f"Warning: Cholesky failed for head {head_idx}, skipping")
+                continue
+
+            # 计算OBS误差（只在head内部）
+            Hinv_diag_head = torch.diagonal(torch.linalg.cholesky(Hinv_head)) ** 2
+            error_head = torch.sum(W_head ** 2 / Hinv_diag_head.unsqueeze(0), dim=0)  # [headsize]
+
+            # 选择该head内最不重要的维度
+            dim_sort_idx = error_head.argsort()  # 从小到大
+            dims_to_remove = dim_sort_idx[:dims_to_remove_per_head]  # head内相对索引
+            keep_dims = dim_sort_idx[dims_to_remove_per_head:]
+
+            # 记录全局索引
+            global_pruned_idx = start_col + dims_to_remove
+            all_pruned_indices.append(global_pruned_idx)
+
+            # 在head内部应用OBS（只用Local Update，无Global Update）
+            # 重排：将要删除的维度移到前面
+            reorder_idx = torch.cat([dims_to_remove, keep_dims])
+            W_head_reordered = W_head[:, reorder_idx]
+            H_head_reordered = H_head[reorder_idx, :][:, reorder_idx]
+
+            # 对重排后的Hessian做Cholesky分解（上三角）
+            try:
+                Hinv_head_reordered = torch.cholesky_inverse(torch.linalg.cholesky(H_head_reordered))
+                Hinv_head_chol = torch.linalg.cholesky(Hinv_head_reordered, upper=True)[:dims_to_remove_per_head]
+            except RuntimeError:
+                print(f"Warning: Cholesky failed for head {head_idx} reordered, skipping compensation")
+                # 直接清零，不做补偿
+                W_head[:, dims_to_remove] = 0
+                H_head[dims_to_remove, :] = 0
+                H_head[:, dims_to_remove] = 0
+                H_head[dims_to_remove, dims_to_remove] = 1
+                continue
+
+            # Local Update（只在head内部）
+            if not self.no_compensate:
+                W1 = W_head_reordered[:, :dims_to_remove_per_head].clone()
+                Hinv1 = Hinv_head_chol[:, :dims_to_remove_per_head]
+
+                for i in range(dims_to_remove_per_head):
+                    Err_i = W1[:, i:i+1] / Hinv1[i, i]
+                    W1[:, i:] -= Err_i.matmul(Hinv1[i:i+1, i:])
+
+            # 清零待删除维度
+            W_head_reordered[:, :dims_to_remove_per_head] = 0
+
+            # 恢复原始顺序
+            reorder_idx_inv = torch.argsort(reorder_idx)
+            W_head_restored = W_head_reordered[:, reorder_idx_inv]
+
+            # 更新权重（写回原始W）
+            W[:, start_col:end_col] = W_head_restored
+
+            # 更新Hessian（只在head内部）
+            H_head[dims_to_remove, :] = 0
+            H_head[:, dims_to_remove] = 0
+            H_head[dims_to_remove, dims_to_remove] = 1
+
+        # 合并所有被删除的索引
+        if all_pruned_indices:
+            pruned_indices = torch.cat(all_pruned_indices)
+        else:
+            pruned_indices = torch.tensor([], dtype=torch.long, device=self.dev)
+
+        # 写回layer
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(self.layer.weight.data.dtype)
+
+        if layer_idx is not None:
+            print(f'Layer {layer_idx}: head_dim_prune completed in {time.time() - tick:.2f}s, '
+                  f'removed {len(pruned_indices)} dims ({sparsity*100:.1f}% per head)', flush=True)
+
+        return pruned_indices
+
     def free(self):
         if DEBUG:
             self.inp1 = None

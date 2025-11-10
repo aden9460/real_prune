@@ -7,13 +7,13 @@ import argparse
 from transformers import set_seed
 import os.path as osp
 from eval import eval_ppl
-from DFOBS.slim_utils.slimgpt import SlimGPT
+from slim_utils.slimgpt import SlimGPT
 from slim_utils.slim_dataset import get_loaders
 from slim_utils.params_remove import LLaMAParamsPruner
 from ppl_eval.ppl_eval import ppl_metric
 from torchvision.utils import save_image
 import sys
-sys.path.append("/home/suanba/EdgeVAR/Torch-Pruning")
+# sys.path.append("/home/suanba/EdgeVAR/Torch-Pruning")
 from importlib.metadata import version
 from transformers import AutoTokenizer, AutoModelForCausalLM,LlamaForCausalLM
 setattr(torch.nn.Linear, 'reset_parameters', lambda self: None)     # disable default parameter init for faster speed
@@ -177,90 +177,90 @@ def prepare_calibration_input(args, model, dataloader, device="cuda"):
     return inps, outs, attention_mask, position_ids
 
 
-def prepare_calibration_d16_last_input(args, model, dataloader,device):
+# def prepare_calibration_d16_last_input(args, model, dataloader,device):
     
-    label_B = dataloader.int()
+#     label_B = dataloader.int()
 
-    layers = model.blocks
+#     layers = model.blocks
 
-    # inps = torch.zeros(
-    #     (len(label_B), 256, 1024),device="cuda")
+#     # inps = torch.zeros(
+#     #     (len(label_B), 256, 1024),device="cuda")
     
-    # for b in layers: b.attn.kv_caching(False)
-    # inps.requires_grad = False
-    # cache = {"i": 0,"x":[], "cond_BD": [], "attn_bias": []}
-    # outs = {"i": 0,"x":[], "cond_BD": [], "attn_bias": []}
-    cache = []
-    outs = []
-    class Catcher(nn.Module):
-        def __init__(self, module):
-            super().__init__()
-            self.module = module
+#     # for b in layers: b.attn.kv_caching(False)
+#     # inps.requires_grad = False
+#     # cache = {"i": 0,"x":[], "cond_BD": [], "attn_bias": []}
+#     # outs = {"i": 0,"x":[], "cond_BD": [], "attn_bias": []}
+#     cache = []
+#     outs = []
+#     class Catcher(nn.Module):
+#         def __init__(self, module):
+#             super().__init__()
+#             self.module = module
 
-        def forward(self, x, **kwargs):  ##ori 只选取最后一层
-            # inps[cache["i"]] = inp  #
+#         def forward(self, x, **kwargs):  ##ori 只选取最后一层
+#             # inps[cache["i"]] = inp  #
             
-            # cache["cond_BD"] = kwargs["cond_BD"]
-            # cache["attn_bias"] = kwargs["attn_bias"]
-            # inps.append(inp)
-            # print(x.shape)
-            tokens = x.shape[1]
-            if tokens ==args.specific_layer :
-                cache.append({
-                "i": len(cache),
-                "x": x,
-                "cond_BD": kwargs["cond_BD"],
+#             # cache["cond_BD"] = kwargs["cond_BD"]
+#             # cache["attn_bias"] = kwargs["attn_bias"]
+#             # inps.append(inp)
+#             # print(x.shape)
+#             tokens = x.shape[1]
+#             if tokens ==args.specific_layer :
+#                 cache.append({
+#                 "i": len(cache),
+#                 "x": x,
+#                 "cond_BD": kwargs["cond_BD"],
 
-                })
-                outs.append({
-                "i": len(cache),
-                "x": 0,
-                "cond_BD": kwargs["cond_BD"],
+#                 })
+#                 outs.append({
+#                 "i": len(cache),
+#                 "x": 0,
+#                 "cond_BD": kwargs["cond_BD"],
 
-                })
-                raise ValueError
-            else:
-                return self.module(x, **kwargs)
+#                 })
+#                 raise ValueError
+#             else:
+#                 return self.module(x, **kwargs)
 
-        # def forward(self, x, **kwargs): #每一层都要 _allstep
-        #     # inps[cache["i"]] = inp  #
+#         # def forward(self, x, **kwargs): #每一层都要 _allstep
+#         #     # inps[cache["i"]] = inp  #
             
-        #     # cache["cond_BD"] = kwargs["cond_BD"]
-        #     # cache["attn_bias"] = kwargs["attn_bias"]
-        #     # inps.append(inp)
-        #     # print(x.shape)
-        #     # tokens = x.shape[1]
-        #     # if tokens ==256 :
-        #     cache.append({
-        #     "i": len(cache),
-        #     "x": x,
-        #     "cond_BD": kwargs["cond_BD"],
+#         #     # cache["cond_BD"] = kwargs["cond_BD"]
+#         #     # cache["attn_bias"] = kwargs["attn_bias"]
+#         #     # inps.append(inp)
+#         #     # print(x.shape)
+#         #     # tokens = x.shape[1]
+#         #     # if tokens ==256 :
+#         #     cache.append({
+#         #     "i": len(cache),
+#         #     "x": x,
+#         #     "cond_BD": kwargs["cond_BD"],
 
-        #     })
-        #     outs.append({
-        #     "i": len(cache),
-        #     "x": 0,
-        #     "cond_BD": kwargs["cond_BD"],
+#         #     })
+#         #     outs.append({
+#         #     "i": len(cache),
+#         #     "x": 0,
+#         #     "cond_BD": kwargs["cond_BD"],
 
-        #     })
-        #     raise ValueError
-        #     # else:
-        #         # return self.module(x, **kwargs)
+#         #     })
+#         #     raise ValueError
+#         #     # else:
+#         #         # return self.module(x, **kwargs)
 
-    layers[0] = Catcher(layers[0])
-    for batch in dataloader:
-        try:
-            model(batch)
-        except ValueError:
-            pass
+#     layers[0] = Catcher(layers[0])
+#     for batch in dataloader:
+#         try:
+#             model(batch)
+#         except ValueError:
+#             pass
 
-    layers[0] = layers[0].module
+#     layers[0] = layers[0].module
 
-    # outs = torch.zeros_like(inps)
+#     # outs = torch.zeros_like(inps)
 
-    # position_ids = None
-    cond_BD_or_gss = None
-    return cond_BD_or_gss, outs, cond_BD_or_gss, cache
+#     # position_ids = None
+#     cond_BD_or_gss = None
+#     return cond_BD_or_gss, outs, cond_BD_or_gss, cache
 
 def prepare_calibration_d16_last_input(args, model, dataloader,device):
     
@@ -498,7 +498,7 @@ def main(args):
     MODEL_DEPTH =  args.maxlayer   # TODO: =====> please specify MODEL_DEPTH <=====
     assert MODEL_DEPTH in {12,16, 20, 24, 30}
     hf_home = 'https://huggingface.co/FoundationVision/var/resolve/main'
-    vae_ckpt, var_ckpt = '/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth', f'/home/suanba/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/var_d{MODEL_DEPTH}.pth'
+    vae_ckpt, var_ckpt = '/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth', f'/home/project/daily/AR/model_zoo/var_d{MODEL_DEPTH}.pth'
     if not osp.exists(vae_ckpt): print("var not exist")
     if not osp.exists(var_ckpt): print("var not exist")
     # if not osp.exists(vae_ckpt): os.system(f'wget {hf_home}/{vae_ckpt}')
@@ -611,7 +611,7 @@ def main(args):
 
     # save_dir = "/home/wangzefang/edgevar/EdgeVAR/VAR_FIDtest/output/FID_test/d24_test_0.2_200i_temporary"
     # os.makedirs(save_dir,exist_ok=True)
-    save_model = "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/sparsity_model/"
+    save_model = "./sparsity_model"
     os.makedirs(save_model,exist_ok=True)
     save_path = os.path.join(save_model, args.model_name)
     torch.save(model.state_dict(), save_path)
@@ -707,7 +707,7 @@ if __name__ == "__main__":
         help="Whether save the checkpoint after removing the zeroed-out parameters.",
     )
     parser.add_argument(
-        "--save_dir", type=str, default="", 
+        "--save_dir", type=str, default="./sparsity_model", 
         help="Path to saved model.",
     )
 

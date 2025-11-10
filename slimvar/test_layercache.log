@@ -1,0 +1,108 @@
+
+Arguments:
+  model_depth: 16
+  vae_ckpt: 
+  var_ckpt: 
+  num_samples: 256
+  use_images: True
+  imagenet_dir: /home/project/ImageNet-1K
+  sparsity: 0.2
+  minlayer: 0
+  maxlayer: 16
+  percdamp: 0.01
+  non_uniform: False
+  non_uniform_strategy: log_increase
+  min_sparsity: 0.06
+  max_sparsity: 0.3
+  no_compensate: False
+  seed: 0
+  save_dir: ./pruned_models
+  model_name: var_d16_s20_layercache.pth
+
+============================================================
+VAR Model Basic Pruning
+============================================================
+
+[1/5] Loading model...
+宽度是1024
+
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/backends/__init__.py:46: UserWarning: Please use the new API settings to control TF32 behavior, such as torch.backends.cudnn.conv.fp32_precision = 'tf32' or torch.backends.cuda.matmul.fp32_precision = 'ieee'. Old settings, e.g, torch.backends.cuda.matmul.allow_tf32 = True, torch.backends.cudnn.allow_tf32 = True, allowTF32CuDNN() and allowTF32CuBLAS() will be deprecated after Pytorch 2.9. Please see https://pytorch.org/docs/main/notes/cuda.html#tensorfloat-32-tf32-on-ampere-and-later-devices (Triggered internally at /pytorch/aten/src/ATen/Context.cpp:80.)
+  self.setter(val)
+/home/project/real_prune/slimvar/VAR/models/var.py:200: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+[init_weights] VAR with init_std=0.0180422
+VAR-d16 model loaded successfully.
+
+[2/5] Using uniform sparsity: 0.2
+
+[3/5] Preparing calibration data...
+加载真实ImageNet图像并编码（使用VAR原始build_dataset）...
+[Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+Transform [train] = 
+Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+RandomCrop(size=(256, 256), padding=None)
+ToTensor()
+<function normalize_01_into_pm1 at 0x7fd9c4f048b0>
+---------------------------
+
+Transform [val] = 
+Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+CenterCrop(size=(256, 256))
+ToTensor()
+<function normalize_01_into_pm1 at 0x7fd9c4f048b0>
+---------------------------
+
+  按类别平衡采样：从 1000 个类别中采样 256 个样本
+  实际采样：256 个样本（均匀跨度采样）
+  已处理 64/256 张图像
+  已处理 128/256 张图像
+  已处理 192/256 张图像
+  已处理 256/256 张图像
+✓ 完成！获得 256 个样本的tokens
+  Calibration samples: 256
+  Total parameters: 0.31B
+
+[4/5] Executing pruning...
+
+============================================================
+Starting VAR Model Pruning
+============================================================
+Model depth: 16
+Pruning layers: 0 to 16
+Target sparsity: 0.2
+Calibration samples: 256
+Using pre-encoded tokens: True
+============================================================
+
+============================================================
+Caching layer inputs...
+============================================================
+Traceback (most recent call last):
+  File "/home/project/real_prune/slimvar/model_slimming_basic.py", line 667, in <module>
+    main(args)
+  File "/home/project/real_prune/slimvar/model_slimming_basic.py", line 517, in main
+    var = model_slimming(var, calibration_labels, calibration_tokens, args)
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/project/real_prune/slimvar/model_slimming_basic.py", line 272, in model_slimming
+    model(batch_labels, batch_tokens)
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1786, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/project/real_prune/slimvar/VAR/models/var.py", line 222, in forward
+    x_BLC = b(x=x_BLC, cond_BD=cond_BD_or_gss, attn_bias=attn_bias)
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1775, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1881, in _call_impl
+    return inner()
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1842, in inner
+    hook_result = hook(self, args, result)
+  File "/home/project/real_prune/slimvar/model_slimming_basic.py", line 254, in capture_input
+    layer_inputs.append(inp[0].detach().cpu())
+IndexError: tuple index out of range

@@ -13,7 +13,7 @@ from slim_utils.params_remove import LLaMAParamsPruner
 from ppl_eval.ppl_eval import ppl_metric
 from torchvision.utils import save_image
 import sys
-sys.path.append("/home/suanba/EdgeVAR/Torch-Pruning")
+# sys.path.append("/home/suanba/EdgeVAR/Torch-Pruning")
 from importlib.metadata import version
 # from transformers import AutoTokenizer, AutoModelForCausalLM,LlamaForCausalLM
 setattr(torch.nn.Linear, 'reset_parameters', lambda self: None)     # disable default parameter init for faster speed

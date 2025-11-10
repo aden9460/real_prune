@@ -4,7 +4,7 @@ sparsity=0.4
 num_samples=150
 model_name="prune_d${maxlayer}_${sparsity}sparsity_${num_samples}i_${specific_layer}eva_scale.pth" 
 
-CUDA_VISIBLE_DEVICES=2 python -u prune.py \
+CUDA_VISIBLE_DEVICES=2 python -u prune_v2.py \
   --minlayer 0 \
   --maxlayer $maxlayer \
   --num_samples $num_samples \

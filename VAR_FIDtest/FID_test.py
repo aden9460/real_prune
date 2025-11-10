@@ -21,7 +21,7 @@ assert MODEL_DEPTH in {12,16, 20, 24, 30}
 # download checkpoint
 hf_home = 'https://huggingface.co/FoundationVision/var/resolve/main'
 # vae_ckpt, var_ckpt = '/wanghuan/data/wangzefang/slim_VAR_copy/VAR/model_zoo/vae_ch160v4096z32.pth', f'/wanghuan/data/wangzefang/slim_VAR_copy/VAR/model_zoo/var_d{MODEL_DEPTH}.pth'
-vae_ckpt = '/home/waas/EdgeVAR/slimgpt_pub/model_zoo/model_zoo/vae_ch160v4096z32.pth'
+vae_ckpt = '/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth'
 var_ckpt = args.var_model
 print(var_ckpt)
 #    /home/wangzefang/Projects/project/slim_VAR/slimgpt_pub/sparsity_model/d24_0.4var_1i_256input.pth
@@ -168,7 +168,7 @@ torch.backends.cudnn.allow_tf32 = bool(tf32)
 torch.backends.cuda.matmul.allow_tf32 = bool(tf32)
 torch.set_float32_matmul_precision('high' if tf32 else 'highest')
 output_name = args.output_name
-save_dir = f"/home/suanba/real_prune/VAR_FIDtest/output/{output_name}"
+save_dir = f"/home/project/real_prune/VAR_FIDtest/output/{output_name}"
 os.makedirs(save_dir,exist_ok=True)
 # sample
 progress_bar = tqdm(total=1000, desc="生成FID样本")
@@ -180,7 +180,7 @@ with torch.inference_mode():
             class_labels  = torch.full((50,), class_num, dtype=torch.long)
             B = len(class_labels)
             label_B: torch.LongTensor = torch.tensor(class_labels, device=device)
-            recon_B3HW = var.autoregressive_infer_cfg(B=B, label_B=label_B, cfg=cfg, top_k=900, top_p=0.95, g_seed=seed, more_smooth=more_smooth)
+            recon_B3HW = var.autoregressive_infer_cfg(B=B, label_B=label_B, cfg=cfg, top_k=900, top_p=0.96, g_seed=seed, more_smooth=more_smooth)
             for i in range(recon_B3HW.shape[0]):
                 img = recon_B3HW[i].permute(1, 2, 0).mul(255).cpu().numpy()
                 img = PImage.fromarray(img.astype(np.uint8))

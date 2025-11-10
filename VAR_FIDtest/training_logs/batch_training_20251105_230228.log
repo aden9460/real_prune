@@ -1,0 +1,512 @@
+========================================
+训练监控开始时间: 2025年 11月 05日 星期三 23:02:28 CST
+日志文件: /home/project/real_prune/VAR_FIDtest/training_logs/batch_training_20251105_230228.log
+========================================
+
+找到训练进程 PID: 3307204
+开始监控...
+
+========================================
+检查点 #1 - 2025年 11月 05日 星期三 23:02:28 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 61, 96, 14, 4426, 32607
+1, NVIDIA GeForce RTX 5090, 70, 100, 63, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 66, 99, 46, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 99, 61, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 55, 71, 40, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 0, 0, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 100, 42, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 66, 0, 0, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #2 - 2025年 11月 05日 星期三 23:02:58 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 59, 99, 21, 15666, 32607
+1, NVIDIA GeForce RTX 5090, 66, 70, 45, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 60, 55, 18, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 59, 0, 0, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 57, 100, 66, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 53, 99, 68, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 68, 91, 56, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 55, 99, 65, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #3 - 2025年 11月 05日 星期三 23:03:28 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 62, 99, 21, 25690, 32607
+1, NVIDIA GeForce RTX 5090, 61, 16, 12, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 66, 99, 53, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 62, 45, 22, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 56, 89, 58, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 53, 99, 66, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 60, 24, 13, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 56, 99, 65, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #4 - 2025年 11月 05日 星期三 23:03:58 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 62, 98, 20, 8102, 32607
+1, NVIDIA GeForce RTX 5090, 67, 99, 60, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 67, 21, 7, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 67, 0, 0, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 59, 99, 55, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 55, 99, 68, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 100, 63, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 57, 99, 65, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #5 - 2025年 11月 05日 星期三 23:04:28 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 62, 99, 19, 23798, 32607
+1, NVIDIA GeForce RTX 5090, 69, 100, 61, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 67, 22, 7, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 67, 0, 0, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 60, 99, 53, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 99, 69, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 100, 60, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 65, 100, 49, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #6 - 2025年 11月 05日 星期三 23:04:58 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 58, 99, 20, 4852, 32607
+1, NVIDIA GeForce RTX 5090, 63, 100, 65, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 66, 21, 7, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 0, 0, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 52, 99, 52, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 99, 68, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 61, 100, 61, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 66, 100, 49, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #7 - 2025年 11月 05日 星期三 23:05:29 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 60, 99, 21, 16184, 32607
+1, NVIDIA GeForce RTX 5090, 61, 100, 62, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 63, 100, 51, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 60, 99, 52, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 49, 100, 42, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 53, 0, 0, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 60, 100, 59, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 57, 0, 0, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #8 - 2025年 11月 05日 星期三 23:05:59 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 61, 99, 20, 31044, 32607
+1, NVIDIA GeForce RTX 5090, 66, 0, 0, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 57, 0, 0, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 59, 13, 11, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 52, 100, 59, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 100, 52, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 63, 50, 28, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 66, 100, 67, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #9 - 2025年 11月 05日 星期三 23:06:29 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 63, 99, 18, 10204, 32607
+1, NVIDIA GeForce RTX 5090, 61, 99, 60, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 64, 100, 50, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 99, 52, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 49, 99, 61, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 60, 0, 0, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 60, 99, 56, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 67, 0, 0, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #10 - 2025年 11月 05日 星期三 23:06:59 CST
+========================================
+已完成模型数: 5/16 (Chain KFAC: 5, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 60, 99, 20, 20876, 32607
+1, NVIDIA GeForce RTX 5090, 70, 99, 63, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 66, 100, 49, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 99, 52, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 59, 100, 63, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 63, 0, 0, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 70, 99, 62, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 66, 0, 0, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #11 - 2025年 11月 05日 星期三 23:07:29 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 55, 9, 3, 2, 32607
+1, NVIDIA GeForce RTX 5090, 63, 0, 0, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 62, 100, 17, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 61, 100, 2, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 49, 21, 13, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 53, 99, 65, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 66, 0, 0, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 57, 99, 56, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #12 - 2025年 11月 05日 星期三 23:07:59 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 59, 92, 23, 27446, 32607
+1, NVIDIA GeForce RTX 5090, 61, 0, 0, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 65, 100, 50, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 60, 84, 35, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 49, 0, 0, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 53, 99, 65, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 12, 10, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 56, 99, 56, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #13 - 2025年 11月 05日 星期三 23:08:29 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 59, 99, 20, 27900, 32607
+1, NVIDIA GeForce RTX 5090, 67, 100, 62, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 65, 48, 23, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 59, 100, 62, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 59, 100, 62, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 63, 0, 0, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 63, 100, 59, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 65, 0, 0, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #14 - 2025年 11月 05日 星期三 23:08:59 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 59, 99, 21, 30790, 32607
+1, NVIDIA GeForce RTX 5090, 69, 0, 0, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 65, 100, 53, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 100, 10, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 49, 16, 12, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 63, 99, 69, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 66, 0, 0, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 65, 99, 68, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #15 - 2025年 11月 05日 星期三 23:09:29 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 63, 95, 15, 5264, 32607
+1, NVIDIA GeForce RTX 5090, 68, 58, 38, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 56, 99, 52, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 66, 99, 65, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 60, 0, 0, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 99, 66, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 36, 8, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 66, 99, 59, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #16 - 2025年 11月 05日 星期三 23:10:00 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 60, 99, 21, 21402, 32607
+1, NVIDIA GeForce RTX 5090, 63, 38, 26, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 56, 0, 0, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 66, 12, 8, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 54, 100, 63, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 100, 68, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 61, 62, 39, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 63, 99, 68, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #17 - 2025年 11月 05日 星期三 23:10:30 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 60, 93, 21, 22780, 32607
+1, NVIDIA GeForce RTX 5090, 70, 0, 0, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 57, 8, 6, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 58, 0, 0, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 59, 55, 35, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 61, 100, 68, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 0, 0, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 65, 99, 68, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #18 - 2025年 11月 05日 星期三 23:11:00 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 60, 99, 19, 11934, 32607
+1, NVIDIA GeForce RTX 5090, 67, 0, 0, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 57, 0, 0, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 64, 45, 28, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 60, 83, 54, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 61, 100, 67, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 62, 36, 24, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 62, 100, 68, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #19 - 2025年 11月 05日 星期三 23:11:30 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 59, 99, 20, 19054, 32607
+1, NVIDIA GeForce RTX 5090, 68, 25, 15, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 66, 99, 53, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 58, 41, 24, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 49, 16, 12, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 52, 99, 66, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 66, 52, 30, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 61, 99, 65, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #20 - 2025年 11月 05日 星期三 23:12:00 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 59, 98, 19, 6326, 32607
+1, NVIDIA GeForce RTX 5090, 69, 99, 62, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 63, 89, 48, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 99, 56, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 60, 99, 63, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 29, 9, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 99, 61, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 65, 44, 28, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #21 - 2025年 11月 05日 星期三 23:12:30 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 60, 99, 18, 21552, 32607
+1, NVIDIA GeForce RTX 5090, 70, 99, 63, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 65, 67, 37, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 68, 100, 64, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 58, 99, 64, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 58, 14, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 69, 100, 59, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 66, 73, 36, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+========================================
+检查点 #22 - 2025年 11月 05日 星期三 23:13:00 CST
+========================================
+已完成模型数: 6/16 (Chain KFAC: 6, SlimGPT: 0)
+
+GPU 状态:
+0, NVIDIA GeForce RTX 5090, 56, 99, 19, 4136, 32607
+1, NVIDIA GeForce RTX 5090, 69, 80, 52, 29510, 32607
+2, NVIDIA GeForce RTX 5090, 57, 99, 44, 29510, 32607
+3, NVIDIA GeForce RTX 5090, 62, 99, 61, 29510, 32607
+4, NVIDIA GeForce RTX 5090, 60, 100, 52, 29510, 32607
+5, NVIDIA GeForce RTX 5090, 62, 0, 0, 29510, 32607
+6, NVIDIA GeForce RTX 5090, 63, 58, 19, 29510, 32607
+7, NVIDIA GeForce RTX 5090, 65, 0, 0, 29510, 32607
+
+已生成的模型文件:
+-rw-r--r-- 1 root root 1.2G 11月  5 23:01 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_equal_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:55 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_natural_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 23:07 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.1_sqrt_n50.pth
+-rw-r--r-- 1 root root 1.2G 11月  5 22:25 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.2_equal_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:18 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.3_natural_n50.pth
+-rw-r--r-- 1 root root 1.1G 11月  5 22:38 /home/project/real_prune/VAR_FIDtest/batch_models/chain_kfac/var_d16_chain_kfac_s0.4_equal_n50.pth
+
+
+========================================
+训练进程已完成: 2025年 11月 05日 星期三 23:13:30 CST
+最终统计:
+  Chain KFAC 模型: 6
+  SlimGPT 模型: 0
+  总计: 6/16
+========================================

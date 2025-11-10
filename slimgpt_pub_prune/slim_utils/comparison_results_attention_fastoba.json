@@ -1,0 +1,146 @@
+[
+  {
+    "sparsity": 0.125,
+    "test_type": "attention_fastoba",
+    "slimgpt_head": {
+      "mse": 0.00012562690244521946,
+      "relative_error": 0.0807196862340645,
+      "weight_change": 8.669060707092285,
+      "time": 0.017720699310302734,
+      "remaining_heads": 10.0,
+      "structure": "10h\u00d764d"
+    },
+    "slimgpt_headdim": {
+      "mse": 0.00013717100955545902,
+      "relative_error": 0.0881371795070305,
+      "weight_change": 5.5930962562561035,
+      "time": 0.015553474426269531,
+      "remaining_dim_per_head": 56.0,
+      "structure": "12h\u00d756d"
+    },
+    "fastoba_head": {
+      "mse": 0.00018862090655602515,
+      "relative_error": 0.12119554090754014,
+      "weight_change": 6.520987033843994,
+      "time": 0.011908769607543945,
+      "remaining_heads": 10.0,
+      "structure": "10h\u00d764d"
+    },
+    "fastoba_headdim": {
+      "mse": 0.00012792808411177248,
+      "relative_error": 0.08219827607808887,
+      "weight_change": 5.982330322265625,
+      "time": 0.013235092163085938,
+      "remaining_dim_per_head": 56.0,
+      "structure": "12h\u00d756d"
+    }
+  },
+  {
+    "sparsity": 0.25,
+    "test_type": "attention_fastoba",
+    "slimgpt_head": {
+      "mse": 0.00019981087825726718,
+      "relative_error": 0.12838548977288122,
+      "weight_change": 10.687138557434082,
+      "time": 0.034514665603637695,
+      "remaining_heads": 9.0,
+      "structure": "9h\u00d764d"
+    },
+    "slimgpt_headdim": {
+      "mse": 0.00028192828176543117,
+      "relative_error": 0.18114879855879565,
+      "weight_change": 7.928499221801758,
+      "time": 0.03326082229614258,
+      "remaining_dim_per_head": 48.0,
+      "structure": "12h\u00d748d"
+    },
+    "fastoba_head": {
+      "mse": 0.0002789774152915925,
+      "relative_error": 0.17925276346399782,
+      "weight_change": 7.9842681884765625,
+      "time": 0.01622486114501953,
+      "remaining_heads": 9.0,
+      "structure": "9h\u00d764d"
+    },
+    "fastoba_headdim": {
+      "mse": 0.00025289907352998853,
+      "relative_error": 0.1624965152120019,
+      "weight_change": 8.411986351013184,
+      "time": 0.017277956008911133,
+      "remaining_dim_per_head": 48.0,
+      "structure": "12h\u00d748d"
+    }
+  },
+  {
+    "sparsity": 0.375,
+    "test_type": "attention_fastoba",
+    "slimgpt_head": {
+      "mse": 0.00028062728233635426,
+      "relative_error": 0.18031286084432738,
+      "weight_change": 12.348822593688965,
+      "time": 0.04106283187866211,
+      "remaining_heads": 8.0,
+      "structure": "8h\u00d764d"
+    },
+    "slimgpt_headdim": {
+      "mse": 0.0004221866838634014,
+      "relative_error": 0.27126973594301784,
+      "weight_change": 9.740182876586914,
+      "time": 0.03664422035217285,
+      "remaining_dim_per_head": 40.0,
+      "structure": "12h\u00d740d"
+    },
+    "fastoba_head": {
+      "mse": 0.00045975783723406494,
+      "relative_error": 0.2954105183113033,
+      "weight_change": 10.317204475402832,
+      "time": 0.025815725326538086,
+      "remaining_heads": 7.0,
+      "structure": "7h\u00d764d"
+    },
+    "fastoba_headdim": {
+      "mse": 0.0004148015286773443,
+      "relative_error": 0.2665245149926856,
+      "weight_change": 10.222223281860352,
+      "time": 0.025789976119995117,
+      "remaining_dim_per_head": 40.0,
+      "structure": "12h\u00d740d"
+    }
+  },
+  {
+    "sparsity": 0.5,
+    "test_type": "attention_fastoba",
+    "slimgpt_head": {
+      "mse": 0.00045987084740772843,
+      "relative_error": 0.29548313130726056,
+      "weight_change": 14.890928268432617,
+      "time": 0.05523276329040527,
+      "remaining_heads": 6.0,
+      "structure": "6h\u00d764d"
+    },
+    "slimgpt_headdim": {
+      "mse": 0.0005644821794703603,
+      "relative_error": 0.3626995772775441,
+      "weight_change": 11.254617691040039,
+      "time": 0.04088735580444336,
+      "remaining_dim_per_head": 32.0,
+      "structure": "12h\u00d732d"
+    },
+    "fastoba_head": {
+      "mse": 0.0005582578014582396,
+      "relative_error": 0.35870019632998246,
+      "weight_change": 11.301966667175293,
+      "time": 0.0304868221282959,
+      "remaining_heads": 6.0,
+      "structure": "6h\u00d764d"
+    },
+    "fastoba_headdim": {
+      "mse": 0.0005720701883547008,
+      "relative_error": 0.3675751388361231,
+      "weight_change": 11.715696334838867,
+      "time": 0.030463457107543945,
+      "remaining_dim_per_head": 32.0,
+      "structure": "12h\u00d732d"
+    }
+  }
+]

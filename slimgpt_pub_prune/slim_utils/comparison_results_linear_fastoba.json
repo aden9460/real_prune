@@ -1,0 +1,90 @@
+[
+  {
+    "sparsity": 0.125,
+    "test_type": "linear",
+    "head_prune": {
+      "mse": 0.055734362453222275,
+      "relative_error": 0.16736853836230867,
+      "weight_change": 6.538339138031006,
+      "time": 0.01536250114440918,
+      "flops_reduction": 0.16666666666666666,
+      "structure": "10 heads \u00d7 64 dim",
+      "remaining_heads": 10.0
+    },
+    "head_dim_prune": {
+      "mse": 0.03935074433684349,
+      "relative_error": 0.11816904819991562,
+      "weight_change": 5.508045196533203,
+      "time": 0.014886617660522461,
+      "flops_reduction": 0.125,
+      "structure": "12 heads \u00d7 56 dim",
+      "remaining_dim_per_head": 56.0
+    }
+  },
+  {
+    "sparsity": 0.25,
+    "test_type": "linear",
+    "head_prune": {
+      "mse": 0.08379334211349487,
+      "relative_error": 0.2516287722103064,
+      "weight_change": 8.010822296142578,
+      "time": 0.020735502243041992,
+      "flops_reduction": 0.25,
+      "structure": "9 heads \u00d7 64 dim",
+      "remaining_heads": 9.0
+    },
+    "head_dim_prune": {
+      "mse": 0.07974880188703537,
+      "relative_error": 0.2394831450558156,
+      "weight_change": 7.8393874168396,
+      "time": 0.01827096939086914,
+      "flops_reduction": 0.25,
+      "structure": "12 heads \u00d7 48 dim",
+      "remaining_dim_per_head": 48.0
+    }
+  },
+  {
+    "sparsity": 0.375,
+    "test_type": "linear",
+    "head_prune": {
+      "mse": 0.11150422692298889,
+      "relative_error": 0.3348436881642463,
+      "weight_change": 9.247970581054688,
+      "time": 0.026273250579833984,
+      "flops_reduction": 0.3333333333333333,
+      "structure": "8 heads \u00d7 64 dim",
+      "remaining_heads": 8.0
+    },
+    "head_dim_prune": {
+      "mse": 0.12093405425548553,
+      "relative_error": 0.3631611632044163,
+      "weight_change": 9.640413284301758,
+      "time": 0.02173638343811035,
+      "flops_reduction": 0.375,
+      "structure": "12 heads \u00d7 40 dim",
+      "remaining_dim_per_head": 40.0
+    }
+  },
+  {
+    "sparsity": 0.5,
+    "test_type": "linear",
+    "head_prune": {
+      "mse": 0.16690990328788757,
+      "relative_error": 0.501225192536009,
+      "weight_change": 11.322367668151855,
+      "time": 0.03735232353210449,
+      "flops_reduction": 0.5,
+      "structure": "6 heads \u00d7 64 dim",
+      "remaining_heads": 6.0
+    },
+    "head_dim_prune": {
+      "mse": 0.16224220395088196,
+      "relative_error": 0.4872082381623938,
+      "weight_change": 11.169774055480957,
+      "time": 0.025182008743286133,
+      "flops_reduction": 0.5,
+      "structure": "12 heads \u00d7 32 dim",
+      "remaining_dim_per_head": 32.0
+    }
+  }
+]

@@ -83,7 +83,10 @@ class Args(Tap):
     pg: float = 0.0         # >0 for use progressive training during [0%, this] of training
     pg0: int = 4            # progressive initial stage, 0: from the 1st token map, 1: from the 2nd token map, etc
     pgwp: float = 0         # num of warmup epochs at each progressive stage
-    
+
+    # checkpoint saving
+    ckpt_save_interval: int = 1  # save checkpoint every N epochs (default: 1 = save every epoch)
+
     # would be automatically set in runtime
     cmd: str = ' '.join(sys.argv[1:])  # [automatically set; don't specify this]
     branch: str = subprocess.check_output(f'git symbolic-ref --short HEAD 2>/dev/null || git rev-parse HEAD', shell=True).decode('utf-8').strip() or '[unknown]' # [automatically set; don't specify this]
@@ -116,6 +119,31 @@ class Args(Tap):
     seed: int = None        # seed
 
     transfer: bool = False
+
+    # ========== 蒸馏相关参数 ==========
+    # 基础蒸馏配置
+    enable_distillation: bool = False               # 是否启用蒸馏
+    teacher_model_path: str = ''                    # 教师模型文件路径
+    teacher_depth: int = 16                         # 教师模型深度 (16/20/24/30)
+
+    # 蒸馏策略配置
+    distill_type: str = 'both'                      # 蒸馏类型：'normal'/'scale_aware'/'both'
+    distill_alpha: float = 0.5                      # 任务损失权重 (0-1)
+    distill_beta: float = 0.5                       # 蒸馏损失权重 (0-1)
+    distill_temperature: float = 4.0                # KL散度温度参数
+
+    # 尺度感知蒸馏配置
+    scale_weights_str: str = '2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2'  # 10个尺度权重(逗号分隔)
+
+    # 高级蒸馏选项（保留接口，暂不实现）
+    use_feature_distill: bool = False               # 是否使用特征蒸馏（未来扩展）
+    feature_layers_str: str = '4,8,12,15'          # 特征蒸馏层索引(逗号分隔，未来扩展)
+    use_attention_distill: bool = False             # 是否使用注意力蒸馏（未来扩展）
+
+    # 蒸馏训练配置
+    distill_warmup_epochs: int = 5                  # 蒸馏预热epoch数
+    distill_schedule: str = 'constant'              # 蒸馏权重调度: constant/linear/cosine
+
     def seed_everything(self, benchmark: bool):
         torch.backends.cudnn.enabled = True
         torch.backends.cudnn.benchmark = benchmark
@@ -138,6 +166,40 @@ class Args(Tap):
         g = torch.Generator()
         g.manual_seed(self.seed * dist.get_world_size() + dist.get_rank())
         return g
+
+    def validate_distill_args(self):
+        """验证蒸馏参数的合法性"""
+        if self.enable_distillation:
+            assert self.teacher_model_path, "教师模型路径不能为空"
+            assert os.path.exists(self.teacher_model_path), f"教师模型文件不存在: {self.teacher_model_path}"
+            assert self.distill_type in ['normal', 'scale_aware', 'both'], f"不支持的蒸馏类型: {self.distill_type}"
+            assert self.distill_alpha + self.distill_beta > 0, "损失权重之和必须大于0"
+            assert self.teacher_depth in [16, 20, 24, 30], f"不支持的教师模型深度: {self.teacher_depth}"
+
+            # 验证尺度权重
+            try:
+                weights = [float(x.strip()) for x in self.scale_weights_str.split(',')]
+                assert len(weights) == 10, f"尺度权重必须有10个值，当前有{len(weights)}个"
+                assert all(w >= 0 for w in weights), "尺度权重必须非负"
+            except ValueError as e:
+                raise ValueError(f"尺度权重格式错误: {e}")
+
+            # 验证温度参数
+            assert self.distill_temperature > 0, "蒸馏温度必须大于0"
+
+            print(f"[蒸馏参数验证] 通过 - 类型:{self.distill_type}, 权重:{self.distill_alpha}/{self.distill_beta}")
+
+    @property
+    def scale_weights(self):
+        """动态解析尺度权重字符串为列表"""
+        return [float(x.strip()) for x in self.scale_weights_str.split(',')]
+
+    @property
+    def feature_layers(self):
+        """动态解析特征层字符串为列表"""
+        if self.use_feature_distill:
+            return [int(x.strip()) for x in self.feature_layers_str.split(',')]
+        return []
     
     local_debug: bool = 'KEVIN_LOCAL' in os.environ
     dbg_nan: bool = False   # 'KEVIN_LOCAL' in os.environ

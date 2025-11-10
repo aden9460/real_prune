@@ -156,7 +156,8 @@ class AdaLNSelfAttn(nn.Module):
         self.C, self.D = embed_dim, cond_dim
         self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
         self.attn = SelfAttention(block_idx=block_idx, embed_dim=embed_dim, num_heads=num_heads, attn_drop=attn_drop, proj_drop=drop, attn_l2_norm=attn_l2_norm, flash_if_available=flash_if_available)
-        self.ffn = FFN(in_features=embed_dim, hidden_features=round(round(embed_dim * mlp_ratio)*(1-args.sparsity)), drop=drop, fused_if_available=fused_if_available)
+        self.ffn = FFN(in_features=embed_dim, hidden_features=round(embed_dim * mlp_ratio), drop=drop, fused_if_available=fused_if_available)
+        # 注释掉FFN剪枝控制: self.ffn = FFN(in_features=embed_dim, hidden_features=round(round(embed_dim * mlp_ratio)*(1-args.sparsity)), drop=drop, fused_if_available=fused_if_available)
 
         self.ln_wo_grad = norm_layer(embed_dim, elementwise_affine=False)
         self.shared_aln = shared_aln

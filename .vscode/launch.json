@@ -9,7 +9,7 @@
         "name": "Prune SlimGPT ",
         "type": "debugpy",
         "request": "launch",
-        "program": "/home/suanba/EdgeVAR/real_prune/slimgpt_pub_prune/prune_v7.py",
+        "program": "/home/project/real_prune/slimgpt_pub_prune/prune_v2.py",
         "console": "integratedTerminal",
         "justMyCode": false,
         "env": {
@@ -21,9 +21,9 @@
         "--num_samples", "15",
         "--percdamp", "1e-2",
         "--prune_method", "slimgpt",
-        "--sparsity", "0.2",
+        "--sparsity", "0.4",
         "--specific_layer", "256",
-        "--model_name", "prune_d16_0.2sparsity_15i-2_full_avegrage_scale.pth"
+        "--model_name", "prune_d16_0.4sparsity_15i-2_256_scale.pth"
         ]
 },
 {
@@ -170,6 +170,32 @@
           "--non_uniform_strategy", "linear_decrease"
           */
         ]
+      },
+      {
+        "name": "Python: model_slimming_basic",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "/home/project/real_prune/slimvar/model_slimming_basic.py",
+        "console": "integratedTerminal",
+        "cwd": "/home/project/real_prune/slimvar",
+        "args": [
+          "--model_depth", "16",
+          "--num_samples", "256",
+          "--sparsity", "0.2",
+          "--minlayer", "0",
+          "--maxlayer", "16",
+          "--percdamp", "0.01",
+          "--save_dir", "./pruned_models",
+          "--model_name", "var_d16_s20_basic.pth",
+          "--seed", "0",
+          "--use_images",
+          "--imagenet_dir", "/home/project/ImageNet-1K"
+        ],
+        "env": {
+          // 若需要限制 GPU 或设定线程等，可在此添加环境变量
+          // "CUDA_VISIBLE_DEVICES": "0"
+        }
       }
+      
     ]
 }
