@@ -124,19 +124,19 @@ if 'trainer' in checkpoint:
     print("检测到训练检查点文件，正在提取模型权重...")
     if 'var_wo_ddp' in checkpoint['trainer']:
         model_weights = checkpoint['trainer']['var_wo_ddp']
-        dynamic_register_pruned_indices(var, model_weights)
-        adapt_fc_weights(var, model_weights)
+        # dynamic_register_pruned_indices(var, model_weights)
+        # adapt_fc_weights(var, model_weights)
         var.load_state_dict(model_weights, strict=True)
         print("成功从训练检查点提取模型权重")
     else:
         print("警告：在检查点中未找到var_wo_ddp，尝试直接加载...")
-        dynamic_register_pruned_indices(var, checkpoint)
-        adapt_fc_weights(var, checkpoint)
+        # dynamic_register_pruned_indices(var, checkpoint)
+        # adapt_fc_weights(var, checkpoint)
         var.load_state_dict(checkpoint, strict=True)
 else:
     print("加载原始模型权重...")
-    dynamic_register_pruned_indices(var, checkpoint)
-    adapt_fc_weights(var, checkpoint)
+    # dynamic_register_pruned_indices(var, checkpoint)
+    # adapt_fc_weights(var, checkpoint)
     var.load_state_dict(checkpoint, strict=True)
 # var.load_state_dict(torch.load(var_ckpt, map_location='cpu'), strict=True)
 vae.eval(), var.eval()

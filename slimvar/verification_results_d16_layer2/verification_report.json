@@ -1,0 +1,30 @@
+{
+  "layer_idx": 2,
+  "num_samples": 100,
+  "scale_mul": {
+    "mean": 12.26709195971489,
+    "std": 2.3360072574332467,
+    "min": 7.403567790985107,
+    "max": 15.6367769241333
+  },
+  "method1": {
+    "pearson_r": -0.09461744529722255,
+    "p_value": 0.3039772840645926,
+    "pass": false,
+    "status": "FAIL"
+  },
+  "method3": {
+    "num_clusters": 3,
+    "intra_similarity": 0.22004222520440817,
+    "inter_similarity": 0.2558156944375212,
+    "ratio": 0.8601592083246865,
+    "silhouette_score": 0.0,
+    "pass": false,
+    "status": "FAIL"
+  },
+  "overall": {
+    "result": "FAIL",
+    "confidence": "N/A",
+    "recommendation": "Clustering pruning is NOT recommended. Use alternative strategies."
+  }
+}

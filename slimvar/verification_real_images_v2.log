@@ -1,0 +1,227 @@
+================================
+  Verification 1: Scale-Concentration
+================================
+
+Model: VAR-d16
+Calibration samples: 50
+Test layers: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15
+Using real images: true
+ImageNet directory: /home/project/ImageNet-1K
+
+Running Verification 1...
+
+
+================================================================================
+============== Scale_mul vs Attention Concentration Verification ===============
+================================================================================
+
+Using device: cuda
+
+Loading VAR model...
+宽度是1024
+
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[init_weights] VAR with init_std=0.0180422
+✓ VAR-d16 model loaded successfully.
+
+============================================================
+================ Using REAL ImageNet Images ================
+============================================================
+
+Loading 50 real images from ImageNet...
+  ImageNet directory: /home/project/ImageNet-1K
+[Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+Transform [train] = 
+Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+RandomCrop(size=(256, 256), padding=None)
+ToTensor()
+<function normalize_01_into_pm1 at 0x7fdba4ac2f80>
+---------------------------
+
+Transform [val] = 
+Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+CenterCrop(size=(256, 256))
+ToTensor()
+<function normalize_01_into_pm1 at 0x7fdba4ac2f80>
+---------------------------
+
+  ✓ Loaded ImageNet validation set: 50000 images
+  Sampling strategy: uniform stride (step=1000)
+
+  Encoding 50 images to tokens...
+  Processing:   0%|          | 0/7 [00:00<?, ?it/s]  Processing:  14%|█▍        | 1/7 [00:00<00:02,  2.22it/s]  Processing:  43%|████▎     | 3/7 [00:00<00:00,  5.34it/s]  Processing:  71%|███████▏  | 5/7 [00:00<00:00,  7.34it/s]  Processing: 100%|██████████| 7/7 [00:00<00:00,  9.30it/s]  Processing: 100%|██████████| 7/7 [00:00<00:00,  7.34it/s]
+
+  ✓ Successfully encoded 50 images
+    Labels shape: torch.Size([50])
+    Tokens shape: torch.Size([50, 679, 32])
+    Class distribution: 50 unique classes
+
+✓ Using teacher forcing mode with pre-encoded tokens
+
+Testing layers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+Calibration samples: 50
+
+================================================================================
+============= Verification 1: Scale_mul vs Attention Concentration =============
+================================================================================
+
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 0 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 0: No attention maps captured for layer 0
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 1 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 1: No attention maps captured for layer 1
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 2 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 2: No attention maps captured for layer 2
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 3 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 3: No attention maps captured for layer 3
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 4 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 4: No attention maps captured for layer 4
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 5 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 5: No attention maps captured for layer 5
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 6 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 6: No attention maps captured for layer 6
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 7 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 7: No attention maps captured for layer 7
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 8 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 8: No attention maps captured for layer 8
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 9 ---------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 9: No attention maps captured for layer 9
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 10 --------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 10: No attention maps captured for layer 10
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 11 --------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 11: No attention maps captured for layer 11
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 12 --------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 12: No attention maps captured for layer 12
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 13 --------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 13: No attention maps captured for layer 13
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 14 --------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 14: No attention maps captured for layer 14
+
+------------------------------------------------------------
+-------------------- Analyzing Layer 15 --------------------
+------------------------------------------------------------
+
+Step 1: Extracting attention weights...
+  Mode: Teacher Forcing (using real image tokens)
+  ✗ Failed to extract attention for layer 15: No attention maps captured for layer 15
+
+================================================================================
+============================ VERIFICATION 1 SUMMARY ============================
+================================================================================
+
+Tested layers: 16
+Passing layers: 0
+Success rate: 0/16 (0.0%)
+
+❌ VERIFICATION 1: FAILED
+Insufficient evidence for scale_mul-concentration relationship
+→ Scale-based strategies may not be effective
+
+Results saved to: scale_concentration_verification/
+================================================================================
+================================================================================
+=========================== Verification 1 Complete! ===========================
+================================================================================
+
+================================
+✅ Verification 1 completed successfully!
+================================
+
+Next steps:
+  1. Check results in: scale_concentration_verification/
+  2. Review visualizations for each layer
+  3. If ≥4/6 layers pass, proceed to Verification 2
+

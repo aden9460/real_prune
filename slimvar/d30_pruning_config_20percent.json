@@ -1,0 +1,229 @@
+{
+  "model": "var-d30",
+  "prune_ratio": 0.2,
+  "strategy": "variance_guided",
+  "protected_layers": [
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21
+  ],
+  "layer_configs": [
+    {
+      "layer": 0,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 1,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 2,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 3,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 4,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 5,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 6,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 7,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 8,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 9,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 10,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 11,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 12,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 13,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 14,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 15,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 16,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 17,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 18,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 19,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 20,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 21,
+      "heads_total": 30,
+      "heads_keep": 30,
+      "heads_prune": 0,
+      "prune_ratio": 0.0
+    },
+    {
+      "layer": 22,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 23,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 24,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 25,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 26,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 27,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 28,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    },
+    {
+      "layer": 29,
+      "heads_total": 30,
+      "heads_keep": 21,
+      "heads_prune": 9,
+      "prune_ratio": 0.3
+    }
+  ]
+}

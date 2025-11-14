@@ -10,7 +10,7 @@ import dist
 from models.basic_var import AdaLNBeforeHead, AdaLNSelfAttn
 from models.helpers import gumbel_softmax_with_rng, sample_with_top_k_top_p_
 from models.vqvae import VQVAE, VectorQuantizer2
-
+import time
 
 class SharedAdaLin(nn.Linear):
     def forward(self, cond_BD):
@@ -155,9 +155,12 @@ class VAR(nn.Module):
         
         cur_L = 0
         f_hat = sos.new_zeros(B, self.Cvae, self.patch_nums[-1], self.patch_nums[-1])
-        
         for b in self.blocks: b.attn.kv_caching(True)
         for si, pn in enumerate(self.patch_nums):   # si: i-th segment
+            
+            
+            # cr_time= time.time()
+
             ratio = si / self.num_stages_minus_1
             # last_L = cur_L
             cur_L += pn*pn
@@ -185,7 +188,9 @@ class VAR(nn.Module):
                 next_token_map = next_token_map.view(B, self.Cvae, -1).transpose(1, 2)
                 next_token_map = self.word_embed(next_token_map) + lvl_pos[:, cur_L:cur_L + self.patch_nums[si+1] ** 2]
                 next_token_map = next_token_map.repeat(2, 1, 1)   # double the batch sizes due to CFG
-        
+
+            # if cr_time != 0:
+                # print(f"{si}scale cost {time.time()-cr_time}")
         for b in self.blocks: b.attn.kv_caching(False)
         return self.vae_proxy[0].fhat_to_img(f_hat).add_(1).mul_(0.5)   # de-normalize, from [-1, 1] to [0, 1]
     

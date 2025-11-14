@@ -1,0 +1,130 @@
+{
+  "per_layer_sparsity": [
+    {
+      "layer": 0,
+      "sparsity": 0.2,
+      "reason": "Low variance (6.5) - difficult to distinguish importance"
+    },
+    {
+      "layer": 1,
+      "sparsity": 0.2,
+      "reason": "Low variance (7.0) - difficult to distinguish importance"
+    },
+    {
+      "layer": 2,
+      "sparsity": 0.2,
+      "reason": "Low variance (5.5) - difficult to distinguish importance"
+    },
+    {
+      "layer": 3,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 4,
+      "sparsity": 0.2,
+      "reason": "Low variance (8.8) - difficult to distinguish importance"
+    },
+    {
+      "layer": 5,
+      "sparsity": 0.3,
+      "reason": "High variance (27.5) - can prune low-scale heads"
+    },
+    {
+      "layer": 6,
+      "sparsity": 0.3,
+      "reason": "High variance (32.3) - can prune low-scale heads"
+    },
+    {
+      "layer": 7,
+      "sparsity": 0.3,
+      "reason": "High variance (47.6) - can prune low-scale heads"
+    },
+    {
+      "layer": 8,
+      "sparsity": 0.3,
+      "reason": "High variance (31.7) - can prune low-scale heads"
+    },
+    {
+      "layer": 9,
+      "sparsity": 0.3,
+      "reason": "High variance (27.0) - can prune low-scale heads"
+    },
+    {
+      "layer": 10,
+      "sparsity": 0.3,
+      "reason": "High variance (32.8) - can prune low-scale heads"
+    },
+    {
+      "layer": 11,
+      "sparsity": 0.3,
+      "reason": "High variance (49.3) - can prune low-scale heads"
+    },
+    {
+      "layer": 12,
+      "sparsity": 0.3,
+      "reason": "High variance (52.9) - can prune low-scale heads"
+    },
+    {
+      "layer": 13,
+      "sparsity": 0.3,
+      "reason": "High variance (26.7) - can prune low-scale heads"
+    },
+    {
+      "layer": 14,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 15,
+      "sparsity": 0.3,
+      "reason": "High variance (21.7) - can prune low-scale heads"
+    }
+  ],
+  "scale_groups": [
+    {
+      "group": "early",
+      "layers": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "scales": "0-3 (1\u00b2-4\u00b2)",
+      "avg_variance": 7.845753829819574,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.21000000000000002
+    },
+    {
+      "group": "mid",
+      "layers": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "scales": "3-7 (5\u00b2-8\u00b2)",
+      "avg_variance": 33.2054422717549,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.3
+    },
+    {
+      "group": "late",
+      "layers": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "scales": "7-10 (10\u00b2-16\u00b2)",
+      "avg_variance": 32.53963629258007,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.2916666666666667
+    }
+  ],
+  "rationale": {}
+}

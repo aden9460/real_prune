@@ -29,6 +29,11 @@ class SlimGPT(object):
         self.args = args
         self.no_compensate = args.no_compensate
 
+        # Taylor方法所需的梯度累积器
+        self.grad_first = None   # 一阶梯度（最后一次backward）
+        self.grad_second = None  # 二阶梯度累积（多次backward的grad²）
+        self.taylor_samples = 0  # 已处理的样本数
+
     def add_batch(self, inp, out):
         if DEBUG:
             self.inp1 = inp
@@ -147,41 +152,99 @@ class SlimGPT(object):
         pruned_indices = column_mask.nonzero(as_tuple=True)[0]
         return pruned_indices
 
-    def head_dim_prune(self, sparsity, headsize=64, percdamp=0.0, layer_idx=None):
+    def accumulate_hessian_diag(self):
         """
-        Head维度剪枝：对每个head独立评估，删除相同数量的维度
+        累积Hessian对角线近似（二阶梯度 = grad²）
 
-        与struct_prune的区别：
-        - struct_prune: 删除完整的head（12 heads × 64 dim → 9 heads × 64 dim）
-        - head_dim_prune: 减少每个head的维度（12 heads × 64 dim → 12 heads × 48 dim）
+        调用时机: 每次loss.backward()后，zero_grad()前
+        """
+        if self.layer.weight.grad is None:
+            print(f"    WARNING: gradient is None for layer {self.layer.__class__.__name__}, skipping accumulation")
+            return
 
-        优势：
-        - 每个head独立评估，保留各自最重要的维度（个性化）
-        - 需要Global Update来补偿所有其他列（包括其他head）
-        - 保持多头结构（reshape兼容）
+        grad = self.layer.weight.grad.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            grad = grad.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            grad = grad.t()
+
+        # 验证梯度
+        grad_mean = grad.mean().item()
+        grad_std = grad.std().item()
+        grad_max = grad.abs().max().item()
+
+        if grad_max < 1e-8:
+            print(f"    WARNING: very small gradients (max={grad_max:.2e}), this may affect pruning quality")
+
+        # 梯度平方
+        grad_squared = grad ** 2
+
+        # 累积
+        if self.grad_second is None:
+            self.grad_second = grad_squared
+        else:
+            self.grad_second += grad_squared
+
+        self.taylor_samples += 1
+
+        # 每5次样本打印统计
+        if self.taylor_samples % 5 == 0:
+            print(f"    Taylor sample {self.taylor_samples}: grad mean={grad_mean:.2e}, std={grad_std:.2e}, max={grad_max:.2e}")
+
+    def finalize_hessian_diag(self):
+        """
+        归一化累积的Hessian对角线
+
+        调用时机: 所有样本处理完后
+        """
+        if self.grad_second is not None and self.taylor_samples > 0:
+            self.grad_second /= self.taylor_samples
+
+    def capture_first_order_grad(self):
+        """
+        捕获一阶梯度（用于param_first和param_mix）
+
+        调用时机: 最后一次loss.backward()后
+        """
+        if self.layer.weight.grad is None:
+            print(f"    WARNING: gradient is None for layer {self.layer.__class__.__name__}, cannot capture first-order gradient")
+            return
+
+        grad = self.layer.weight.grad.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            grad = grad.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            grad = grad.t()
+
+        # 验证梯度
+        grad_mean = grad.mean().item()
+        grad_std = grad.std().item()
+        grad_max = grad.abs().max().item()
+
+        print(f"    First-order grad: mean={grad_mean:.2e}, std={grad_std:.2e}, max={grad_max:.2e}")
+
+        self.grad_first = grad
+
+    def taylor_prune_llm(self, sparsity, headsize=64, percdamp=0.01,
+                         layer_idx=0, taylor_type='param_mix'):
+        """
+        基于LLM-Pruner Taylor重要性的结构化剪枝
+
+        支持三种Taylor变体:
+        - param_first: I = |w · ∂L/∂w| (一阶)
+        - param_second: I = |w · H_ii · w| (纯二阶)
+        - param_mix: I = |w · ∂L/∂w - 0.5 · w · H_ii · w| (混合，推荐)
 
         Args:
-            sparsity: 稀疏度（例如0.25表示每个head删除25%维度）
-            headsize: 每个head的维度（默认64）
-            percdamp: Hessian对角线阻尼系数
+            sparsity: 剪枝率 (0-1)
+            headsize: head大小 (VAR固定64)
+            percdamp: 保留参数（与Taylor无关）
             layer_idx: 层索引（用于日志）
+            taylor_type: 'param_first', 'param_second', 'param_mix'
 
         Returns:
-            pruned_indices: 被删除的列索引（全局索引）
+            prune_indices: 要剪枝的column索引 [Tensor]
         """
-        assert self.columns % headsize == 0, \
-            f"columns ({self.columns}) must be divisible by headsize ({headsize})"
-
-        num_heads = self.columns // headsize
-        dims_to_remove_per_head = round(headsize * sparsity)
-
-        if dims_to_remove_per_head == 0:
-            print(f"Warning: sparsity too low, no dimensions to remove. sparsity={sparsity}, headsize={headsize}")
-            return torch.tensor([], dtype=torch.long, device=self.dev)
-
-        tick = time.time()
-
-        # 准备权重和Hessian
         W = self.layer.weight.data.clone()
         if isinstance(self.layer, nn.Conv2d):
             W = W.flatten(1)
@@ -189,131 +252,373 @@ class SlimGPT(object):
             W = W.t()
         W = W.float()
 
-        H = self.H
-        del self.H
+        # 计算salience（显著性）
+        if taylor_type == 'param_first':
+            # 一阶: S = w · ∂L/∂w
+            if self.grad_first is None:
+                raise ValueError("First order gradient not captured. Call capture_first_order_grad() first.")
+            salience = W * self.grad_first
 
-        # 处理死节点
-        dead = torch.diag(H) == 0
-        H[dead, dead] = 1
-        W[:, dead] = 0
+        elif taylor_type == 'param_second':
+            # 纯二阶: S = w · H_ii · w
+            if self.grad_second is None:
+                raise ValueError("Second order gradient not accumulated. Call accumulate_hessian_diag() during training.")
+            salience = W * self.grad_second * W
 
-        # 添加阻尼
-        if percdamp > 0:
-            damp = percdamp * torch.mean(torch.diag(H))
-            diag = torch.arange(H.size(0), device=self.dev)
-            H[diag, diag] += damp
+        elif taylor_type == 'param_mix':
+            # 混合: S = w · ∂L/∂w - 0.5 · w · H_ii · w
+            if self.grad_first is None or self.grad_second is None:
+                raise ValueError("Both first and second order gradients required for param_mix.")
+            salience = W * self.grad_first - 0.5 * W * self.grad_second * W
 
-        # 用于记录所有被删除的维度（全局索引）
-        all_pruned_indices = []
+        else:
+            raise ValueError(f"Unknown taylor_type: {taylor_type}. Must be 'param_first', 'param_second', or 'param_mix'.")
 
-        # 逐个head处理
-        for head_idx in range(num_heads):
-            start_col = head_idx * headsize
-            end_col = start_col + headsize
+        # 聚合到输出通道 (sum across input dimension)
+        importance = salience.abs().sum(dim=1)  # [out_channels]
 
-            # 1. 每次重新计算完整Hinv（因为H在变化）
-            try:
-                Hinv = torch.cholesky_inverse(torch.linalg.cholesky(H))
-            except RuntimeError as e:
-                print(f"Warning: Cholesky failed for complete H at head {head_idx}: {e}")
-                continue
+        # 按head分组（VAR特定）
+        if headsize > 1:
+            num_heads = importance.shape[0] // headsize
+            assert importance.shape[0] % headsize == 0, f"out_channels={importance.shape[0]} must be divisible by headsize={headsize}"
 
-            # 2. 提取head子矩阵，计算head内误差
-            W_head = W[:, start_col:end_col]
-            H_head = H[start_col:end_col, start_col:end_col]
-            Hinv_head = Hinv[start_col:end_col, start_col:end_col]
+            head_importance = importance.view(num_heads, headsize).sum(dim=1)  # [num_heads]
 
-            try:
-                Hinv_diag_head = torch.diagonal(torch.linalg.cholesky(Hinv_head)) ** 2
-            except RuntimeError:
-                print(f"Warning: Cholesky failed for head {head_idx}, skipping")
-                continue
+            # 选择要剪枝的heads（重要性最低的）- 修复：使用round而非int
+            num_prune_heads = round(num_heads * sparsity)
+            if num_prune_heads == 0:
+                print(f"    Taylor {taylor_type}: Layer {layer_idx}, sparsity too low, no heads pruned")
+                return torch.tensor([], dtype=torch.long, device=W.device)
 
-            error_head = torch.sum(W_head ** 2 / Hinv_diag_head.unsqueeze(0), dim=0)
+            if num_prune_heads >= num_heads:
+                print(f"    Taylor {taylor_type}: Layer {layer_idx}, sparsity too high, pruning {num_heads-1}/{num_heads} heads")
+                num_prune_heads = num_heads - 1  # 至少保留1个head
 
-            # 3. 选择要删除的维度（head内相对索引）
-            dim_sort_idx = error_head.argsort()
-            dims_to_remove = dim_sort_idx[:dims_to_remove_per_head]
-            keep_dims = dim_sort_idx[dims_to_remove_per_head:]
+            prune_head_indices = head_importance.argsort()[:num_prune_heads]
 
-            # 转换为全局索引
-            global_pruned_idx = start_col + dims_to_remove
-            all_pruned_indices.append(global_pruned_idx)
+            # 转换为channel索引
+            prune_indices = []
+            for head_idx in prune_head_indices:
+                prune_indices.extend(range(head_idx * headsize, (head_idx + 1) * headsize))
+            prune_indices = torch.tensor(prune_indices, dtype=torch.long, device=W.device)
 
-            # 4. 重排：将待删除维度移到head最前面
-            reorder_idx_head = torch.cat([dims_to_remove, keep_dims])
+            # 详细日志
+            actual_sparsity = num_prune_heads / num_heads
+            print(f"    Taylor {taylor_type}: Layer {layer_idx}")
+            print(f"      Requested sparsity: {sparsity:.3f} ({sparsity*num_heads:.1f} heads)")
+            print(f"      Actual sparsity: {actual_sparsity:.3f} ({num_prune_heads}/{num_heads} heads)")
+            print(f"      Head importance range: [{head_importance.min().item():.6f}, {head_importance.max().item():.6f}]")
+            print(f"      Pruned heads: {prune_head_indices.tolist()}")
+            print(f"      Kept heads: {sorted(set(range(num_heads)) - set(prune_head_indices.tolist()))}")
 
-            # 全局重排索引
-            reorder_idx_global = torch.arange(self.columns, device=self.dev)
-            reorder_idx_global[start_col:end_col] = start_col + reorder_idx_head
+        else:
+            # headsize=1, 直接按column剪枝
+            num_prune = round(self.columns * sparsity)  # 修复：使用round而非int
+            if num_prune == 0:
+                return torch.tensor([], dtype=torch.long, device=W.device)
 
-            # 重排整个W和Hinv
-            W = W[:, reorder_idx_global]
-            Hinv_reordered = Hinv[reorder_idx_global, :][:, reorder_idx_global]
+            prune_indices = importance.argsort()[:num_prune]
+            print(f"    Taylor {taylor_type}: Layer {layer_idx}, pruned {num_prune}/{self.columns} columns")
 
-            # 5. 对重排后的矩阵做Cholesky分解（上三角）
-            try:
-                Hinv_chol = torch.linalg.cholesky(Hinv_reordered, upper=True)[
-                    start_col:start_col+dims_to_remove_per_head
-                ]
-            except RuntimeError:
-                print(f"Warning: Cholesky failed for head {head_idx} reordered, skipping compensation")
-                # 直接清零，不做补偿
-                W[:, start_col:start_col+dims_to_remove_per_head] = 0
-                # 恢复原始顺序
-                reorder_idx_inv = torch.argsort(reorder_idx_global)
-                W = W[:, reorder_idx_inv]
-                # 更新H
-                for idx in global_pruned_idx:
-                    H[idx, :] = H[:, idx] = 0
-                    H[idx, idx] = 1
-                continue
-
-            # 6. Local Update（在head内）
-            if not self.no_compensate:
-                W1 = W[:, start_col:start_col+dims_to_remove_per_head].clone()
-                Hinv1 = Hinv_chol[:, start_col:end_col]
-
-                for i in range(dims_to_remove_per_head):
-                    col_i = start_col + i
-                    Err_i = W1[:, i:i+1] / Hinv_chol[i, col_i]
-                    W1[:, i:] -= Err_i.matmul(Hinv1[i:i+1, i:])
-
-                # 7. Global Update（补偿所有其他列）
-                W[:, start_col:start_col+dims_to_remove_per_head] = 0
-                W[:, start_col+dims_to_remove_per_head:] -= W1.matmul(
-                    Hinv_chol[:, start_col+dims_to_remove_per_head:]
-                )
-            else:
-                # 不补偿，直接清零
-                W[:, start_col:start_col+dims_to_remove_per_head] = 0
-
-            # 8. 恢复原始顺序
-            reorder_idx_inv = torch.argsort(reorder_idx_global)
-            W = W[:, reorder_idx_inv]
-
-            # 9. 更新H（清零已删除维度）
-            for idx in global_pruned_idx:
-                H[idx, :] = H[:, idx] = 0
-                H[idx, idx] = 1
-
-        # 写回
+        # 执行剪枝（零化）
+        W[:, prune_indices] = 0
         if isinstance(self.layer, transformers.Conv1D):
             W = W.t()
-        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(
-            self.layer.weight.data.dtype
-        )
+        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(self.layer.weight.data.dtype)
 
-        if layer_idx is not None:
-            print(f'Layer {layer_idx}: head_dim_prune completed in {time.time() - tick:.2f}s, '
-                  f'removed {len(all_pruned_indices) * dims_to_remove_per_head} dims total '
-                  f'({dims_to_remove_per_head} dims per head)', flush=True)
+        print(f"    Pruned columns {(self.layer.weight.sum(0) == 0).sum().item()}/{self.layer.weight.size(1)}")
 
-        return torch.cat(all_pruned_indices) if all_pruned_indices else torch.tensor([], dtype=torch.long, device=self.dev)
+        return prune_indices
 
     def free(self):
         if DEBUG:
             self.inp1 = None
             self.out1 = None
         self.H = None
+        # 释放Taylor相关内存
+        self.grad_first = None
+        self.grad_second = None
         torch.cuda.empty_cache()
+
+    def struct_prune_with_indices(self, prune_columns, percdamp=0.0, headsize=1):
+        """
+        Prune exactly the specified input columns with SlimGPT global compensation.
+
+        Args:
+            prune_columns: 1D torch.LongTensor/list of column indices to remove (input features)
+            percdamp: damping ratio
+            headsize: kept for API symmetry; group-size >1 not supported here (expects 1)
+
+        Returns:
+            pruned_indices: torch.LongTensor of pruned columns (same as input set)
+        """
+        assert headsize == 1, "struct_prune_with_indices currently supports headsize=1 (linear columns)"
+
+        dev = self.layer.weight.device
+        # Prepare W in 2D [rows, columns]
+        W = self.layer.weight.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            W = W.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        W = W.float()
+
+        # Prepare H
+        H = self.H
+        del self.H
+        dead = torch.diag(H) == 0
+        H[dead, dead] = 1
+        W[:, dead] = 0
+
+        if percdamp > 0:
+            damp = percdamp * torch.mean(torch.diag(H))
+            diag = torch.arange(H.size(0), device=dev)
+            H[diag, diag] += damp
+
+        # Build reorder index: [pruned..., kept...]
+        if not torch.is_tensor(prune_columns):
+            prune_columns = torch.tensor(prune_columns, dtype=torch.long, device=dev)
+        else:
+            prune_columns = prune_columns.to(device=dev, dtype=torch.long)
+
+        # unique and sorted
+        prune_columns = torch.unique(prune_columns)
+        cnt = prune_columns.numel()
+        all_idx = torch.arange(self.columns, device=dev)
+        keep_mask = torch.ones(self.columns, dtype=torch.bool, device=dev)
+        keep_mask[prune_columns] = False
+        keep_columns = all_idx[keep_mask]
+        column_sort_idx = torch.cat([prune_columns, keep_columns], dim=0)
+
+        # Compute Hinv and its cholesky factor in reordered basis
+        Hinv = torch.cholesky_inverse(torch.linalg.cholesky(H))
+        Hinv = Hinv[column_sort_idx, :][:, column_sort_idx]
+        Hinv_chol = torch.linalg.cholesky(Hinv, upper=True)[:cnt]
+
+        # Local elim + global update (same as iterative but in one block)
+        W = W[:, column_sort_idx]
+        W1 = W[:, :cnt].clone()
+        Hinv1 = Hinv_chol[:, :cnt]
+        Err1 = torch.zeros_like(W1)
+
+        for i in range(cnt):
+            Err1[:, i:i+1] = W1[:, i:i+1] / Hinv1[i, i]
+            if not self.no_compensate:
+                W1[:, i:] -= Err1[:, i:i+1].matmul(Hinv1[i:i+1, i:])
+
+        # Zero pruned block
+        W[:, :cnt] = 0
+        if not self.no_compensate:
+            end = self.columns
+            # Use the cholesky factor (shape: cnt x columns) to match dimensions
+            W[:, cnt:end] -= Err1.matmul(Hinv_chol[:, cnt:end])
+
+        # Restore original column order
+        inv_perm = torch.argsort(column_sort_idx)
+        W = W[:, inv_perm]
+
+        # Write back
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(self.layer.weight.data.dtype)
+
+        return prune_columns
+
+    def struct_prune_with_indices_iterative(self, prune_columns, percdamp=0.0, headsize=1, chunk_size=64):
+        """
+        Iteratively prune the specified input columns in chunks, updating H between chunks,
+        following the same local+global compensation scheme as struct_prune.
+
+        Args:
+            prune_columns: 1D tensor/list of column indices (input features) to remove
+            percdamp: damping ratio applied to H diagonal
+            headsize: kept for API symmetry; only headsize=1 supported
+            chunk_size: number of columns to prune per iteration (e.g., head_dim for one head)
+
+        Returns:
+            pruned_indices: torch.LongTensor of pruned columns
+        """
+        assert headsize == 1, "iterative indices pruning supports headsize=1 (linear columns)"
+
+        dev = self.layer.weight.device
+        # Prepare W in 2D [rows, columns]
+        W = self.layer.weight.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            W = W.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        W = W.float()
+
+        # Prepare H (keep for iterative updates)
+        H = self.H
+        del self.H
+        dead = torch.diag(H) == 0
+        H[dead, dead] = 1
+        W[:, dead] = 0
+
+        if not torch.is_tensor(prune_columns):
+            prune_columns = torch.tensor(prune_columns, dtype=torch.long, device=dev)
+        else:
+            prune_columns = prune_columns.to(device=dev, dtype=torch.long)
+        prune_columns = torch.unique(prune_columns)
+
+        column_mask = torch.zeros(self.columns, dtype=torch.bool, device=dev)
+        pruned_columns = 0
+
+        remaining = prune_columns.tolist()
+        while remaining:
+            # current chunk
+            cnt = min(chunk_size, len(remaining))
+            chunk = torch.tensor(remaining[:cnt], dtype=torch.long, device=dev)
+
+            # Compute Hinv and reorder with chunk at front, pruned columns at tail
+            Hinv = torch.cholesky_inverse(torch.linalg.cholesky(H))
+            all_idx = torch.arange(self.columns, device=dev)
+            pruned_tail = all_idx[column_mask]
+            keep_mask = torch.ones(self.columns, dtype=torch.bool, device=dev)
+            keep_mask[chunk] = False
+            keep_mask[column_mask] = False
+            keep_alive = all_idx[keep_mask]
+            column_sort_idx = torch.cat([chunk, keep_alive, pruned_tail], dim=0)
+
+            Hinv = Hinv[column_sort_idx, :][:, column_sort_idx]
+            Hinv_chol = torch.linalg.cholesky(Hinv, upper=True)[:cnt]
+
+            # Local elim + global update for this chunk
+            W = W[:, column_sort_idx]
+            W1 = W[:, :cnt].clone()
+            Hinv1 = Hinv_chol[:, :cnt]
+            Err1 = torch.zeros_like(W1)
+            for i in range(cnt):
+                Err1[:, i:i+1] = W1[:, i:i+1] / Hinv1[i, i]
+                if not self.no_compensate:
+                    W1[:, i:] -= Err1[:, i:i+1].matmul(Hinv1[i:i+1, i:])
+
+            W[:, :cnt] = 0
+            if not self.no_compensate:
+                end = self.columns - pruned_columns
+                W[:, cnt:end] -= Err1.matmul(Hinv_chol[:, cnt:end])
+
+            # Restore order
+            inv_perm = torch.argsort(column_sort_idx)
+            W = W[:, inv_perm]
+
+            # Update H mask to simulate removal
+            pruned_idx = chunk
+            H[pruned_idx, :] = 0
+            H[:, pruned_idx] = 0
+            H[pruned_idx, pruned_idx] = 1
+            column_mask[pruned_idx] = 1
+            pruned_columns += cnt
+            remaining = remaining[cnt:]
+
+        # Write back
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(self.layer.weight.data.dtype)
+
+        pruned_indices = column_mask.nonzero(as_tuple=True)[0]
+        return pruned_indices
+
+    def magnitude_prune(self, sparsity, percdamp, headsize, layer_idx):
+        """
+        Magnitude-based pruning: prune channels/heads with smallest weight magnitude.
+
+        Args:
+            sparsity: target pruning ratio
+            percdamp: not used (kept for API consistency)
+            headsize: if > 1, prune by heads; if == 1, prune by columns
+            layer_idx: not used (kept for API consistency)
+
+        Returns:
+            prune_col_idx: torch.LongTensor of pruned column indices
+        """
+        W = self.layer.weight.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            W = W.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        W = W.float()
+
+        if headsize > 1:
+            num_heads = W.shape[1] // headsize
+            assert W.shape[1] % headsize == 0, "Column count must be divisible by headsize"
+            # Calculate number of heads to prune
+            target_heads = round(num_heads * sparsity)
+            # Calculate head scores (sum of absolute values per head)
+            head_scores = W.abs().reshape(W.shape[0], num_heads, headsize).sum(dim=(0, 2))  # [num_heads]
+            prune_head_idx = torch.argsort(head_scores)[:target_heads]  # heads to prune
+            # Get column indices for all pruned heads
+            prune_col_idx = []
+            for h in prune_head_idx:
+                prune_col_idx.extend(range(h * headsize, (h + 1) * headsize))
+            prune_col_idx = torch.tensor(prune_col_idx, device=W.device)
+        else:
+            # headsize=1, prune by columns directly
+            num_prune = round(W.shape[1] * sparsity)
+            col_scores = W.abs().sum(dim=0)
+            prune_col_idx = torch.argsort(col_scores)[:num_prune]
+
+        # Prune (zero out)
+        W[:, prune_col_idx] = 0
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(self.layer.weight.data.dtype)
+
+        print('pruned columns %d/%d' % ((self.layer.weight.sum(0) == 0).sum().item(), self.layer.weight.size(1)), flush=True)
+        return prune_col_idx
+
+    def taylor_prune(self, sparsity, percdamp, headsize, layer_idx):
+        """
+        Taylor-based pruning: prune channels/heads with smallest |W * grad| score.
+
+        Args:
+            sparsity: target pruning ratio
+            percdamp: not used (kept for API consistency)
+            headsize: if > 1, prune by heads; if == 1, prune by columns
+            layer_idx: not used (kept for API consistency)
+
+        Returns:
+            prune_col_idx: torch.LongTensor of pruned column indices
+        """
+        W = self.layer.weight.data.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            W = W.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        W = W.float()
+
+        # Need gradients
+        if self.layer.weight.grad is None:
+            raise RuntimeError("Taylor pruning requires gradients from backward pass")
+        grad = self.layer.weight.grad.clone()
+        if isinstance(self.layer, nn.Conv2d):
+            grad = grad.flatten(1)
+        if isinstance(self.layer, transformers.Conv1D):
+            grad = grad.t()
+        grad = grad.float()
+
+        if headsize > 1:
+            num_heads = W.shape[1] // headsize
+            assert W.shape[1] % headsize == 0, "Column count must be divisible by headsize"
+            target_heads = round(num_heads * sparsity)
+            # Calculate Taylor scores per head
+            taylor_scores = (W * grad).abs().reshape(W.shape[0], num_heads, headsize).sum(dim=(0, 2))  # [num_heads]
+            prune_head_idx = torch.argsort(taylor_scores)[:target_heads]
+            prune_col_idx = []
+            for h in prune_head_idx:
+                prune_col_idx.extend(range(h * headsize, (h + 1) * headsize))
+            prune_col_idx = torch.tensor(prune_col_idx, device=W.device)
+        else:
+            num_prune = round(W.shape[1] * sparsity)
+            taylor_scores = (W * grad).abs().sum(dim=0)
+            prune_col_idx = torch.argsort(taylor_scores)[:num_prune]
+
+        # Prune (zero out)
+        W[:, prune_col_idx] = 0
+        if isinstance(self.layer, transformers.Conv1D):
+            W = W.t()
+        self.layer.weight.data = W.reshape(self.layer.weight.shape).to(self.layer.weight.data.dtype)
+
+        print('pruned columns %d/%d' % ((self.layer.weight.sum(0) == 0).sum().item(), self.layer.weight.size(1)), flush=True)
+        return prune_col_idx

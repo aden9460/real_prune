@@ -1,0 +1,2 @@
+torchrun  --nproc_per_node=1 --nnodes=1 --node_rank=0 --master_port=29501 transfer.py \
+  --depth=16  --sparsity=0.4 --data_path="/home/suanba/datasets/ImageNet-1K/" --var_model="/home/project/daily/AR/model_zoo/d16_0.4_distill.pth"

@@ -1,0 +1,8 @@
+{
+  "model_depth": 16,
+  "sparsity": 0.4,
+  "num_heads": 10,
+  "vae_ckpt": "/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth",
+  "var_ckpt": "/home/project/real_prune/slimvar/pruned_models/qscaluefix_var_d16_0.4_2000sample_basic.pth",
+  "output_dir": "./scale_mul_analysis_d16_0.4_0epoch_qfix"
+}

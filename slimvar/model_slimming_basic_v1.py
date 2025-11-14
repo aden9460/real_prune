@@ -11,6 +11,7 @@ This script implements the basic pruning pipeline without advanced features:
 Advanced features (controlled by parameters) will be added separately.
 """
 
+
 import time
 import os
 import torch
@@ -239,7 +240,7 @@ def prepare_calibration_data(vae, num_samples, use_images=False, image_dir=None,
         return calibration_labels, None
 
 
-@torch.no_grad()
+# @torch.no_grad() - Removed to support Taylor pruning with gradients
 def model_slimming(model, calibration_labels, calibration_tokens, args):
     """
     Execute basic VAR model pruning with streaming activation propagation
@@ -289,10 +290,12 @@ def model_slimming(model, calibration_labels, calibration_tokens, args):
                 batch_tokens = calibration_tokens[batch_idx:end_idx].to(device)
                 model(batch_labels, batch_tokens)
             else:
-                # Fallback to label-only mode
+                # Fallback to label-only mode - create dummy tokens
                 for b in model.blocks[1:]:  # Skip the catcher
                     b.attn.kv_caching(True)
-                model(batch_labels)
+                # Create minimal dummy tokens for initialization (VAR requires both label and tokens)
+                dummy_tokens = torch.zeros(len(batch_labels), 679, model.vae_proxy[0].Cvae, device=device)
+                model(batch_labels, dummy_tokens)
                 for b in model.blocks[1:]:
                     b.attn.kv_caching(False)
         except ValueError:
@@ -323,8 +326,7 @@ def model_slimming(model, calibration_labels, calibration_tokens, args):
         if args.minlayer <= i < args.maxlayer:
             all_module_dict = find_layers(layer)
 
-            # Collect activations for ALL modules in this layer BEFORE any pruning
-            # Use current layer_inputs as input to this layer
+            # Different collection strategies for different pruning methods
             sequential = [
                 ["attn.proj", "ffn.fc2"],  # Collect both modules together
             ]
@@ -338,72 +340,145 @@ def model_slimming(model, calibration_labels, calibration_tokens, args):
                 for name in module_dict:
                     pruner_dict[name] = SlimGPT(module_dict[name], i, args)
 
-                # Step 2: Register hooks on all modules
-                def add_batch(name):
-                    def func(_, inp, out):
-                        pruner_dict[name].add_batch(inp[0].data, out.data)
-                    return func
+                if args.prune_method in ["slimgpt", "magnitude"]:
+                    # ========== SlimGPT/Magnitude方法：收集激活统计 ==========
+                    print(f"  Collecting activations for {args.prune_method}...")
 
-                handles = []
-                for name in module_dict:
-                    handles.append(module_dict[name].register_forward_hook(add_batch(name)))
+                    # Step 2: Register hooks on all modules
+                    def add_batch(name):
+                        def func(_, inp, out):
+                            pruner_dict[name].add_batch(inp[0].data, out.data)
+                        return func
 
-                # Step 3: Collect activations using current layer_inputs
-                print(f"  Collecting activations for current layer...")
+                    handles = []
+                    for name in module_dict:
+                        handles.append(module_dict[name].register_forward_hook(add_batch(name)))
 
-                # Process samples in batches to avoid memory issues
-                batch_size = 16
-                for batch_idx in range(0, num_samples, batch_size):
-                    end_idx = min(batch_idx + batch_size, num_samples)
+                    # Step 3: Collect activations using current layer_inputs
+                    batch_size = 16
+                    for batch_idx in range(0, num_samples, batch_size):
+                        end_idx = min(batch_idx + batch_size, num_samples)
 
-                    for j in range(batch_idx, end_idx):
-                        # Forward through current layer only using layer_inputs[j]
-                        layer_input = layer_inputs[j:j+1]  # (1, 680, C)
+                        for j in range(batch_idx, end_idx):
+                            layer_input = layer_inputs[j:j+1]  # (1, 680, C)
+                            class_label = calibration_labels[j:j+1]
+                            cond_BD = model.class_emb(class_label)  # (1, C)
+                            cond_BD_or_gss = model.shared_ada_lin(cond_BD)
+                            seq_len = layer_input.shape[1]
+                            attn_bias = model.attn_bias_for_masking[:, :, :seq_len, :seq_len]
 
-                        # Get class embedding for this sample
-                        class_label = calibration_labels[j:j+1]
-                        cond_BD = model.class_emb(class_label)  # (1, C)
-                        cond_BD_or_gss = model.shared_ada_lin(cond_BD)
+                            # Forward only (no gradients needed)
+                            with torch.no_grad() if args.prune_method == "magnitude" else torch.enable_grad():
+                                out = layer(x=layer_input, cond_BD=cond_BD_or_gss, attn_bias=attn_bias)
 
-                        # Get attention bias - use the input's sequence length
-                        seq_len = layer_input.shape[1]
-                        attn_bias = model.attn_bias_for_masking[:, :, :seq_len, :seq_len]
+                        if batch_idx % 64 == 0:
+                            print(f"    Processing samples {batch_idx}/{num_samples}")
 
-                        # Forward through the layer with proper VAR block inputs
-                        _ = layer(x=layer_input, cond_BD=cond_BD_or_gss, attn_bias=attn_bias)
+                    # Step 4: Remove hooks
+                    for h in handles:
+                        h.remove()
 
-                    if batch_idx % 64 == 0:
-                        print(f"    Processing samples {batch_idx}/{num_samples}")
+                elif args.prune_method == "taylor":
+                    # ========== LLM-Pruner Taylor方法：收集梯度 ==========
+                    print(f"  Using Taylor method: {getattr(args, 'taylor_type', 'param_mix')}")
+                    taylor_type = getattr(args, 'taylor_type', 'param_mix')
+                    num_taylor_samples = getattr(args, 'num_taylor_samples', min(20, num_samples))
 
-                # Step 4: Remove hooks
-                for h in handles:
-                    h.remove()
+                    # Phase 1: 逐样本收集二阶梯度（如果需要）
+                    if taylor_type in ['param_second', 'param_mix']:
+                        print(f"  Collecting second-order gradients (Hessian diagonal)...")
+
+                        for j in range(num_taylor_samples):
+                            layer_input = layer_inputs[j:j+1]
+                            class_label = calibration_labels[j:j+1]
+                            cond_BD = model.class_emb(class_label)
+                            cond_BD_or_gss = model.shared_ada_lin(cond_BD)
+                            seq_len = layer_input.shape[1]
+                            attn_bias = model.attn_bias_for_masking[:, :, :seq_len, :seq_len]
+
+                            # Forward
+                            out = layer(x=layer_input, cond_BD=cond_BD_or_gss, attn_bias=attn_bias)
+
+                            # Construct loss (simple output norm)
+                            loss = (out ** 2).sum()
+                            loss.backward()
+
+                            # 累积二阶梯度（修复：在zero_grad之前）
+                            for name in pruner_dict:
+                                pruner_dict[name].accumulate_hessian_diag()
+
+                            model.zero_grad()
+
+                            if (j + 1) % 10 == 0:
+                                print(f"    Processed {j+1}/{num_taylor_samples} samples for Hessian")
+
+                        # 归一化二阶梯度
+                        for name in pruner_dict:
+                            pruner_dict[name].finalize_hessian_diag()
+
+                        print(f"  ✓ Second-order gradient collection completed")
+
+                    # Phase 2: 收集一阶梯度（如果需要）
+                    if taylor_type in ['param_first', 'param_mix']:
+                        print(f"  Collecting first-order gradients...")
+
+                        # 使用多个样本的平均loss
+                        total_loss = 0
+                        for j in range(num_taylor_samples):
+                            layer_input = layer_inputs[j:j+1]
+                            class_label = calibration_labels[j:j+1]
+                            cond_BD = model.class_emb(class_label)
+                            cond_BD_or_gss = model.shared_ada_lin(cond_BD)
+                            seq_len = layer_input.shape[1]
+                            attn_bias = model.attn_bias_for_masking[:, :, :seq_len, :seq_len]
+
+                            out = layer(x=layer_input, cond_BD=cond_BD_or_gss, attn_bias=attn_bias)
+                            total_loss += (out ** 2).sum()
+
+                        total_loss /= num_taylor_samples
+                        total_loss.backward()
+
+                        # 捕获一阶梯度
+                        for name in pruner_dict:
+                            pruner_dict[name].capture_first_order_grad()
+
+                        print(f"  ✓ Gradient collection completed")
+
+                else:
+                    raise ValueError(f"Unknown pruning method: {args.prune_method}")
 
                 # Step 5: Now prune each module in dependency order (attn.proj first, then ffn.fc2)
                 prune_order = ["attn.proj", "ffn.fc2"]
                 for name in prune_order:
                     sparsity = args.sparsity[i] if isinstance(args.sparsity, list) else args.sparsity
-                    print(f"  Layer {i}: {name} - pruning {sparsity*100:.1f}%")
+                    print(f"  Layer {i}: {name} - pruning {sparsity*100:.1f}% using {args.prune_method}")
 
-                    # ⭐ 根据参数选择剪枝方法
-                    # 默认：执行原始逻辑（else 分支）
-                    # 仅当显式指定 --use_head_dim_prune 且处理 attn.proj 时，才使用新方法
-                    if hasattr(args, 'use_head_dim_prune') and args.use_head_dim_prune and name == "attn.proj":
-                        # 新功能：Head_dim 剪枝（需要显式开启）
-                        idx = pruner_dict[name].head_dim_prune(
-                            sparsity=sparsity,
-                            headsize=64,
-                            percdamp=args.percdamp,
-                            layer_idx=i,
-                        )
-                    else:
-                        # 默认：原始 Head 剪枝或 FFN 剪枝（保持不变）
+                    # Select pruning method
+                    if args.prune_method == "slimgpt":
                         idx = pruner_dict[name].struct_prune(
                             sparsity=sparsity,
                             percdamp=args.percdamp,
                             headsize=64 if name == "attn.proj" else 1,
                             layer_idx=i,
                         )
+                    elif args.prune_method == "magnitude":
+                        idx = pruner_dict[name].magnitude_prune(
+                            sparsity=sparsity,
+                            percdamp=args.percdamp,
+                            headsize=64 if name == "attn.proj" else 1,
+                            layer_idx=i,
+                        )
+                    elif args.prune_method == "taylor":
+                        # Use LLM-Pruner Taylor method
+                        idx = pruner_dict[name].taylor_prune_llm(
+                            sparsity=sparsity,
+                            percdamp=args.percdamp,
+                            headsize=64 if name == "attn.proj" else 1,
+                            layer_idx=i,
+                            taylor_type=getattr(args, 'taylor_type', 'param_mix')
+                        )
+                    else:
+                        raise ValueError(f"Unknown pruning method: {args.prune_method}")
 
                     pruner_dict[name].free()
 
@@ -418,113 +493,70 @@ def model_slimming(model, calibration_labels, calibration_tokens, args):
                         print(f"    ✓ Pruned {len(idx_list)} channels from fc2 input and fc1 output")
 
                     elif name == "attn.proj":
+                        # 修复：使用当前层的num_heads而非全局model.num_heads
+                        current_num_heads = model.blocks[i].attn.num_heads
+                        new_num_heads = torch.round(torch.tensor(current_num_heads * (1 - sparsity))).int()
+                        model.blocks[i].attn.num_heads = new_num_heads
+
                         idx_m = idx.to(dtype=torch.long)
                         idx_list = idx.tolist()
                         keep_idxs = list(set(range(target_layer.in_features)) - set(idx_list))
 
-                        # ⭐ 根据参数选择不同的处理逻辑
-                        # 默认：执行原始 Head 剪枝逻辑（else 分支）
-                        if hasattr(args, 'use_head_dim_prune') and args.use_head_dim_prune:
-                            # ============ Head_dim 剪枝分支 ============
+                        # Debug: 打印关键信息
+                        print(f"    ✓ Attention pruning details:")
+                        print(f"      Current heads: {current_num_heads} -> New heads: {new_num_heads}")
+                        print(f"      Pruned channels: {len(idx_list)}")
+                        print(f"      Kept channels: {len(keep_idxs)}")
 
-                            # 1. ⭐ 更新 head_dim（不是 num_heads）
-                            old_head_dim = 64
-                            new_head_dim = old_head_dim - round(old_head_dim * sparsity)
-                            model.blocks[i].attn.head_dim = new_head_dim
-                            # num_heads 保持不变！
+                        # Update biases
+                        model.blocks[i].attn.q_bias = nn.Parameter(model.blocks[i].attn.q_bias.data[keep_idxs])
+                        zero_k_bias = model.blocks[i].attn.zero_k_bias.data[keep_idxs]
+                        model.blocks[i].attn.register_buffer('zero_k_bias', zero_k_bias)
+                        model.blocks[i].attn.v_bias = nn.Parameter(model.blocks[i].attn.v_bias.data[keep_idxs])
 
-                            # 2. 更新 biases
-                            model.blocks[i].attn.q_bias = nn.Parameter(
-                                model.blocks[i].attn.q_bias.data[keep_idxs]
-                            )
-                            zero_k_bias = model.blocks[i].attn.zero_k_bias.data[keep_idxs]
-                            model.blocks[i].attn.register_buffer('zero_k_bias', zero_k_bias)
-                            model.blocks[i].attn.v_bias = nn.Parameter(
-                                model.blocks[i].attn.v_bias.data[keep_idxs]
-                            )
+                        # Update scale parameter - FIXED: Preserve original learned values
+                        head_dim = 64  # VAR uses fixed head_dim=64
 
-                            # 3. ⭐ scale_mul 不需要修改（所有 head 都保留）
-                            # model.blocks[i].attn.scale_mul_1H11 保持不变
+                        # Calculate which heads are removed (idx contains channel indices to remove)
+                        removed_heads = set((idx_m // head_dim).tolist())
+                        all_heads = set(range(current_num_heads))  # 修复：使用current_num_heads
+                        keep_heads = sorted(list(all_heads - removed_heads))
 
-                            # 4. Torch-Pruning（逻辑完全一样）
-                            tp.prune_linear_in_channels(target_layer, idx_list)
+                        # Preserve the learned scale_mul values for remaining heads
+                        old_scale_mul = model.blocks[i].attn.scale_mul_1H11.data  # (1, current_num_heads, 1, 1)
+                        new_scale_mul = old_scale_mul[0, keep_heads, 0, 0].view(1, -1, 1, 1)
 
-                            target_layer_b = get_module_by_name(model.blocks[i], "attn.mat_qkv")
-                            hidden = 16 * 64
+                        model.blocks[i].attn.scale_mul_1H11 = nn.Parameter(
+                            new_scale_mul.clone().to(device),
+                            requires_grad=True
+                        )
 
-                            rm_feat_q = idx_m
-                            rm_qkv = torch.cat([
-                                rm_feat_q,
-                                rm_feat_q + hidden,
-                                rm_feat_q + 2*hidden
-                            ], dim=0)
+                        # Debug info
+                        print(f"    ✓ Preserved scale_mul for heads {keep_heads}")
+                        print(f"      Removed heads: {sorted(removed_heads)}")
+                        print(f"      scale_mul shape: {old_scale_mul.shape} -> {new_scale_mul.shape}")
+                        print(f"      scale_mul range: [{new_scale_mul.exp().min().item():.3f}, {new_scale_mul.exp().max().item():.3f}]")
 
-                            rm_qkv_list = torch.unique(rm_qkv.to("cpu")).sort().values.tolist()
-                            tp.prune_linear_out_channels(target_layer_b, rm_qkv_list)
+                        # Prune proj
+                        tp.prune_linear_in_channels(target_layer, idx_list)
 
-                            print(f"    ✓ Pruned {len(idx_list)} dims ({len(idx_list)//16} dims per head)")
-                            print(f"    ✓ New head_dim: {new_head_dim} (num_heads={model.blocks[i].attn.num_heads})")
+                        # Prune mat_qkv
+                        target_layer_b = get_module_by_name(model.blocks[i], "attn.mat_qkv")
+                        hidden = current_num_heads * 64  # 修复：使用current_num_heads
 
-                        else:
-                            # ============ 原始 Head 剪枝分支 ============
+                        rm_feat_q = idx_m
+                        rm_qkv = torch.cat([
+                            rm_feat_q,
+                            rm_feat_q + hidden,
+                            rm_feat_q + 2*hidden
+                        ], dim=0)
 
-                            # 1. 更新 num_heads（不是 head_dim）
-                            model.blocks[i].attn.num_heads = torch.round(
-                                torch.tensor(model.num_heads * (1 - sparsity))
-                            ).int()
+                        rm_qkv_list = torch.unique(rm_qkv.to("cpu")).sort().values.tolist()
+                        tp.prune_linear_out_channels(target_layer_b, rm_qkv_list)
 
-                            # 2. 更新 biases
-                            model.blocks[i].attn.q_bias = nn.Parameter(
-                                model.blocks[i].attn.q_bias.data[keep_idxs]
-                            )
-                            zero_k_bias = model.blocks[i].attn.zero_k_bias.data[keep_idxs]
-                            model.blocks[i].attn.register_buffer('zero_k_bias', zero_k_bias)
-                            model.blocks[i].attn.v_bias = nn.Parameter(
-                                model.blocks[i].attn.v_bias.data[keep_idxs]
-                            )
-
-                            # 3. 更新 scale_mul（删除被移除 head 的 scale）
-                            head_dim = 64  # VAR uses fixed head_dim=64
-                            old_num_heads = target_layer.in_features // head_dim
-
-                            # Calculate which heads are removed (idx contains channel indices to remove)
-                            removed_heads = set((idx_m // head_dim).tolist())
-                            all_heads = set(range(old_num_heads))
-                            keep_heads = sorted(list(all_heads - removed_heads))
-
-                            # Preserve the learned scale_mul values for remaining heads
-                            old_scale_mul = model.blocks[i].attn.scale_mul_1H11.data  # (1, old_num_heads, 1, 1)
-                            new_scale_mul = old_scale_mul[0, keep_heads, 0, 0].view(1, -1, 1, 1)
-
-                            model.blocks[i].attn.scale_mul_1H11 = nn.Parameter(
-                                new_scale_mul.clone().to(device),
-                                requires_grad=True
-                            )
-
-                            # Debug info
-                            print(f"    ✓ Preserved scale_mul for heads {keep_heads}")
-                            print(f"      Removed heads: {sorted(removed_heads)}")
-                            print(f"      scale_mul range: [{new_scale_mul.exp().min().item():.3f}, {new_scale_mul.exp().max().item():.3f}]")
-
-                            # 4. Torch-Pruning
-                            tp.prune_linear_in_channels(target_layer, idx_list)
-
-                            target_layer_b = get_module_by_name(model.blocks[i], "attn.mat_qkv")
-                            hidden = 16 * 64
-
-                            rm_feat_q = idx_m
-                            rm_qkv = torch.cat([
-                                rm_feat_q,
-                                rm_feat_q + hidden,
-                                rm_feat_q + 2*hidden
-                            ], dim=0)
-
-                            rm_qkv_list = torch.unique(rm_qkv.to("cpu")).sort().values.tolist()
-                            tp.prune_linear_out_channels(target_layer_b, rm_qkv_list)
-
-                            print(f"    ✓ Pruned {len(idx_list)} channels ({len(idx_list)//64} heads)")
-                            print(f"    ✓ New head count: {model.blocks[i].attn.num_heads}")
-
+                        print(f"    ✓ Pruned {len(idx_list)} channels ({len(idx_list)//64} heads)")
+                        print(f"    ✓ New head count: {model.blocks[i].attn.num_heads}")
+                        print(f"    ✓ mat_qkv shape after pruning: {target_layer_b.weight.shape}")
 
                 del pruner_dict
                 torch.cuda.empty_cache()
@@ -553,9 +585,16 @@ def model_slimming(model, calibration_labels, calibration_tokens, args):
                 cond_BD = model.class_emb(class_label)  # (1, C)
                 cond_BD_or_gss = model.shared_ada_lin(cond_BD)
 
-                # Get attention bias - use the first sample's shape to determine sequence length
+                # Get attention bias - adapt to current layer's head count after pruning
                 seq_len = layer_input.shape[1]
-                attn_bias = model.attn_bias_for_masking[:, :, :seq_len, :seq_len]
+                current_num_heads = layer.attn.num_heads if hasattr(layer.attn, 'num_heads') else model.num_heads
+                # Take only the needed number of heads from the original attention bias
+                original_attn_bias = model.attn_bias_for_masking[:, :, :seq_len, :seq_len]
+                if current_num_heads < model.num_heads:
+                    # Layer has been pruned, use only the first current_num_heads
+                    attn_bias = original_attn_bias[:, :current_num_heads, :, :]
+                else:
+                    attn_bias = original_attn_bias
 
                 # Forward through the layer with proper VAR inputs
                 with torch.no_grad():
@@ -629,6 +668,11 @@ def main(args):
     state_dict = var.state_dict()
     total_params = sum(v.numel() for v in state_dict.values()) / 1e9
     print(f"  Total parameters: {total_params:.2f}B")
+
+    # Enable gradients for Taylor pruning
+    if args.prune_method == "taylor":
+        print("\n  Enabling gradients for Taylor pruning...")
+        var.requires_grad_(True)
 
     # 6. Execute pruning
     if isinstance(args.sparsity, list) or args.sparsity > 0:
@@ -751,27 +795,32 @@ if __name__ == "__main__":
         help="Non-uniform pruning strategy"
     )
     parser.add_argument(
-        "--min_sparsity", type=float, default=0.06,
+        "--min_sparsity", type=float, default=0,
         help="Minimum sparsity for non-uniform pruning"
     )
     parser.add_argument(
-        "--max_sparsity", type=float, default=0.3,
+        "--max_sparsity", type=float, default=0.6,
         help="Maximum sparsity for non-uniform pruning"
     )
 
     # Other options
     parser.add_argument(
+        "--prune_method", type=str, default="slimgpt",
+        choices=["slimgpt", "magnitude", "taylor"],
+        help="Pruning method: slimgpt (Hessian-based), magnitude, or taylor"
+    )
+    parser.add_argument(
+        "--taylor_type", type=str, default="param_mix",
+        choices=["param_first", "param_second", "param_mix"],
+        help="Taylor importance type: param_first (1st order), param_second (2nd order), param_mix (mixed, recommended). Only used when --prune_method=taylor"
+    )
+    parser.add_argument(
+        "--num_taylor_samples", type=int, default=20,
+        help="Number of samples for Taylor gradient collection. Only used when --prune_method=taylor. Recommended: 10-50"
+    )
+    parser.add_argument(
         "--no_compensate", action="store_true",
         help="Skip error compensation in SlimGPT"
-    )
-    # Head_dim pruning option
-    parser.add_argument(
-        "--use_head_dim_prune",
-        action="store_true",  # ⭐ 默认 False，保证向后兼容
-        help="Use head_dim pruning instead of head pruning for attention layers. "
-             "Head_dim pruning reduces the dimension of each head while keeping all heads, "
-             "whereas head pruning removes entire heads. "
-             "Default: False (use original head pruning)"
     )
     parser.add_argument(
         "--seed", type=int, default=0,

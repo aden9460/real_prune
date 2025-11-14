@@ -1,0 +1,8 @@
+{
+  "model_depth": 16,
+  "sparsity": 0.4,
+  "num_heads": 10,
+  "vae_ckpt": "/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth",
+  "var_ckpt": "/home/project/real_prune/VAR_train/distill_d16_scale_aware_256_0.6_3_fromft20_pro+awa_0.6_0/ar-ckpt-last.pth",
+  "output_dir": "./scale_mul_analysis_d16_0.4"
+}

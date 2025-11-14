@@ -699,17 +699,17 @@ def main(args):
     print("all:{}",end-zero)
 
     print(model)
-    macs, nparams = tp.utils.count_ops_and_params(model, example_input, layer_wise=False)
+    # macs, nparams = tp.utils.count_ops_and_params(model, example_input, layer_wise=False)
 
-    print(model(example_input).shape)
-    print(
-        "  Params: %.2f M => %.2f M"
-        % ( nparams / 1e6, nparams / 1e6)
-    )
-    print(
-        "   MACs: %.2f G => %.2f G"
-        % ( macs / 1e9, macs / 1e9)
-    )
+    # print(model(example_input).shape)
+    # print(
+    #     "  Params: %.2f M => %.2f M"
+    #     % ( nparams / 1e6, nparams / 1e6)
+    # )
+    # print(
+    #     "   MACs: %.2f G => %.2f G"
+    #     % ( macs / 1e9, macs / 1e9)
+    # )
 
 
     # save_dir = "/home/wangzefang/edgevar/EdgeVAR/VAR_FIDtest/output/FID_test/d24_test_0.2_200i_temporary"

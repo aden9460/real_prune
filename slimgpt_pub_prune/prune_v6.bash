@@ -1,6 +1,6 @@
 specific_layer=256
 maxlayer=16
-sparsity=0.4
+sparsity=0.2
 num_samples=100
 prune_method="slimgpt"
 model_name="real_d${maxlayer}_${sparsity}sparsity_${num_samples}i_cat680_scale_${prune_method}_fix_prune.pth" 

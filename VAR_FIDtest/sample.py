@@ -9,13 +9,13 @@ setattr(torch.nn.Linear, 'reset_parameters', lambda self: None)     # disable de
 setattr(torch.nn.LayerNorm, 'reset_parameters', lambda self: None)  # disable default parameter init for faster speed
 from models import VQVAE, build_vae_var
 from torchvision.utils import save_image
-MODEL_DEPTH = 24    # TODO: =====> please specify MODEL_DEPTH <=====
+MODEL_DEPTH = 16    # TODO: =====> please specify MODEL_DEPTH <=====
 assert MODEL_DEPTH in {16, 20, 24, 30}
 from utils import arg_util, misc
 args: arg_util.Args = arg_util.init_dist_and_get_args()
 # download checkpoint
 hf_home = 'https://huggingface.co/FoundationVision/var/resolve/main'
-vae_ckpt, var_ckpt = '/wanghuan/data/wangzefang/slim_VAR_copy/VAR/model_zoo/vae_ch160v4096z32.pth', f'/wanghuan/data/wangzefang/slim_VAR_copy/VAR/local_output/ar-ckpt-last.pth'
+vae_ckpt, var_ckpt = '/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth', f'/home/project/daily/AR/model_zoo/var_d16.pth'
    
 if not osp.exists(vae_ckpt): os.system(f'wget {hf_home}/{vae_ckpt}')
 if not osp.exists(var_ckpt): os.system(f'wget {hf_home}/{var_ckpt}')
@@ -45,7 +45,7 @@ seed = 0 #@param {type:"number"}
 torch.manual_seed(seed)
 num_sampling_steps = 250 #@param {type:"slider", min:0, max:1000, step:1}
 cfg = 4 #@param {type:"slider", min:1, max:10, step:0.1}
-class_labels = (980, 980, 437, 437, 22, 22, 562, 562)  #@param {type:"raw"}
+class_labels = (14,14,14,14,14,14,14,14,14,14,14,14,14,14,14)  #@param {type:"raw"}
 more_smooth = False # True for more smooth output
 
 # seed
@@ -61,7 +61,7 @@ torch.backends.cudnn.allow_tf32 = bool(tf32)
 torch.backends.cuda.matmul.allow_tf32 = bool(tf32)
 torch.set_float32_matmul_precision('high' if tf32 else 'highest')
 
-save_dir = "/wanghuan/data/wangzefang/VAR/FID_test/image/baseline_d24_8_sparsity_0.4_5epoch"
+save_dir = "/home/project/real_prune/VAR_FIDtest/test"
 os.makedirs(save_dir,exist_ok=True)
 # sample
 
@@ -70,10 +70,9 @@ with torch.inference_mode():
         # for class_num in range(5):
             # class_labels  = torch.full((10,), class_num, dtype=torch.long).cuda()
         class_num=0
-        class_labels = (980, 980, 437, 437, 22, 22, 562, 562)
         B = len(class_labels)
         label_B: torch.LongTensor = torch.tensor(class_labels, device=device)
-        recon_B3HW = var.autoregressive_infer_cfg(B=B, label_B=label_B, cfg=cfg, top_k=900, top_p=0.95, g_seed=seed, more_smooth=more_smooth)
+        recon_B3HW = var.autoregressive_infer_cfg(B=B, label_B=label_B, cfg=cfg, top_k=900, top_p=0.96, g_seed=seed, more_smooth=more_smooth)
         for image in range(recon_B3HW.shape[0]):
             save_image(recon_B3HW[image],f'{save_dir}/{class_num:03d}_img_{image:03d}.png')
 

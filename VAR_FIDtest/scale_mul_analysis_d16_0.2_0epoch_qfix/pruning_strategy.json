@@ -1,0 +1,130 @@
+{
+  "per_layer_sparsity": [
+    {
+      "layer": 0,
+      "sparsity": 0.2,
+      "reason": "Low variance (7.7) - difficult to distinguish importance"
+    },
+    {
+      "layer": 1,
+      "sparsity": 0.2,
+      "reason": "Low variance (7.4) - difficult to distinguish importance"
+    },
+    {
+      "layer": 2,
+      "sparsity": 0.2,
+      "reason": "Low variance (5.0) - difficult to distinguish importance"
+    },
+    {
+      "layer": 3,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 4,
+      "sparsity": 0.2,
+      "reason": "Low variance (5.1) - difficult to distinguish importance"
+    },
+    {
+      "layer": 5,
+      "sparsity": 0.3,
+      "reason": "High variance (32.3) - can prune low-scale heads"
+    },
+    {
+      "layer": 6,
+      "sparsity": 0.3,
+      "reason": "High variance (33.0) - can prune low-scale heads"
+    },
+    {
+      "layer": 7,
+      "sparsity": 0.3,
+      "reason": "High variance (52.3) - can prune low-scale heads"
+    },
+    {
+      "layer": 8,
+      "sparsity": 0.3,
+      "reason": "High variance (25.2) - can prune low-scale heads"
+    },
+    {
+      "layer": 9,
+      "sparsity": 0.3,
+      "reason": "High variance (25.9) - can prune low-scale heads"
+    },
+    {
+      "layer": 10,
+      "sparsity": 0.3,
+      "reason": "High variance (31.7) - can prune low-scale heads"
+    },
+    {
+      "layer": 11,
+      "sparsity": 0.3,
+      "reason": "High variance (39.8) - can prune low-scale heads"
+    },
+    {
+      "layer": 12,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 13,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 14,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 15,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    }
+  ],
+  "scale_groups": [
+    {
+      "group": "early",
+      "layers": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "scales": "0-3 (1\u00b2-4\u00b2)",
+      "avg_variance": 7.60278537959105,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.21000000000000002
+    },
+    {
+      "group": "mid",
+      "layers": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "scales": "3-7 (5\u00b2-8\u00b2)",
+      "avg_variance": 33.72350381818273,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.3
+    },
+    {
+      "group": "late",
+      "layers": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "scales": "7-10 (10\u00b2-16\u00b2)",
+      "avg_variance": 21.406934623627365,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.26666666666666666
+    }
+  ],
+  "rationale": {}
+}

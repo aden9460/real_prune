@@ -1,0 +1,130 @@
+{
+  "0": {
+    "sparsity": 0.0625,
+    "num_prune": 1,
+    "num_keep": 15,
+    "group": "低方差轻度",
+    "variance": 6.49,
+    "strategy": "极少剪枝"
+  },
+  "1": {
+    "sparsity": 0.0,
+    "num_prune": 0,
+    "num_keep": 16,
+    "group": "低方差保护",
+    "variance": 7.04,
+    "strategy": "完全保护"
+  },
+  "2": {
+    "sparsity": 0.0625,
+    "num_prune": 1,
+    "num_keep": 15,
+    "group": "低方差轻度",
+    "variance": 5.46,
+    "strategy": "极少剪枝"
+  },
+  "3": {
+    "sparsity": 0.0,
+    "num_prune": 0,
+    "num_keep": 16,
+    "group": "低方差保护",
+    "variance": 11.40,
+    "strategy": "完全保护"
+  },
+  "4": {
+    "sparsity": 0.0,
+    "num_prune": 0,
+    "num_keep": 16,
+    "group": "低方差保护",
+    "variance": 8.85,
+    "strategy": "完全保护"
+  },
+  "5": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 27.50,
+    "strategy": "层内分位数剪枝"
+  },
+  "6": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 32.28,
+    "strategy": "层内分位数剪枝"
+  },
+  "7": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 47.57,
+    "strategy": "层内分位数剪枝"
+  },
+  "8": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 31.73,
+    "strategy": "层内分位数剪枝"
+  },
+  "9": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 26.95,
+    "strategy": "层内分位数剪枝"
+  },
+  "10": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 32.79,
+    "strategy": "层内分位数剪枝"
+  },
+  "11": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 49.32,
+    "strategy": "层内分位数剪枝"
+  },
+  "12": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 52.87,
+    "strategy": "层内分位数剪枝"
+  },
+  "13": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 26.71,
+    "strategy": "层内分位数剪枝"
+  },
+  "14": {
+    "sparsity": 0.0625,
+    "num_prune": 1,
+    "num_keep": 15,
+    "group": "低方差轻度",
+    "variance": 11.87,
+    "strategy": "极少剪枝"
+  },
+  "15": {
+    "sparsity": 0.3125,
+    "num_prune": 5,
+    "num_keep": 11,
+    "group": "高方差",
+    "variance": 21.68,
+    "strategy": "层内分位数剪枝"
+  }
+}

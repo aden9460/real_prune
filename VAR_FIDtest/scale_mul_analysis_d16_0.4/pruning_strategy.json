@@ -1,0 +1,130 @@
+{
+  "per_layer_sparsity": [
+    {
+      "layer": 0,
+      "sparsity": 0.2,
+      "reason": "Low variance (4.4) - difficult to distinguish importance"
+    },
+    {
+      "layer": 1,
+      "sparsity": 0.2,
+      "reason": "Low variance (3.1) - difficult to distinguish importance"
+    },
+    {
+      "layer": 2,
+      "sparsity": 0.2,
+      "reason": "Low variance (3.4) - difficult to distinguish importance"
+    },
+    {
+      "layer": 3,
+      "sparsity": 0.2,
+      "reason": "Low variance (4.0) - difficult to distinguish importance"
+    },
+    {
+      "layer": 4,
+      "sparsity": 0.2,
+      "reason": "Low variance (7.7) - difficult to distinguish importance"
+    },
+    {
+      "layer": 5,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 6,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 7,
+      "sparsity": 0.3,
+      "reason": "High variance (20.6) - can prune low-scale heads"
+    },
+    {
+      "layer": 8,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 9,
+      "sparsity": 0.2,
+      "reason": "Low variance (9.0) - difficult to distinguish importance"
+    },
+    {
+      "layer": 10,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 11,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 12,
+      "sparsity": 0.3,
+      "reason": "High variance (23.6) - can prune low-scale heads"
+    },
+    {
+      "layer": 13,
+      "sparsity": 0.25,
+      "reason": "Balanced distribution - default sparsity"
+    },
+    {
+      "layer": 14,
+      "sparsity": 0.2,
+      "reason": "Low variance (4.6) - difficult to distinguish importance"
+    },
+    {
+      "layer": 15,
+      "sparsity": 0.2,
+      "reason": "Low variance (8.3) - difficult to distinguish importance"
+    }
+  ],
+  "scale_groups": [
+    {
+      "group": "early",
+      "layers": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "scales": "0-3 (1\u00b2-4\u00b2)",
+      "avg_variance": 4.51821614886762,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.2
+    },
+    {
+      "group": "mid",
+      "layers": [
+        5,
+        6,
+        7,
+        8,
+        9
+      ],
+      "scales": "3-7 (5\u00b2-8\u00b2)",
+      "avg_variance": 14.355204203517394,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.25
+    },
+    {
+      "group": "late",
+      "layers": [
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "scales": "7-10 (10\u00b2-16\u00b2)",
+      "avg_variance": 14.25776555363504,
+      "avg_high_ratio": 0.0,
+      "recommended_sparsity": 0.24166666666666667
+    }
+  ],
+  "rationale": {}
+}
