@@ -1,0 +1,95 @@
+🚀 Starting VAR OBA Pruning Test...
+📋 Configuration:
+  Model: VAR-d16
+  Target sparsity: 0.4
+  Calibration samples: 64
+  OBA weights: delta=1.0, upward=1.0, downward=1.0, parallel=1.0
+
+🔧 Running OBA pruning...
+2025-11-13 07:11:40.072035: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-11-13 07:11:40.127411: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI AVX512_BF16 AVX512_FP16 AVX_VNNI AMX_TILE AMX_INT8 AMX_BF16 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2025-11-13 07:11:41.246117: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+🚀 VAR OBA Pruning Started
+  Model: VAR-d16
+  VAR checkpoint: /home/project/daily/AR/model_zoo/var_d16.pth
+  VAE checkpoint: /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  Target sparsity: 0.4
+
+📦 Loading models...
+宽度是1024
+
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+/home/project/real_prune/OBA/VAR/models/var.py:200: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with torch.cuda.amp.autocast(enabled=False):
+/home/project/real_prune/OBA/torch_pruning/dependency.py:641: UserWarning: Unwrapped parameters detected: ['var_model.blocks.3.attn.scale_mul_1H11', 'var_model.blocks.6.attn.v_bias', 'var_model.blocks.9.attn.q_bias', 'var_model.blocks.11.attn.scale_mul_1H11', 'var_model.blocks.13.attn.v_bias', 'var_model.blocks.0.attn.scale_mul_1H11', 'var_model.blocks.3.attn.q_bias', 'var_model.blocks.5.attn.scale_mul_1H11', 'var_model.blocks.7.attn.q_bias', 'var_model.blocks.12.attn.scale_mul_1H11', 'var_model.blocks.14.attn.q_bias', 'var_model.blocks.0.attn.q_bias', 'var_model.blocks.1.attn.scale_mul_1H11', 'var_model.blocks.5.attn.v_bias', 'var_model.blocks.8.attn.scale_mul_1H11', 'var_model.blocks.8.attn.q_bias', 'var_model.blocks.10.attn.scale_mul_1H11', 'var_model.blocks.12.attn.v_bias', 'var_model.blocks.15.attn.q_bias', 'var_model.pos_1LC', 'var_model.blocks.2.attn.scale_mul_1H11', 'var_model.blocks.4.attn.scale_mul_1H11', 'var_model.blocks.6.attn.q_bias', 'var_model.blocks.10.attn.v_bias', 'var_model.blocks.13.attn.q_bias', 'var_model.blocks.15.attn.scale_mul_1H11', 'var_model.pos_start', 'var_model.blocks.1.attn.v_bias', 'var_model.blocks.4.attn.v_bias', 'var_model.blocks.9.attn.scale_mul_1H11', 'var_model.blocks.11.attn.v_bias', 'var_model.blocks.2.attn.q_bias', 'var_model.blocks.5.attn.q_bias', 'var_model.blocks.7.attn.scale_mul_1H11', 'var_model.blocks.9.attn.v_bias', 'var_model.blocks.12.attn.q_bias', 'var_model.blocks.14.attn.scale_mul_1H11', 'var_model.blocks.1.attn.q_bias', 'var_model.blocks.3.attn.v_bias', 'var_model.blocks.7.attn.v_bias', 'var_model.blocks.10.attn.q_bias', 'var_model.blocks.14.attn.v_bias', 'var_model.blocks.0.attn.v_bias', 'var_model.blocks.2.attn.v_bias', 'var_model.blocks.4.attn.q_bias', 'var_model.blocks.6.attn.scale_mul_1H11', 'var_model.blocks.8.attn.v_bias', 'var_model.blocks.11.attn.q_bias', 'var_model.blocks.13.attn.scale_mul_1H11', 'var_model.blocks.15.attn.v_bias'].
+ Torch-Pruning will prune the last non-singleton dimension of these parameters. If you wish to change this behavior, please provide an unwrapped_parameters argument.
+  warnings.warn(warning_str)
+[init_weights] VAR with init_std=0.0180422
+  ✅ Models loaded. Original params: 310,283,520
+
+📊 Preparing calibration data (64 samples)...
+加载真实ImageNet图像并编码（使用VAR原始build_dataset）...
+[Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+Transform [train] = 
+Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+RandomCrop(size=(256, 256), padding=None)
+ToTensor()
+<function normalize_01_into_pm1 at 0x7fb5042740d0>
+---------------------------
+
+Transform [val] = 
+Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+CenterCrop(size=(256, 256))
+ToTensor()
+<function normalize_01_into_pm1 at 0x7fb5042740d0>
+---------------------------
+
+  从 1000 个类别中采样 64 个样本
+  实际采样：64 个样本（均匀跨度采样）
+  编码图像为tokens...
+    编码进度: 16/64
+    编码进度: 32/64
+    编码进度: 48/64
+    编码进度: 64/64
+  ✅ 成功编码 64 个样本
+  📊 Token tensor shape: torch.Size([64, 679, 32])
+  ✅ Data ready: 16 batches
+🔥 Starting OBA Pruning...
+🔧 Patching VAR in-place operations for OBA compatibility...
+  ✅ VAR blocks patched for OBA compatibility
+  Target FLOPs ratio: 0.6
+  OBA parameters: delta=1.0, upward=1.0, downward=1.0, parallel=1.0
+  📊 Base FLOPs: 105.70G, Base Params: 258.19M
+  🔧 Executing pruning...
+  0%|          | 0/49 [00:00<?, ?it/s]sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+  0%|          | 0/49 [00:00<?, ?it/s]
+  ❌ Pruning failed: 'Linear' object has no attribute 'grad_output'
+🔧 Restoring original VAR forward methods...
+  ✅ Original methods restored
+🔧 Restoring original VAR forward methods...
+  ✅ Original methods restored
+Traceback (most recent call last):
+  File "/home/project/real_prune/OBA/var_prune_oba_v2.py", line 509, in <module>
+    main()
+  File "/home/project/real_prune/OBA/var_prune_oba_v2.py", line 476, in main
+    var_pruned = execute_oba_pruning(var, calibration_loader, args)
+  File "/home/project/real_prune/OBA/var_prune_oba_v2.py", line 361, in execute_oba_pruning
+    pruner.iterative_prune_step()  # 只需要调用方法，数据已经在构造函数中传递了
+  File "/home/project/real_prune/OBA/torch_pruning/conduct_pruning.py", line 171, in iterative_prune_step
+    self.pruner.obtain_importance(loss)
+  File "/home/project/real_prune/OBA/torch_pruning/pruner/algorithms/oba_pruner.py", line 290, in obtain_importance
+    current_group_importances = self.first_order_taylor(loss, current_group_importances)
+  File "/home/project/real_prune/OBA/torch_pruning/pruner/algorithms/oba_pruner.py", line 301, in first_order_taylor
+    current_group_importances = self.record_gradient_x(current_group_importances)
+  File "/home/project/real_prune/OBA/torch_pruning/pruner/algorithms/oba_pruner.py", line 979, in record_gradient_x
+    group_importances[module]["output_gradient"] = module.grad_output[0].detach().clone()
+  File "/root/miniconda3/envs/var/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1964, in __getattr__
+    raise AttributeError(
+AttributeError: 'Linear' object has no attribute 'grad_output'
+
+❌ OBA Pruning failed!
