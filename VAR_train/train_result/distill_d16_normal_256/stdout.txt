@@ -1,0 +1,638 @@
+[10-31 17:42:57] (_train/utils/arg_util.py, line 241)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[10-31 17:42:57] (_train/utils/arg_util.py, line 242)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[10-31 17:42:57] (_train/utils/arg_util.py, line 243)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[10-31 17:42:57] (_train/utils/arg_util.py, line 190)=> [蒸馏参数验证] 通过 - 类型:normal, 权重:0.5/0.5
+[10-31 17:42:57] (distill/train_distill.py, line 258)=> [参数验证] 蒸馏参数验证通过
+[10-31 17:42:57] (distill/train_distill.py, line  63)=> global bs=322, local bs=46
+[10-31 17:42:57] (distill/train_distill.py, line  64)=> initial args:\n{
+  data_path           : /home/project/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00012578125
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 322
+  batch_size          : 46
+  glb_batch_size      : 322
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  ckpt_save_interval  : 3
+  cmd                 : --enable_distillation=1 --teacher_model_path=/home/project/daily/AR/model_zoo/var_d16.pth --teacher_depth=16 --distill_type=normal --distill_alpha=0.5 --distill_beta=0.5 --depth=16 --bs=320 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth --data_path=/home/project/ImageNet-1K --local_out_dir_path=/home/project/real_prune/VAR_train/train_result/distill_d16_normal_256
+  branch              : main
+  commit_id           : 1bf7cb2895b8461062f9dbaf1daffb729258724e
+  commit_msg          : 25.9.25
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256
+  tb_log_dir_path     : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b322ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/log.txt
+  last_ckpt_path      : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  enable_distillation : True
+  teacher_model_path  : /home/project/daily/AR/model_zoo/var_d16.pth
+  teacher_depth       : 16
+  distill_type        : normal
+  distill_alpha       : 0.5
+  distill_beta        : 0.5
+  distill_temperature : 4.0
+  scale_weights_str   : 2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2
+  use_feature_distill : False
+  feature_layers_str  : 4,8,12,15
+  use_attention_distill: False
+  distill_warmup_epochs: 5
+  distill_schedule    : constant
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[10-31 17:42:57] (distill/train_distill.py, line  68)=> [build PT data] ...\n
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7fc993f79ab0>
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7fc993f79ab0>
+[10-31 17:42:59] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[10-31 17:42:59] (distill/train_distill.py, line  91)=> [auto_resume] no ckpt found @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt*.pth
+[10-31 17:42:59] (distill/train_distill.py, line  91)=> [auto_resume quit]
+[10-31 17:42:59] (distill/train_distill.py, line  92)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[10-31 17:42:59] (distill/train_distill.py, line  98)=> [dataloader] gbs=322, lbs=46, iters_train=3979, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[10-31 17:42:59] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[10-31 17:42:59] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[10-31 17:43:00] (distill/train_distill.py, line 132)=> 加载学生模型权重...
+[10-31 17:43:00] (distill/train_distill.py, line 146)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)\n\n
+[10-31 17:43:00] (distill/train_distill.py, line 148)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[10-31 17:43:00] (distill/train_distill.py, line 149)=> [INIT][#para] VAR=231.41\n\n
+[10-31 17:43:00] (distill/train_distill.py, line 154)=> \n============================================================
+[10-31 17:43:00] (distill/train_distill.py, line 155)=> 开始加载教师模型...
+[10-31 17:43:00] (distill/distill_utils.py, line  31)=> [加载教师模型] 路径: /home/project/daily/AR/model_zoo/var_d16.pth
+[10-31 17:43:00] (distill/distill_utils.py, line  32)=> [加载教师模型] 深度: 16
+[10-31 17:43:00] (distill/distill_utils.py, line  39)=> [加载教师模型] 构建模型架构...
+[10-31 17:43:00] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[10-31 17:43:00] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[10-31 17:43:00] (distill/distill_utils.py, line  52)=> [加载教师模型] 加载权重...
+[10-31 17:43:01] (distill/train_distill.py, line 166)=> 教师模型加载失败: Error(s) in loading state_dict for VAR:
+	size mismatch for blocks.0.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.0.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.0.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.0.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.0.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.0.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.0.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.0.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.0.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.1.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.1.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.1.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.1.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.1.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.1.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.1.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.1.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.1.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.2.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.2.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.2.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.2.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.2.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.2.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.2.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.2.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.2.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.3.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.3.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.3.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.3.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.3.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.3.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.3.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.3.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.3.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.4.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.4.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.4.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.4.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.4.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.4.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.4.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.4.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.4.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.5.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.5.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.5.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.5.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.5.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.5.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.5.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.5.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.5.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.6.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.6.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.6.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.6.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.6.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.6.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.6.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.6.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.6.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.7.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.7.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.7.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.7.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.7.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.7.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.7.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.7.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.7.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.8.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.8.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.8.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.8.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.8.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.8.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.8.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.8.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.8.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.9.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.9.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.9.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.9.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.9.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.9.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.9.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.9.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.9.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.10.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.10.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.10.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.10.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.10.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.10.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.10.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.10.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.10.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.11.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.11.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.11.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.11.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.11.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.11.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.11.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.11.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.11.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.12.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.12.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.12.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.12.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.12.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.12.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.12.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.12.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.12.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.13.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.13.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.13.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.13.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.13.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.13.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.13.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.13.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.13.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.14.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.14.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.14.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.14.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.14.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.14.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.14.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.14.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.14.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+	size mismatch for blocks.15.attn.scale_mul_1H11: copying a param with shape torch.Size([1, 16, 1, 1]) from checkpoint, the shape in current model is torch.Size([1, 10, 1, 1]).
+	size mismatch for blocks.15.attn.q_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.15.attn.v_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.15.attn.zero_k_bias: copying a param with shape torch.Size([1024]) from checkpoint, the shape in current model is torch.Size([640]).
+	size mismatch for blocks.15.attn.mat_qkv.weight: copying a param with shape torch.Size([3072, 1024]) from checkpoint, the shape in current model is torch.Size([1920, 1024]).
+	size mismatch for blocks.15.attn.proj.weight: copying a param with shape torch.Size([1024, 1024]) from checkpoint, the shape in current model is torch.Size([1024, 640]).
+	size mismatch for blocks.15.ffn.fc1.weight: copying a param with shape torch.Size([4096, 1024]) from checkpoint, the shape in current model is torch.Size([2458, 1024]).
+	size mismatch for blocks.15.ffn.fc1.bias: copying a param with shape torch.Size([4096]) from checkpoint, the shape in current model is torch.Size([2458]).
+	size mismatch for blocks.15.ffn.fc2.weight: copying a param with shape torch.Size([1024, 4096]) from checkpoint, the shape in current model is torch.Size([1024, 2458]).
+[10-31 17:43:01] (distill/train_distill.py, line 167)=> 将使用普通训练模式
+[10-31 17:43:01] (distill/train_distill.py, line 170)=> ============================================================\n
+[10-31 17:43:01] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[10-31 17:43:01] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=231405120
+[10-31 17:43:01] (rain/utils/lr_control.py, line 105)=> 
+[10-31 17:43:01] (distill/train_distill.py, line 185)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00012578125, 'weight_decay': 0}\n
+[10-31 17:43:01] (distill/train_distill.py, line 210)=> [训练器] 使用普通训练器 (VARTrainer)
+[10-31 17:43:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [   0/3979]  eta: 4:21:23  tlr: 6.3e-07  tnm: 16.52  Lm: 9.211 (9.211)  Lt: 8.465 (8.465)  Accm: 0.07 (0.07)  Acct: 0.08 (0.08)  time: 3.9416  data: 0.3304
+[10-31 17:58:19] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [ 994/3979]  eta: 0:45:53  tlr: 7.9e-05  tnm: 0.66  Lm: 8.180 (8.180)  Lt: 7.796 (7.796)  Accm: 0.77 (0.77)  Acct: 0.68 (0.68)  time: 0.9129  data: 0.3151
+[10-31 18:13:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [1989/3979]  eta: 0:30:34  tlr: 0.00013  tnm: 0.66  Lm: 7.149 (7.690)  Lt: 7.126 (7.345)  Accm: 1.46 (1.37)  Acct: 1.27 (1.45)  time: 0.9400  data: 0.3098
+[10-31 18:28:51] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [2983/3979]  eta: 0:15:17  tlr: 0.00013  tnm: 0.55  Lm: 6.929 (7.441)  Lt: 6.784 (7.056)  Accm: 2.02 (1.72)  Acct: 2.13 (2.08)  time: 0.9114  data: 0.3046
+[10-31 18:44:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [3978/3979]  eta: 0:00:00  tlr: 0.00013  tnm: 0.52  Lm: 6.709 (7.258)  Lt: 6.443 (6.849)  Accm: 2.58 (2.03)  Acct: 2.99 (2.58)  time: 0.9281  data: 0.3168
+[10-31 18:44:05] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/20]   Total time:      1:01:03   (0.921 s / it)
+[10-31 18:44:05] (distill/train_distill.py, line 347)=>      [ep0]  (training )  Lm: 7.262 (7.262), Lt: 6.847 (6.847),  Acc m&t: 2.03 2.61,  Remain: 19:17:00,  Finish: 2025-11-01 14:01
+[10-31 18:44:06] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [   0/3979]  eta: 1:01:05  tlr: 0.00013  tnm: 0.51  Lm: 6.457 (6.457)  Lt: 5.977 (5.977)  Accm: 3.33 (3.33)  Acct: 4.63 (4.63)  time: 0.9213  data: 0.3035
+[10-31 18:59:22] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [ 994/3979]  eta: 0:45:50  tlr: 0.00013  tnm: 0.45  Lm: 6.444 (6.444)  Lt: 5.923 (5.923)  Accm: 3.48 (3.48)  Acct: 4.94 (4.94)  time: 0.9270  data: 0.3009
+[10-31 19:14:40] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [1989/3979]  eta: 0:30:35  tlr: 0.00013  tnm: 0.46  Lm: 6.432 (6.418)  Lt: 5.869 (5.896)  Accm: 3.58 (3.51)  Acct: 5.17 (5.02)  time: 0.9075  data: 0.3002
+[10-31 19:29:55] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [2983/3979]  eta: 0:15:17  tlr: 0.00012  tnm: 0.42  Lm: 6.429 (6.420)  Lt: 5.855 (5.879)  Accm: 3.59 (3.53)  Acct: 5.18 (5.06)  time: 0.9102  data: 0.3102
+[10-31 19:45:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [3978/3979]  eta: 0:00:00  tlr: 0.00012  tnm: 0.42  Lm: 6.432 (6.427)  Lt: 5.842 (5.869)  Accm: 3.58 (3.47)  Acct: 5.17 (5.06)  time: 0.9335  data: 0.3076
+[10-31 19:45:10] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   1/20]   Total time:      1:01:04   (0.921 s / it)
+[10-31 19:45:10] (distill/train_distill.py, line 347)=>      [ep1]  (training )  Lm: 6.427 (6.427), Lt: 5.858 (5.858),  Acc m&t: 3.52 5.18,  Remain: 18:21:40,  Finish: 2025-11-01 14:06
+[10-31 19:45:11] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [   0/3979]  eta: 0:59:57  tlr: 0.00012  tnm: 0.43  Lm: 6.367 (6.367)  Lt: 5.721 (5.721)  Accm: 3.81 (3.81)  Acct: 5.76 (5.76)  time: 0.9042  data: 0.3097
+[10-31 20:00:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [ 994/3979]  eta: 0:45:53  tlr: 0.00012  tnm: 0.41  Lm: 6.378 (6.378)  Lt: 5.796 (5.796)  Accm: 3.72 (3.72)  Acct: 5.51 (5.51)  time: 0.9241  data: 0.3135
+[10-31 20:15:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [1989/3979]  eta: 0:30:35  tlr: 0.00012  tnm: 0.41  Lm: 6.367 (6.348)  Lt: 5.721 (5.764)  Accm: 3.81 (3.86)  Acct: 5.76 (5.65)  time: 0.9202  data: 0.3270
+[10-31 20:31:00] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [2983/3979]  eta: 0:15:17  tlr: 0.00012  tnm: 0.41  Lm: 6.328 (6.317)  Lt: 5.711 (5.742)  Accm: 3.97 (4.06)  Acct: 5.84 (5.87)  time: 0.9151  data: 0.3033
+[10-31 20:46:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [3978/3979]  eta: 0:00:00  tlr: 0.00012  tnm: 0.41  Lm: 6.333 (6.320)  Lt: 5.701 (5.732)  Accm: 3.97 (4.05)  Acct: 5.93 (5.89)  time: 0.9387  data: 0.3093
+[10-31 20:46:16] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   2/20]   Total time:      1:01:06   (0.921 s / it)
+[10-31 20:47:44] (distill/train_distill.py, line 318)=>  [*] [ep2]  (val 50000)  Lm: 6.3501, Lt: 5.7283, Acc m&t: 3.85 5.77,  Val cost: 88.48s
+[10-31 20:47:44] (distill/train_distill.py, line 326)=> [saving ckpt] ep3 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep003.pth (best)
+[10-31 20:47:50] (distill/train_distill.py, line 347)=>      [ep2]  (training )  Lm: 6.350 (6.350), Lt: 5.728 (5.728),  Acc m&t: 3.85 5.77,  Remain: 17:28:55,  Finish: 2025-11-01 14:15
+[10-31 20:47:51] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [   0/3979]  eta: 1:08:40  tlr: 0.00012  tnm: 0.42  Lm: 6.342 (6.342)  Lt: 5.739 (5.739)  Accm: 3.57 (3.57)  Acct: 5.25 (5.25)  time: 1.0355  data: 0.3137
+[10-31 21:03:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [ 994/3979]  eta: 0:45:59  tlr: 0.00011  tnm: 0.40  Lm: 6.311 (6.311)  Lt: 5.691 (5.691)  Accm: 3.86 (3.86)  Acct: 5.72 (5.72)  time: 0.9392  data: 0.3080
+[10-31 21:18:37] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [1989/3979]  eta: 0:30:47  tlr: 0.00011  tnm: 0.41  Lm: 6.288 (6.304)  Lt: 5.644 (5.663)  Accm: 4.14 (3.97)  Acct: 6.20 (5.90)  time: 0.9607  data: 0.3251
+[10-31 21:34:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [2983/3979]  eta: 0:15:29  tlr: 0.00011  tnm: 0.40  Lm: 6.309 (6.310)  Lt: 5.654 (5.663)  Accm: 4.04 (3.96)  Acct: 6.05 (5.90)  time: 0.9346  data: 0.3220
+[10-31 21:49:31] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [3978/3979]  eta: 0:00:00  tlr: 0.00011  tnm: 0.41  Lm: 6.330 (6.320)  Lt: 5.646 (5.660)  Accm: 3.93 (3.92)  Acct: 6.13 (5.95)  time: 0.9240  data: 0.3269
+[10-31 21:49:31] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   3/20]   Total time:      1:01:41   (0.930 s / it)
+[10-31 21:49:31] (distill/train_distill.py, line 347)=>      [ep3]  (training )  Lm: 6.312 (6.312), Lt: 5.681 (5.681),  Acc m&t: 3.99 6.00,  Remain: 16:04:39,  Finish: 2025-11-01 13:54
+[10-31 21:49:32] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [   0/3979]  eta: 1:04:57  tlr: 0.00011  tnm: 0.41  Lm: 6.288 (6.288)  Lt: 5.673 (5.673)  Accm: 3.78 (3.78)  Acct: 5.93 (5.93)  time: 0.9796  data: 0.4271
+[10-31 22:04:48] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [ 994/3979]  eta: 0:45:51  tlr: 0.00011  tnm: 0.42  Lm: 6.289 (6.289)  Lt: 5.644 (5.644)  Accm: 4.04 (4.04)  Acct: 6.09 (6.09)  time: 0.9270  data: 0.3232
+[10-31 22:20:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [1989/3979]  eta: 0:30:32  tlr: 0.00011  tnm: 0.42  Lm: 6.288 (6.276)  Lt: 5.641 (5.643)  Accm: 4.30 (4.16)  Acct: 6.25 (6.20)  time: 0.9140  data: 0.2981
+[10-31 22:35:17] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [2983/3979]  eta: 0:15:16  tlr: 0.00011  tnm: 0.41  Lm: 6.289 (6.293)  Lt: 5.628 (5.630)  Accm: 4.07 (4.08)  Acct: 6.26 (6.22)  time: 0.9415  data: 0.3094
+[10-31 22:50:51] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [3978/3979]  eta: 0:00:00  tlr: 0.0001  tnm: 0.41  Lm: 6.290 (6.297)  Lt: 5.641 (5.632)  Accm: 3.92 (4.05)  Acct: 6.25 (6.19)  time: 0.9556  data: 0.3403
+[10-31 22:50:51] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   4/20]   Total time:      1:01:20   (0.925 s / it)
+[10-31 22:50:51] (distill/train_distill.py, line 347)=>      [ep4]  (training )  Lm: 6.280 (6.280), Lt: 5.639 (5.639),  Acc m&t: 4.15 6.23,  Remain: 15:47:58,  Finish: 2025-11-01 14:38
+[10-31 22:50:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [   0/3979]  eta: 1:09:27  tlr: 0.0001  tnm: 0.40  Lm: 6.286 (6.286)  Lt: 5.658 (5.658)  Accm: 4.02 (4.02)  Acct: 6.25 (6.25)  time: 1.0474  data: 0.4948
+[10-31 23:06:29] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [ 994/3979]  eta: 0:46:53  tlr: 0.0001  tnm: 0.40  Lm: 6.309 (6.309)  Lt: 5.666 (5.666)  Accm: 4.01 (4.01)  Acct: 6.23 (6.23)  time: 0.9197  data: 0.3081
+[10-31 23:21:44] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [1989/3979]  eta: 0:30:53  tlr: 0.0001  tnm: 0.41  Lm: 6.331 (6.328)  Lt: 5.674 (5.675)  Accm: 4.00 (3.94)  Acct: 6.22 (6.17)  time: 0.9199  data: 0.3050
+[10-31 23:36:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [2983/3979]  eta: 0:15:23  tlr: 9.9e-05  tnm: 0.40  Lm: 6.330 (6.328)  Lt: 5.684 (5.685)  Accm: 3.90 (3.89)  Acct: 6.13 (6.02)  time: 0.9211  data: 0.3074
+[10-31 23:52:12] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [3978/3979]  eta: 0:00:00  tlr: 9.8e-05  tnm: 0.41  Lm: 6.328 (6.309)  Lt: 5.674 (5.664)  Accm: 4.00 (4.00)  Acct: 6.22 (6.13)  time: 0.9269  data: 0.3083
+[10-31 23:52:12] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   5/20]   Total time:      1:01:20   (0.925 s / it)
+[10-31 23:53:35] (distill/train_distill.py, line 318)=>  [*] [ep5]  (val 50000)  Lm: 6.2942, Lt: 5.6570, Acc m&t: 4.04 6.10,  Val cost: 83.00s
+[10-31 23:53:35] (distill/train_distill.py, line 326)=> [saving ckpt] ep6 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep006.pth (best)
+[10-31 23:53:43] (distill/train_distill.py, line 347)=>      [ep5]  (training )  Lm: 6.280 (6.294), Lt: 5.639 (5.657),  Acc m&t: 4.15 6.23,  Remain: 14:22:40,  Finish: 2025-11-01 14:14
+[10-31 23:53:44] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [   0/3979]  eta: 0:58:17  tlr: 9.8e-05  tnm: 0.41  Lm: 6.355 (6.355)  Lt: 5.657 (5.657)  Accm: 3.65 (3.65)  Acct: 6.08 (6.08)  time: 0.8791  data: 0.2954
+[11-01 00:08:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [ 994/3979]  eta: 0:45:43  tlr: 9.6e-05  tnm: 0.40  Lm: 6.350 (6.350)  Lt: 5.712 (5.712)  Accm: 3.68 (3.68)  Acct: 5.94 (5.94)  time: 0.9258  data: 0.3112
+[11-01 00:24:12] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [1989/3979]  eta: 0:30:29  tlr: 9.5e-05  tnm: 0.41  Lm: 6.346 (6.348)  Lt: 5.657 (5.689)  Accm: 3.71 (3.74)  Acct: 6.08 (6.11)  time: 0.9205  data: 0.3165
+[11-01 00:39:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [2983/3979]  eta: 0:15:15  tlr: 9.3e-05  tnm: 0.41  Lm: 6.350 (6.356)  Lt: 5.669 (5.687)  Accm: 3.72 (3.74)  Acct: 6.05 (6.09)  time: 0.9136  data: 0.3074
+[11-01 00:54:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [3978/3979]  eta: 0:00:00  tlr: 9.2e-05  tnm: 0.43  Lm: 6.346 (6.340)  Lt: 5.657 (5.670)  Accm: 3.74 (3.83)  Acct: 6.08 (6.19)  time: 0.9254  data: 0.3128
+[11-01 00:54:42] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   6/20]   Total time:      1:00:58   (0.920 s / it)
+[11-01 00:54:42] (distill/train_distill.py, line 347)=>      [ep6]  (training )  Lm: 6.280 (6.291), Lt: 5.639 (5.642),  Acc m&t: 4.15 6.23,  Remain: 13:15:26,  Finish: 2025-11-01 14:10
+[11-01 00:54:43] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [   0/3979]  eta: 1:01:13  tlr: 9.2e-05  tnm: 0.41  Lm: 6.326 (6.326)  Lt: 5.721 (5.721)  Accm: 4.10 (4.10)  Acct: 6.05 (6.05)  time: 0.9233  data: 0.3015
+[11-01 01:09:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [ 994/3979]  eta: 0:45:41  tlr: 9e-05  tnm: 0.43  Lm: 6.320 (6.320)  Lt: 5.683 (5.683)  Accm: 3.98 (3.98)  Acct: 6.04 (6.04)  time: 0.9013  data: 0.3006
+[11-01 01:25:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [1989/3979]  eta: 0:30:27  tlr: 8.9e-05  tnm: 0.42  Lm: 6.314 (6.287)  Lt: 5.645 (5.626)  Accm: 4.10 (4.05)  Acct: 6.05 (6.21)  time: 0.9188  data: 0.3063
+[11-01 01:40:26] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [2983/3979]  eta: 0:15:15  tlr: 8.7e-05  tnm: 0.43  Lm: 6.318 (6.296)  Lt: 5.653 (5.635)  Accm: 3.98 (3.97)  Acct: 6.04 (6.15)  time: 0.8982  data: 0.3122
+[11-01 01:55:39] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [3978/3979]  eta: 0:00:00  tlr: 8.6e-05  tnm: 0.42  Lm: 6.314 (6.273)  Lt: 5.645 (5.636)  Accm: 4.10 (4.17)  Acct: 6.05 (6.25)  time: 0.9017  data: 0.3074
+[11-01 01:55:39] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   7/20]   Total time:      1:00:56   (0.919 s / it)
+[11-01 01:55:39] (distill/train_distill.py, line 347)=>      [ep7]  (training )  Lm: 6.259 (6.259), Lt: 5.619 (5.619),  Acc m&t: 4.22 6.30,  Remain: 11:53:58,  Finish: 2025-11-01 13:49
+[11-01 01:55:40] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [   0/3979]  eta: 1:03:25  tlr: 8.6e-05  tnm: 0.43  Lm: 6.203 (6.203)  Lt: 5.527 (5.527)  Accm: 4.25 (4.25)  Acct: 6.51 (6.51)  time: 0.9564  data: 0.3145
+[11-01 02:10:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [ 994/3979]  eta: 0:45:46  tlr: 8.4e-05  tnm: 0.43  Lm: 6.203 (6.203)  Lt: 5.526 (5.526)  Accm: 4.27 (4.27)  Acct: 6.54 (6.54)  time: 0.9201  data: 0.3049
+[11-01 02:26:08] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [1989/3979]  eta: 0:30:29  tlr: 8.2e-05  tnm: 0.42  Lm: 6.203 (6.210)  Lt: 5.527 (5.559)  Accm: 4.29 (4.28)  Acct: 6.56 (6.58)  time: 0.9278  data: 0.3087
+[11-01 02:41:21] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [2983/3979]  eta: 0:15:15  tlr: 8.1e-05  tnm: 0.42  Lm: 6.214 (6.218)  Lt: 5.568 (5.572)  Accm: 4.27 (4.25)  Acct: 6.54 (6.53)  time: 0.9205  data: 0.3153
+[11-01 02:56:33] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [3978/3979]  eta: 0:00:00  tlr: 7.9e-05  tnm: 0.45  Lm: 6.203 (6.206)  Lt: 5.527 (5.559)  Accm: 4.29 (4.40)  Acct: 6.56 (6.67)  time: 0.8988  data: 0.3012
+[11-01 02:56:33] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   8/20]   Total time:      1:00:54   (0.918 s / it)
+[11-01 02:57:56] (distill/train_distill.py, line 318)=>  [*] [ep8]  (val 50000)  Lm: 6.2484, Lt: 5.6110, Acc m&t: 4.34 6.47,  Val cost: 83.09s
+[11-01 02:57:56] (distill/train_distill.py, line 326)=> [saving ckpt] ep9 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep009.pth (best)
+[11-01 02:58:04] (distill/train_distill.py, line 347)=>      [ep8]  (training )  Lm: 6.248 (6.248), Lt: 5.611 (5.611),  Acc m&t: 4.34 6.47,  Remain: 10:51:11,  Finish: 2025-11-01 13:47
+[11-01 02:58:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [   0/3979]  eta: 1:04:46  tlr: 7.9e-05  tnm: 0.45  Lm: 6.291 (6.291)  Lt: 5.683 (5.683)  Accm: 4.01 (4.01)  Acct: 5.58 (5.58)  time: 0.9769  data: 0.3199
+[11-01 03:13:19] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [ 994/3979]  eta: 0:45:43  tlr: 7.8e-05  tnm: 0.43  Lm: 6.267 (6.267)  Lt: 5.683 (5.683)  Accm: 4.11 (4.11)  Acct: 5.96 (5.96)  time: 0.9273  data: 0.2978
+[11-01 03:28:31] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [1989/3979]  eta: 0:30:26  tlr: 7.6e-05  tnm: 0.43  Lm: 6.243 (6.255)  Lt: 5.682 (5.657)  Accm: 4.19 (4.14)  Acct: 6.33 (6.08)  time: 0.8960  data: 0.3062
+[11-01 03:43:46] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [2983/3979]  eta: 0:15:15  tlr: 7.5e-05  tnm: 0.44  Lm: 6.237 (6.236)  Lt: 5.644 (5.627)  Accm: 4.20 (4.31)  Acct: 6.33 (6.38)  time: 0.9221  data: 0.3041
+[11-01 03:59:00] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [3978/3979]  eta: 0:00:00  tlr: 7.3e-05  tnm: 0.43  Lm: 6.243 (6.254)  Lt: 5.682 (5.645)  Accm: 4.19 (4.23)  Acct: 6.33 (6.30)  time: 0.9138  data: 0.3111
+[11-01 03:59:00] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   9/20]   Total time:      1:00:55   (0.919 s / it)
+[11-01 03:59:00] (distill/train_distill.py, line 347)=>      [ep9]  (training )  Lm: 6.242 (6.242), Lt: 5.593 (5.593),  Acc m&t: 4.34 6.48,  Remain: 9:57:54,  Finish: 2025-11-01 13:56
+[11-01 03:59:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [   0/3979]  eta: 1:14:40  tlr: 7.3e-05  tnm: 0.43  Lm: 6.173 (6.173)  Lt: 5.529 (5.529)  Accm: 4.60 (4.60)  Acct: 6.70 (6.70)  time: 1.1261  data: 0.5740
+[11-01 04:14:11] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [ 994/3979]  eta: 0:45:33  tlr: 7.2e-05  tnm: 0.43  Lm: 6.166 (6.166)  Lt: 5.531 (5.531)  Accm: 4.59 (4.59)  Acct: 6.59 (6.59)  time: 0.9346  data: 0.3131
+[11-01 04:29:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [1989/3979]  eta: 0:30:24  tlr: 7e-05  tnm: 0.43  Lm: 6.173 (6.199)  Lt: 5.532 (5.549)  Accm: 4.57 (4.37)  Acct: 6.47 (6.40)  time: 0.9159  data: 0.3012
+[11-01 04:44:38] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [2983/3979]  eta: 0:15:13  tlr: 6.9e-05  tnm: 0.44  Lm: 6.206 (6.209)  Lt: 5.553 (5.555)  Accm: 4.39 (4.33)  Acct: 6.38 (6.37)  time: 0.9080  data: 0.3163
+[11-01 04:59:55] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [3978/3979]  eta: 0:00:00  tlr: 6.7e-05  tnm: 0.43  Lm: 6.238 (6.219)  Lt: 5.532 (5.549)  Accm: 4.20 (4.28)  Acct: 6.40 (6.38)  time: 0.9306  data: 0.3041
+[11-01 04:59:55] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  10/20]   Total time:      1:00:54   (0.919 s / it)
+[11-01 04:59:55] (distill/train_distill.py, line 347)=>      [ep10]  (training )  Lm: 6.242 (6.260), Lt: 5.593 (5.611),  Acc m&t: 4.34 6.48,  Remain: 9:12:16,  Finish: 2025-11-01 14:12
+[11-01 04:59:55] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [   0/3979]  eta: 1:01:38  tlr: 6.7e-05  tnm: 0.44  Lm: 6.365 (6.365)  Lt: 5.692 (5.692)  Accm: 3.55 (3.55)  Acct: 5.85 (5.85)  time: 0.9294  data: 0.3484
+[11-01 05:15:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [ 994/3979]  eta: 0:45:46  tlr: 6.6e-05  tnm: 0.45  Lm: 6.303 (6.303)  Lt: 5.632 (5.632)  Accm: 4.10 (4.10)  Acct: 6.37 (6.37)  time: 0.9146  data: 0.3128
+[11-01 05:30:23] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [1989/3979]  eta: 0:30:28  tlr: 6.4e-05  tnm: 0.44  Lm: 6.241 (6.266)  Lt: 5.573 (5.590)  Accm: 4.53 (4.24)  Acct: 6.55 (6.43)  time: 0.9082  data: 0.3025
+[11-01 05:45:37] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [2983/3979]  eta: 0:15:15  tlr: 6.3e-05  tnm: 0.44  Lm: 6.217 (6.248)  Lt: 5.549 (5.573)  Accm: 4.53 (4.32)  Acct: 6.55 (6.46)  time: 0.9206  data: 0.3257
+[11-01 06:00:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [3978/3979]  eta: 0:00:00  tlr: 6.1e-05  tnm: 0.45  Lm: 6.214 (6.241)  Lt: 5.573 (5.578)  Accm: 4.53 (4.33)  Acct: 6.55 (6.37)  time: 0.9197  data: 0.3008
+[11-01 06:00:52] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  11/20]   Total time:      1:00:57   (0.919 s / it)
+[11-01 06:02:15] (distill/train_distill.py, line 318)=>  [*] [ep11]  (val 50000)  Lm: 6.2380, Lt: 5.5812, Acc m&t: 4.30 6.45,  Val cost: 82.87s
+[11-01 06:02:15] (distill/train_distill.py, line 326)=> [saving ckpt] ep12 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep012.pth (best)
+[11-01 06:02:23] (distill/train_distill.py, line 347)=>      [ep11]  (training )  Lm: 6.238 (6.238), Lt: 5.581 (5.581),  Acc m&t: 4.34 6.48,  Remain: 7:59:22,  Finish: 2025-11-01 14:00
+[11-01 06:02:24] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [   0/3979]  eta: 0:57:28  tlr: 6.1e-05  tnm: 0.44  Lm: 6.198 (6.198)  Lt: 5.516 (5.516)  Accm: 4.71 (4.71)  Acct: 6.93 (6.93)  time: 0.8667  data: 0.3064
+[11-01 06:17:36] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [ 994/3979]  eta: 0:45:40  tlr: 6e-05  tnm: 0.44  Lm: 6.222 (6.222)  Lt: 5.539 (5.539)  Accm: 4.30 (4.30)  Acct: 6.51 (6.51)  time: 0.9142  data: 0.3066
+[11-01 06:32:50] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [1989/3979]  eta: 0:30:26  tlr: 5.8e-05  tnm: 0.46  Lm: 6.246 (6.245)  Lt: 5.563 (5.559)  Accm: 4.02 (4.21)  Acct: 6.60 (6.54)  time: 0.9275  data: 0.3179
+[11-01 06:48:03] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [2983/3979]  eta: 0:15:14  tlr: 5.7e-05  tnm: 0.45  Lm: 6.222 (6.215)  Lt: 5.539 (5.530)  Accm: 4.35 (4.33)  Acct: 6.76 (6.65)  time: 0.9113  data: 0.3102
+[11-01 07:03:19] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [3978/3979]  eta: 0:00:00  tlr: 5.5e-05  tnm: 0.45  Lm: 6.246 (6.235)  Lt: 5.563 (5.562)  Accm: 4.09 (4.28)  Acct: 6.60 (6.53)  time: 0.9149  data: 0.3126
+[11-01 07:03:19] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  12/20]   Total time:      1:00:56   (0.919 s / it)
+[11-01 07:03:19] (distill/train_distill.py, line 347)=>      [ep12]  (training )  Lm: 6.217 (6.217), Lt: 5.561 (5.561),  Acc m&t: 4.47 6.68,  Remain: 7:04:55,  Finish: 2025-11-01 14:08
+[11-01 07:03:20] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [   0/3979]  eta: 1:05:05  tlr: 5.5e-05  tnm: 0.45  Lm: 6.211 (6.211)  Lt: 5.527 (5.527)  Accm: 4.20 (4.20)  Acct: 6.53 (6.53)  time: 0.9816  data: 0.4288
+[11-01 07:18:33] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [ 994/3979]  eta: 0:45:41  tlr: 5.4e-05  tnm: 0.45  Lm: 6.214 (6.214)  Lt: 5.510 (5.510)  Accm: 4.37 (4.37)  Acct: 6.76 (6.76)  time: 0.9182  data: 0.3069
+[11-01 07:33:46] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [1989/3979]  eta: 0:30:27  tlr: 5.2e-05  tnm: 0.46  Lm: 6.211 (6.179)  Lt: 5.493 (5.498)  Accm: 4.55 (4.69)  Acct: 7.00 (7.01)  time: 0.9192  data: 0.2992
+[11-01 07:49:00] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [2983/3979]  eta: 0:15:14  tlr: 5.1e-05  tnm: 0.48  Lm: 6.214 (6.201)  Lt: 5.510 (5.532)  Accm: 4.37 (4.53)  Acct: 6.76 (6.78)  time: 0.9113  data: 0.3110
+[11-01 08:04:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [3978/3979]  eta: 0:00:00  tlr: 4.9e-05  tnm: 0.46  Lm: 6.216 (6.219)  Lt: 5.527 (5.549)  Accm: 4.20 (4.42)  Acct: 6.53 (6.65)  time: 0.9318  data: 0.3097
+[11-01 08:04:16] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  13/20]   Total time:      1:00:57   (0.919 s / it)
+[11-01 08:04:16] (distill/train_distill.py, line 347)=>      [ep13]  (training )  Lm: 6.217 (6.222), Lt: 5.561 (5.568),  Acc m&t: 4.47 6.68,  Remain: 6:03:14,  Finish: 2025-11-01 14:07
+[11-01 08:04:17] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [   0/3979]  eta: 0:58:53  tlr: 4.9e-05  tnm: 0.47  Lm: 6.273 (6.273)  Lt: 5.616 (5.616)  Accm: 4.35 (4.35)  Acct: 6.62 (6.62)  time: 0.8881  data: 0.2977
+[11-01 08:19:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [ 994/3979]  eta: 0:45:36  tlr: 4.8e-05  tnm: 0.46  Lm: 6.290 (6.290)  Lt: 5.601 (5.601)  Accm: 4.12 (4.12)  Acct: 6.37 (6.37)  time: 0.9205  data: 0.3123
+[11-01 08:34:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [1989/3979]  eta: 0:30:26  tlr: 4.6e-05  tnm: 0.46  Lm: 6.307 (6.306)  Lt: 5.616 (5.642)  Accm: 3.90 (4.01)  Acct: 6.12 (6.24)  time: 0.9190  data: 0.3084
+[11-01 08:49:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [2983/3979]  eta: 0:15:14  tlr: 4.4e-05  tnm: 0.47  Lm: 6.290 (6.292)  Lt: 5.601 (5.623)  Accm: 4.05 (4.06)  Acct: 6.31 (6.30)  time: 0.9223  data: 0.3090
+[11-01 09:05:09] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [3978/3979]  eta: 0:00:00  tlr: 4.3e-05  tnm: 0.49  Lm: 6.273 (6.280)  Lt: 5.585 (5.613)  Accm: 4.21 (4.10)  Acct: 6.39 (6.32)  time: 0.9162  data: 0.3124
+[11-01 09:05:09] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  14/20]   Total time:      1:00:53   (0.918 s / it)
+[11-01 09:06:33] (distill/train_distill.py, line 318)=>  [*] [ep14]  (val 50000)  Lm: 6.2393, Lt: 5.5785, Acc m&t: 4.29 6.52,  Val cost: 83.31s
+[11-01 09:06:33] (distill/train_distill.py, line 326)=> [saving ckpt] ep15 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep015.pth (best)
+[11-01 09:06:40] (distill/train_distill.py, line 347)=>      [ep14]  (training )  Lm: 6.217 (6.239), Lt: 5.561 (5.579),  Acc m&t: 4.47 6.68,  Remain: 5:01:35,  Finish: 2025-11-01 14:06
+[11-01 09:06:41] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [   0/3979]  eta: 1:03:41  tlr: 4.3e-05  tnm: 0.47  Lm: 6.128 (6.128)  Lt: 5.531 (5.531)  Accm: 4.82 (4.82)  Acct: 6.74 (6.74)  time: 0.9604  data: 0.3384
+[11-01 09:21:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [ 994/3979]  eta: 0:45:40  tlr: 4.1e-05  tnm: 0.49  Lm: 6.131 (6.131)  Lt: 5.478 (5.478)  Accm: 4.81 (4.81)  Acct: 6.86 (6.86)  time: 0.9296  data: 0.3266
+[11-01 09:37:07] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [1989/3979]  eta: 0:30:26  tlr: 4e-05  tnm: 0.49  Lm: 6.133 (6.138)  Lt: 5.531 (5.497)  Accm: 4.82 (4.84)  Acct: 6.82 (6.84)  time: 0.9259  data: 0.3233
+[11-01 09:52:22] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [2983/3979]  eta: 0:15:14  tlr: 3.8e-05  tnm: 0.48  Lm: 6.142 (6.149)  Lt: 5.510 (5.495)  Accm: 4.81 (4.76)  Acct: 6.81 (6.84)  time: 0.9251  data: 0.3051
+[11-01 10:07:34] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [3978/3979]  eta: 0:00:00  tlr: 3.7e-05  tnm: 0.48  Lm: 6.152 (6.163)  Lt: 5.531 (5.505)  Accm: 4.80 (4.71)  Acct: 6.82 (6.85)  time: 0.9461  data: 0.3033
+[11-01 10:07:34] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  15/20]   Total time:      1:00:53   (0.918 s / it)
+[11-01 10:07:34] (distill/train_distill.py, line 347)=>      [ep15]  (training )  Lm: 6.210 (6.210), Lt: 5.549 (5.549),  Acc m&t: 4.47 6.68,  Remain: 4:07:58,  Finish: 2025-11-01 14:15
+[11-01 10:07:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [   0/3979]  eta: 1:04:29  tlr: 3.7e-05  tnm: 0.48  Lm: 6.091 (6.091)  Lt: 5.417 (5.417)  Accm: 5.05 (5.05)  Acct: 7.62 (7.62)  time: 0.9726  data: 0.3178
+[11-01 10:22:47] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [ 994/3979]  eta: 0:45:36  tlr: 3.5e-05  tnm: 0.48  Lm: 6.159 (6.159)  Lt: 5.494 (5.494)  Accm: 4.82 (4.82)  Acct: 7.08 (7.08)  time: 0.9190  data: 0.3181
+[11-01 10:38:02] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [1989/3979]  eta: 0:30:28  tlr: 3.4e-05  tnm: 0.50  Lm: 6.227 (6.187)  Lt: 5.570 (5.520)  Accm: 4.58 (4.58)  Acct: 6.55 (6.89)  time: 0.9367  data: 0.3210
+[11-01 10:53:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [2983/3979]  eta: 0:15:14  tlr: 3.2e-05  tnm: 0.49  Lm: 6.235 (6.201)  Lt: 5.571 (5.546)  Accm: 4.63 (4.60)  Acct: 6.74 (6.90)  time: 0.9136  data: 0.3122
+[11-01 11:08:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [3978/3979]  eta: 0:00:00  tlr: 3.1e-05  tnm: 0.49  Lm: 6.227 (6.206)  Lt: 5.570 (5.537)  Accm: 4.58 (4.56)  Acct: 6.94 (6.94)  time: 0.9210  data: 0.3047
+[11-01 11:08:28] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  16/20]   Total time:      1:00:53   (0.918 s / it)
+[11-01 11:08:28] (distill/train_distill.py, line 347)=>      [ep16]  (training )  Lm: 6.200 (6.200), Lt: 5.539 (5.539),  Acc m&t: 4.47 6.77,  Remain: 3:04:17,  Finish: 2025-11-01 14:12
+[11-01 11:08:29] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [   0/3979]  eta: 1:01:42  tlr: 3.1e-05  tnm: 0.49  Lm: 6.190 (6.190)  Lt: 5.601 (5.601)  Accm: 4.40 (4.40)  Acct: 6.56 (6.56)  time: 0.9306  data: 0.3221
+[11-01 11:23:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [ 994/3979]  eta: 0:45:50  tlr: 2.9e-05  tnm: 0.48  Lm: 6.196 (6.196)  Lt: 5.567 (5.567)  Accm: 4.57 (4.57)  Acct: 6.73 (6.73)  time: 0.9330  data: 0.3164
+[11-01 11:38:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [1989/3979]  eta: 0:30:29  tlr: 2.8e-05  tnm: 0.49  Lm: 6.194 (6.195)  Lt: 5.533 (5.551)  Accm: 4.42 (4.52)  Acct: 6.90 (6.80)  time: 0.9004  data: 0.3151
+[11-01 11:54:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [2983/3979]  eta: 0:15:15  tlr: 2.6e-05  tnm: 0.48  Lm: 6.197 (6.220)  Lt: 5.567 (5.574)  Accm: 4.41 (4.37)  Acct: 6.73 (6.66)  time: 0.9239  data: 0.3320
+[11-01 12:09:21] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [3978/3979]  eta: 0:00:00  tlr: 2.5e-05  tnm: 0.50  Lm: 6.201 (6.219)  Lt: 5.533 (5.559)  Accm: 4.40 (4.36)  Acct: 6.89 (6.71)  time: 0.8949  data: 0.2931
+[11-01 12:09:21] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  17/20]   Total time:      1:00:52   (0.918 s / it)
+[11-01 12:10:44] (distill/train_distill.py, line 318)=>  [*] [ep17]  (val 50000)  Lm: 6.2104, Lt: 5.5457, Acc m&t: 4.44 6.71,  Val cost: 82.90s
+[11-01 12:10:44] (distill/train_distill.py, line 326)=> [saving ckpt] ep18 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep018.pth (best)
+[11-01 12:10:51] (distill/train_distill.py, line 347)=>      [ep17]  (training )  Lm: 6.200 (6.210), Lt: 5.539 (5.546),  Acc m&t: 4.47 6.77,  Remain: 1:58:24,  Finish: 2025-11-01 14:07
+[11-01 12:10:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [   0/3979]  eta: 1:04:38  tlr: 2.5e-05  tnm: 0.49  Lm: 6.257 (6.257)  Lt: 5.608 (5.608)  Accm: 3.88 (3.88)  Acct: 5.79 (5.79)  time: 0.9748  data: 0.3145
+[11-01 12:26:03] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [ 994/3979]  eta: 0:45:36  tlr: 2.3e-05  tnm: 0.50  Lm: 6.220 (6.220)  Lt: 5.552 (5.552)  Accm: 4.26 (4.26)  Acct: 6.29 (6.29)  time: 0.9097  data: 0.3110
+[11-01 12:41:17] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [1989/3979]  eta: 0:30:25  tlr: 2.2e-05  tnm: 0.50  Lm: 6.257 (6.235)  Lt: 5.537 (5.547)  Accm: 4.23 (4.25)  Acct: 6.78 (6.47)  time: 0.9045  data: 0.3079
+[11-01 12:56:29] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [2983/3979]  eta: 0:15:13  tlr: 2e-05  tnm: 0.50  Lm: 6.220 (6.217)  Lt: 5.516 (5.529)  Accm: 4.44 (4.37)  Acct: 6.81 (6.66)  time: 0.9026  data: 0.3085
+[11-01 13:11:44] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [3978/3979]  eta: 0:00:00  tlr: 1.9e-05  tnm: 0.50  Lm: 6.257 (6.232)  Lt: 5.537 (5.553)  Accm: 4.33 (4.36)  Acct: 6.78 (6.64)  time: 0.9220  data: 0.3068
+[11-01 13:11:44] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  18/20]   Total time:      1:00:52   (0.918 s / it)
+[11-01 13:11:44] (distill/train_distill.py, line 347)=>      [ep18]  (training )  Lm: 6.181 (6.181), Lt: 5.511 (5.511),  Acc m&t: 4.62 6.97,  Remain: 1:01:09,  Finish: 2025-11-01 14:12
+[11-01 13:11:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [   0/3979]  eta: 1:02:07  tlr: 1.9e-05  tnm: 0.50  Lm: 6.204 (6.204)  Lt: 5.545 (5.545)  Accm: 4.36 (4.36)  Acct: 6.44 (6.44)  time: 0.9368  data: 0.2920
+[11-01 13:26:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [ 994/3979]  eta: 0:45:36  tlr: 1.7e-05  tnm: 0.51  Lm: 6.115 (6.115)  Lt: 5.478 (5.478)  Accm: 4.95 (4.95)  Acct: 6.86 (6.86)  time: 0.9133  data: 0.3047
+[11-01 13:42:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [1989/3979]  eta: 0:30:26  tlr: 1.6e-05  tnm: 0.50  Lm: 6.204 (6.158)  Lt: 5.545 (5.503)  Accm: 4.36 (4.70)  Acct: 6.54 (6.75)  time: 0.9032  data: 0.3104
+[11-01 13:57:23] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [2983/3979]  eta: 0:15:14  tlr: 1.4e-05  tnm: 0.51  Lm: 6.185 (6.160)  Lt: 5.528 (5.505)  Accm: 4.47 (4.67)  Acct: 6.65 (6.76)  time: 0.9101  data: 0.3030
+[11-01 14:12:36] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [3978/3979]  eta: 0:00:00  tlr: 1.3e-05  tnm: 0.50  Lm: 6.166 (6.150)  Lt: 5.510 (5.481)  Accm: 4.58 (4.70)  Acct: 6.77 (6.89)  time: 0.9241  data: 0.3138
+[11-01 14:12:36] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  19/20]   Total time:      1:00:52   (0.918 s / it)
+[11-01 14:13:59] (distill/train_distill.py, line 318)=>  [*] [ep19]  (val 50000)  Lm: 6.1880, Lt: 5.5207, Acc m&t: 4.50 6.82,  Val cost: 82.98s
+[11-01 14:13:59] (distill/train_distill.py, line 326)=> [saving ckpt] ep20 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-ep020.pth (best)
+[11-01 14:14:07] (distill/train_distill.py, line 347)=>      [ep19]  (training )  Lm: 6.181 (6.188), Lt: 5.511 (5.521),  Acc m&t: 4.62 6.97,  Remain: 0:00:14,  Finish: 2025-11-01 14:12
+[11-01 14:14:07] (distill/train_distill.py, line 353)=> \n\n
+[11-01 14:14:07] (distill/train_distill.py, line 354)=>   [*] [蒸馏训练完成]  总耗时: 20.5h,   Lm: 6.181 (6.187970747266497),   Lt: 5.511 (5.520729051317487)
+[11-01 14:14:07] (distill/train_distill.py, line 370)=> \n\n
+[11-01 14:14:13] (distill/train_distill.py, line 377)=> final args:
+
+{
+  data_path           : /home/project/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00012578125
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 322
+  batch_size          : 46
+  glb_batch_size      : 322
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  ckpt_save_interval  : 3
+  cmd                 : --enable_distillation=1 --teacher_model_path=/home/project/daily/AR/model_zoo/var_d16.pth --teacher_depth=16 --distill_type=normal --distill_alpha=0.5 --distill_beta=0.5 --depth=16 --bs=320 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth --data_path=/home/project/ImageNet-1K --local_out_dir_path=/home/project/real_prune/VAR_train/train_result/distill_d16_normal_256
+  branch              : main
+  commit_id           : 1bf7cb2895b8461062f9dbaf1daffb729258724e
+  commit_msg          : 25.9.25
+  acc_mean            : 4.504841129694666
+  acc_tail            : 6.8242916996989935
+  L_mean              : 6.187970747266497
+  L_tail              : 5.520729051317487
+  vacc_mean           : 4.640755653381348
+  vacc_tail           : 7.185609340667725
+  vL_mean             : 6.150829792022705
+  vL_tail             : 5.442246913909912
+  grad_norm           : 0.5040505230426788
+  cur_lr              : 1.2578125e-05
+  cur_wd              : 0.05
+  cur_it              : 3979/3979
+  cur_ep              : 20/20
+  remain_time         : -
+  finish_time         : 2025-11-01 14:13
+  local_out_dir_path  : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256
+  tb_log_dir_path     : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b322ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/log.txt
+  last_ckpt_path      : /home/project/real_prune/VAR_train/train_result/distill_d16_normal_256/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  enable_distillation : False
+  teacher_model_path  : /home/project/daily/AR/model_zoo/var_d16.pth
+  teacher_depth       : 16
+  distill_type        : normal
+  distill_alpha       : 0.5
+  distill_beta        : 0.5
+  distill_temperature : 4.0
+  scale_weights_str   : 2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2
+  use_feature_distill : False
+  feature_layers_str  : 4,8,12,15
+  use_attention_distill: False
+  distill_warmup_epochs: 5
+  distill_schedule    : constant
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+

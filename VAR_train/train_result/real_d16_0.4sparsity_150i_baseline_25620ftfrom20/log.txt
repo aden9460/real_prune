@@ -1,0 +1,10 @@
+{
+"is_master": true,
+"name": "text",
+"cmd": "--depth=16 --bs=320 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path=/home/project/real_prune/VAR_train/real_d16_0.4sparsity_150i_baseline_25620ftfrom20 --data_path=/home/project/ImageNet-1K --var_path=/home/project/real_prune/VAR_train/train_result/real_d16_0.4sparsity_150i_baseline_256/ar-ckpt-last.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth",
+"commit": "1bf7cb2895b8461062f9dbaf1daffb729258724e",
+"branch": "main",
+"tb_log_dir_path": "/home/project/real_prune/VAR_train/real_d16_0.4sparsity_150i_baseline_25620ftfrom20/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b322ep20adamlr0.0001wd0.05"
+}
+{'it': '3979/3979', 'ep': '1/20', 'lr': 0.00012578125, 'wd': 0.05, 'grad_norm': 0.5158437967300415, 'L_mean': 6.248250130244664, 'L_tail': 5.589525236402239, 'acc_mean': 4.322707376309803, 'acc_tail': 6.510578574878829, 'vL_mean': 6.236660003662109, 'vL_tail': 5.550236701965332, 'vacc_mean': 4.277611255645752, 'vacc_tail': 6.605843544006348, 'remain_time': '19:18:26', 'finish_time': '2025-11-07 09:53'}
+{'it': '3979/3979', 'ep': '2/20', 'lr': 0.00012201383012426836, 'wd': 0.05, 'grad_norm': 0.47982439398765564, 'L_mean': 6.27385003226144, 'L_tail': 5.625444412231445, 'acc_mean': 4.148611671158245, 'acc_tail': 6.32084635751588, 'vL_mean': 6.234862327575684, 'vL_tail': 5.548508644104004, 'vacc_mean': 4.2848591804504395, 'vacc_tail': 6.615836143493652, 'remain_time': '18:19:03', 'finish_time': '2025-11-07 09:57'}

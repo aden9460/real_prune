@@ -13,8 +13,8 @@
 *.pt
 *.gz
 *.npz
-*.txt
 
+*.pdf
 # 忽略数据文件
 *.csv
 *.tsv

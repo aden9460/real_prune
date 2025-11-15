@@ -1,0 +1,9 @@
+{
+"is_master": true,
+"name": "text",
+"cmd": "--depth=16 --bs=320 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path=/home/project/real_prune/VAR_train/qscaluefix_var_d16_0.4_mag_1epoch --data_path=/home/project/ImageNet-1K --var_path=/home/project/real_prune/slimvar/pruned_models/qscaluefix_var_d16_0.4_1000sample_mag.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth",
+"commit": "47e3e1552586935e2af7cbeec34c6a14ab127eec",
+"branch": "main",
+"tb_log_dir_path": "/home/project/real_prune/VAR_train/qscaluefix_var_d16_0.4_mag_1epoch/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b320ep1adamlr0.0001wd0.05"
+}
+{'it': '4004/4004', 'ep': '1/1', 'lr': 1.25e-05, 'wd': 0.05, 'grad_norm': 7.274374955892563, 'L_mean': 7.213330936431885, 'L_tail': 6.569874441623687, 'acc_mean': 2.7749079739442095, 'acc_tail': 4.043945346147666, 'vL_mean': 6.341537952423096, 'vL_tail': 5.710070610046387, 'vacc_mean': 3.8588027954101562, 'vacc_tail': 5.830078125, 'remain_time': '-', 'finish_time': '2025-11-14 16:30'}

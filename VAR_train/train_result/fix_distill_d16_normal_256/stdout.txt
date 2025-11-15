@@ -1,0 +1,1107 @@
+[11-02 14:20:34] (_train/utils/arg_util.py, line 241)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[11-02 14:20:34] (_train/utils/arg_util.py, line 242)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[11-02 14:20:34] (_train/utils/arg_util.py, line 243)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[11-02 14:20:34] (_train/utils/arg_util.py, line 190)=> [蒸馏参数验证] 通过 - 类型:normal, 权重:0.5/0.5
+[11-02 14:20:34] (distill/train_distill.py, line 258)=> [参数验证] 蒸馏参数验证通过
+[11-02 14:20:34] (distill/train_distill.py, line  63)=> global bs=259, local bs=37
+[11-02 14:20:34] (distill/train_distill.py, line  64)=> initial args:\n{
+  data_path           : /home/project/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00010117187500000001
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 259
+  batch_size          : 37
+  glb_batch_size      : 259
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  ckpt_save_interval  : 3
+  cmd                 : --enable_distillation=1 --teacher_model_path=/home/project/daily/AR/model_zoo/var_d16.pth --teacher_depth=16 --distill_type=normal --distill_alpha=0.5 --distill_beta=0.5 --depth=16 --bs=256 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth --data_path=/home/project/ImageNet-1K --local_out_dir_path=/home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  branch              : main
+  commit_id           : 1bf7cb2895b8461062f9dbaf1daffb729258724e
+  commit_msg          : 25.9.25
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  tb_log_dir_path     : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b259ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/log.txt
+  last_ckpt_path      : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  enable_distillation : True
+  teacher_model_path  : /home/project/daily/AR/model_zoo/var_d16.pth
+  teacher_depth       : 16
+  distill_type        : normal
+  distill_alpha       : 0.5
+  distill_beta        : 0.5
+  distill_temperature : 4.0
+  scale_weights_str   : 2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2
+  use_feature_distill : False
+  feature_layers_str  : 4,8,12,15
+  use_attention_distill: False
+  distill_warmup_epochs: 5
+  distill_schedule    : constant
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[11-02 14:20:34] (distill/train_distill.py, line  68)=> [build PT data] ...\n
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7fb4b2179ab0>
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7fb4b2179ab0>
+[11-02 14:20:36] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[11-02 14:20:36] (distill/train_distill.py, line  91)=> [auto_resume] no ckpt found @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt*.pth
+[11-02 14:20:36] (distill/train_distill.py, line  91)=> [auto_resume quit]
+[11-02 14:20:36] (distill/train_distill.py, line  92)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[11-02 14:20:36] (distill/train_distill.py, line  98)=> [dataloader] gbs=259, lbs=37, iters_train=4947, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[11-02 14:20:36] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[11-02 14:20:36] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[11-02 14:20:37] (distill/train_distill.py, line 132)=> 加载学生模型权重...
+[11-02 14:20:37] (distill/train_distill.py, line 146)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)\n\n
+[11-02 14:20:37] (distill/train_distill.py, line 148)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[11-02 14:20:37] (distill/train_distill.py, line 149)=> [INIT][#para] VAR=231.41\n\n
+[11-02 14:20:37] (distill/train_distill.py, line 154)=> \n============================================================
+[11-02 14:20:37] (distill/train_distill.py, line 155)=> 开始加载教师模型...
+[11-02 14:20:37] (distill/distill_utils.py, line  31)=> [加载教师模型] 路径: /home/project/daily/AR/model_zoo/var_d16.pth
+[11-02 14:20:37] (distill/distill_utils.py, line  32)=> [加载教师模型] 深度: 16
+[11-02 14:20:37] (distill/distill_utils.py, line  39)=> [加载教师模型] 构建模型架构...
+[11-02 14:20:37] (distill/distill_utils.py, line  46)=> [加载教师模型] 临时设置 sparsity=0 (原值=0.4)
+[11-02 14:20:37] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[11-02 14:20:37] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[11-02 14:20:37] (distill/distill_utils.py, line  62)=> [加载教师模型] 恢复 sparsity=0.4
+[11-02 14:20:37] (distill/distill_utils.py, line  65)=> [加载教师模型] 加载权重...
+[11-02 14:20:38] (distill/distill_utils.py, line  79)=> [加载教师模型] 直接加载模型权重
+[11-02 14:20:38] (distill/distill_utils.py, line  89)=> [加载教师模型] 成功加载，参数量: 310.28M
+[11-02 14:20:38] (distill/distill_utils.py, line  90)=> [加载教师模型] 已冻结参数: 310.28M
+[11-02 14:20:38] (distill/train_distill.py, line 158)=> 教师模型加载成功
+[11-02 14:20:38] (distill/train_distill.py, line 163)=> ======== 蒸馏配置摘要 ========
+蒸馏类型: normal
+教师模型: var_d16.pth (深度=16)
+损失权重: 任务=0.50, 蒸馏=0.50
+蒸馏温度: 4.0
+==============================
+[11-02 14:20:38] (distill/train_distill.py, line 170)=> ============================================================\n
+[11-02 14:20:38] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[11-02 14:20:38] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=231405120
+[11-02 14:20:38] (rain/utils/lr_control.py, line 105)=> 
+[11-02 14:20:38] (distill/train_distill.py, line 185)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00010117187500000001, 'weight_decay': 0}\n
+[11-02 14:20:38] (l/distillation_losses.py, line  45)=> [蒸馏损失] 类型=normal, 温度=4.0
+[11-02 14:20:38] (l/distillation_losses.py, line  46)=> [尺度权重] [2.0, 1.8, 1.6, 1.4, 1.2, 1.0, 0.8, 0.6, 0.4, 0.2]
+[11-02 14:20:38] (/distillation_trainer.py, line  65)=> [蒸馏训练器] 教师模型已冻结
+[11-02 14:20:38] (/distillation_trainer.py, line  66)=> [蒸馏训练器] 教师参数: 310.28M (310.28M已冻结)
+[11-02 14:20:38] (distill/distill_utils.py, line 166)=> [兼容性检查] 教师模型参数: 310.28M
+[11-02 14:20:38] (distill/distill_utils.py, line 167)=> [兼容性检查] 学生模型参数: 231.41M
+[11-02 14:20:38] (distill/distill_utils.py, line 168)=> [兼容性检查] 压缩比: 74.58%
+[11-02 14:20:38] (distill/distill_utils.py, line 175)=> [兼容性检查] 词汇表大小: 4096
+[11-02 14:20:38] (distill/distill_utils.py, line 180)=> [兼容性检查] 序列长度: 680
+[11-02 14:20:38] (distill/distill_utils.py, line 185)=> [兼容性检查] patch配置: (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+[11-02 14:20:38] (distill/distill_utils.py, line 187)=> [兼容性检查] 通过
+[11-02 14:20:38] (/distillation_trainer.py, line  73)=> [蒸馏训练器] 初始化完成
+[11-02 14:20:38] (/distillation_trainer.py, line  74)=> [蒸馏训练器] 蒸馏类型: normal
+[11-02 14:20:38] (/distillation_trainer.py, line  75)=> [蒸馏训练器] 损失权重: 任务=0.50, 蒸馏=0.50
+[11-02 14:20:38] (distill/train_distill.py, line 202)=> [训练器] 使用蒸馏训练器 (DistillationVARTrainer)
+[11-02 14:20:38] (distill/train_distill.py, line 203)=> [蒸馏模式] normal 蒸馏，权重 0.5/0.5
+[11-02 14:20:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [   0/4947]  eta: 4:53:04  tlr: 5.1e-07  tnm: 0.00  Lm: 9.257 (9.257)  Lt: 8.543 (8.543)  Accm: 0.04 (0.04)  Acct: 0.03 (0.03)  TaskL: 9.2574 (9.2574)  DistillL: 3561.1516 (3561.1516)  TotalL: 3570.4091 (3570.4091)  time: 3.5546  data: 0.2781
+[11-02 14:38:24] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [1236/4947]  eta: 0:53:18  tlr: 6.3e-05  tnm: 0.00  Lm: 8.312 (8.312)  Lt: 7.890 (7.890)  Accm: 0.59 (0.59)  Acct: 0.61 (0.61)  TaskL: 8.3116 (8.3116)  DistillL: 2396.0468 (2396.0468)  TotalL: 2404.3584 (2404.3584)  time: 0.8496  data: 0.2632
+[11-02 14:56:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [2473/4947]  eta: 0:35:37  tlr: 0.0001  tnm: 0.00  Lm: 7.366 (7.822)  Lt: 7.237 (7.430)  Accm: 1.15 (1.24)  Acct: 1.19 (1.49)  TaskL: 7.3657 (7.8220)  DistillL: 1230.9420 (1853.7209)  TotalL: 1238.3077 (1861.5429)  time: 0.9088  data: 0.2669
+[11-02 15:14:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [3709/4947]  eta: 0:17:56  tlr: 0.0001  tnm: 0.00  Lm: 7.124 (7.587)  Lt: 6.874 (7.150)  Accm: 1.65 (1.47)  Acct: 2.21 (1.93)  TaskL: 7.1242 (7.5872)  DistillL: 1000.0056 (1513.8588)  TotalL: 1007.1099 (1521.4460)  time: 0.8562  data: 0.2490
+[11-02 15:32:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [4946/4947]  eta: 0:00:00  tlr: 0.0001  tnm: 0.00  Lm: 6.883 (7.409)  Lt: 6.512 (6.958)  Accm: 2.14 (1.69)  Acct: 3.23 (2.27)  TaskL: 6.8827 (7.4094)  DistillL: 769.0692 (1297.3018)  TotalL: 775.9120 (1304.7112)  time: 0.8618  data: 0.2498
+[11-02 15:32:04] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/20]   Total time:      1:11:26   (0.866 s / it)
+[11-02 15:32:04] (distill/train_distill.py, line 347)=>      [ep0]  (training )  Lm: 7.382 (7.382), Lt: 6.914 (6.914),  Acc m&t: 1.80 2.50,  Remain: 22:18:57,  Finish: 2025-11-03 13:51
+[11-02 15:32:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [   0/4947]  eta: 1:09:18  tlr: 0.0001  tnm: 0.00  Lm: 6.614 (6.614)  Lt: 5.987 (5.987)  Accm: 3.22 (3.22)  Acct: 4.96 (4.96)  TaskL: 6.6144 (6.6144)  DistillL: 459.1690 (459.1690)  TotalL: 465.7834 (465.7834)  time: 0.8406  data: 0.2470
+[11-02 15:49:47] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [1236/4947]  eta: 0:53:08  tlr: 0.0001  tnm: 0.00  Lm: 6.618 (6.618)  Lt: 6.022 (6.022)  Accm: 3.18 (3.18)  Acct: 4.89 (4.89)  TaskL: 6.6184 (6.6184)  DistillL: 429.7619 (429.7619)  TotalL: 436.3803 (436.3803)  time: 0.8638  data: 0.2387
+[11-02 16:07:31] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [2473/4947]  eta: 0:35:26  tlr: 0.0001  tnm: 0.00  Lm: 6.614 (6.595)  Lt: 5.987 (5.995)  Accm: 3.14 (3.14)  Acct: 4.82 (4.84)  TaskL: 6.6144 (6.5951)  DistillL: 400.3548 (408.9116)  TotalL: 406.9772 (415.5067)  time: 0.8494  data: 0.2421
+[11-02 16:25:09] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [3709/4947]  eta: 0:17:42  tlr: 9.9e-05  tnm: 0.00  Lm: 6.581 (6.572)  Lt: 5.964 (5.976)  Accm: 3.18 (3.20)  Acct: 4.89 (4.93)  TaskL: 6.5815 (6.5722)  DistillL: 383.7829 (387.2525)  TotalL: 390.3684 (393.8247)  time: 0.8446  data: 0.2492
+[11-02 16:42:51] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [4946/4947]  eta: 0:00:00  tlr: 9.8e-05  tnm: 0.00  Lm: 6.549 (6.568)  Lt: 5.944 (5.970)  Accm: 3.21 (3.20)  Acct: 4.96 (4.98)  TaskL: 6.5492 (6.5676)  DistillL: 367.2109 (374.7133)  TotalL: 373.7595 (381.2809)  time: 0.8591  data: 0.2477
+[11-02 16:42:51] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   1/20]   Total time:      1:10:46   (0.858 s / it)
+[11-02 16:42:51] (distill/train_distill.py, line 347)=>      [ep1]  (training )  Lm: 6.576 (6.576), Lt: 5.955 (5.955),  Acc m&t: 3.19 4.96,  Remain: 20:56:26,  Finish: 2025-11-03 13:39
+[11-02 16:42:51] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [   0/4947]  eta: 1:09:57  tlr: 9.8e-05  tnm: 0.00  Lm: 6.522 (6.522)  Lt: 5.834 (5.834)  Accm: 3.40 (3.40)  Acct: 5.46 (5.46)  TaskL: 6.5216 (6.5216)  DistillL: 317.9564 (317.9564)  TotalL: 324.4780 (324.4780)  time: 0.8485  data: 0.2497
+[11-02 17:00:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [1236/4947]  eta: 0:53:13  tlr: 9.7e-05  tnm: 0.00  Lm: 6.547 (6.547)  Lt: 5.910 (5.910)  Accm: 3.25 (3.25)  Acct: 5.01 (5.01)  TaskL: 6.5471 (6.5471)  DistillL: 293.6954 (293.6954)  TotalL: 300.2425 (300.2425)  time: 0.8649  data: 0.2557
+[11-02 17:18:17] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [2473/4947]  eta: 0:35:26  tlr: 9.6e-05  tnm: 0.00  Lm: 6.522 (6.535)  Lt: 5.855 (5.891)  Accm: 3.40 (3.33)  Acct: 5.42 (5.14)  TaskL: 6.5216 (6.5347)  DistillL: 286.1459 (291.1789)  TotalL: 292.6557 (297.7135)  time: 0.8508  data: 0.2548
+[11-02 17:35:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [3709/4947]  eta: 0:17:42  tlr: 9.4e-05  tnm: 0.00  Lm: 6.516 (6.505)  Lt: 5.844 (5.870)  Accm: 3.44 (3.45)  Acct: 5.44 (5.26)  TaskL: 6.5157 (6.5052)  DistillL: 293.3584 (293.5269)  TotalL: 299.8217 (300.0321)  time: 0.8603  data: 0.2371
+[11-02 17:53:36] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [4946/4947]  eta: 0:00:00  tlr: 9.3e-05  tnm: 0.00  Lm: 6.522 (6.515)  Lt: 5.855 (5.886)  Accm: 3.40 (3.38)  Acct: 5.42 (5.15)  TaskL: 6.5216 (6.5150)  DistillL: 286.1459 (287.9315)  TotalL: 292.6557 (294.4464)  time: 0.8691  data: 0.2465
+[11-02 17:53:36] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   2/20]   Total time:      1:10:45   (0.858 s / it)
+
+
+
+
+
+
+
+=======================================================   RESTART [11-02 18:39:24]   =======================================================
+[11-02 18:39:24] (_train/utils/arg_util.py, line 241)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[11-02 18:39:24] (_train/utils/arg_util.py, line 242)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[11-02 18:39:24] (_train/utils/arg_util.py, line 243)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[11-02 18:39:24] (_train/utils/arg_util.py, line 190)=> [蒸馏参数验证] 通过 - 类型:normal, 权重:0.5/0.5
+[11-02 18:39:24] (distill/train_distill.py, line 258)=> [参数验证] 蒸馏参数验证通过
+[11-02 18:39:24] (distill/train_distill.py, line  63)=> global bs=259, local bs=37
+[11-02 18:39:24] (distill/train_distill.py, line  64)=> initial args:\n{
+  data_path           : /home/project/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00010117187500000001
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 259
+  batch_size          : 37
+  glb_batch_size      : 259
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  ckpt_save_interval  : 3
+  cmd                 : --enable_distillation=1 --teacher_model_path=/home/project/daily/AR/model_zoo/var_d16.pth --teacher_depth=16 --distill_type=normal --distill_alpha=0.5 --distill_beta=0.5 --depth=16 --bs=256 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth --data_path=/home/project/ImageNet-1K --local_out_dir_path=/home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  branch              : main
+  commit_id           : 1bf7cb2895b8461062f9dbaf1daffb729258724e
+  commit_msg          : 25.9.25
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  tb_log_dir_path     : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b259ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/log.txt
+  last_ckpt_path      : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  enable_distillation : True
+  teacher_model_path  : /home/project/daily/AR/model_zoo/var_d16.pth
+  teacher_depth       : 16
+  distill_type        : normal
+  distill_alpha       : 0.5
+  distill_beta        : 0.5
+  distill_temperature : 4.0
+  scale_weights_str   : 2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2
+  use_feature_distill : False
+  feature_layers_str  : 4,8,12,15
+  use_attention_distill: False
+  distill_warmup_epochs: 5
+  distill_schedule    : constant
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[11-02 18:39:24] (distill/train_distill.py, line  68)=> [build PT data] ...\n
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f1053975ab0>
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7f1053975ab0>
+[11-02 18:39:26] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[11-02 18:39:26] (distill/train_distill.py, line  91)=> [auto_resume] no ckpt found @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt*.pth
+[11-02 18:39:26] (distill/train_distill.py, line  91)=> [auto_resume quit]
+[11-02 18:39:26] (distill/train_distill.py, line  92)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[11-02 18:39:26] (distill/train_distill.py, line  98)=> [dataloader] gbs=259, lbs=37, iters_train=4947, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[11-02 18:39:26] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[11-02 18:39:26] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[11-02 18:39:27] (distill/train_distill.py, line 132)=> 加载学生模型权重...
+[11-02 18:39:27] (distill/train_distill.py, line 146)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)\n\n
+[11-02 18:39:27] (distill/train_distill.py, line 148)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[11-02 18:39:27] (distill/train_distill.py, line 149)=> [INIT][#para] VAR=231.41\n\n
+[11-02 18:39:27] (distill/train_distill.py, line 154)=> \n============================================================
+[11-02 18:39:27] (distill/train_distill.py, line 155)=> 开始加载教师模型...
+[11-02 18:39:27] (distill/distill_utils.py, line  31)=> [加载教师模型] 路径: /home/project/daily/AR/model_zoo/var_d16.pth
+[11-02 18:39:27] (distill/distill_utils.py, line  32)=> [加载教师模型] 深度: 16
+[11-02 18:39:27] (distill/distill_utils.py, line  39)=> [加载教师模型] 构建模型架构...
+[11-02 18:39:27] (distill/distill_utils.py, line  46)=> [加载教师模型] 临时设置 sparsity=0 (原值=0.4)
+[11-02 18:39:27] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[11-02 18:39:27] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[11-02 18:39:27] (distill/distill_utils.py, line  62)=> [加载教师模型] 恢复 sparsity=0.4
+[11-02 18:39:27] (distill/distill_utils.py, line  65)=> [加载教师模型] 加载权重...
+[11-02 18:39:28] (distill/distill_utils.py, line  79)=> [加载教师模型] 直接加载模型权重
+[11-02 18:39:28] (distill/distill_utils.py, line  89)=> [加载教师模型] 成功加载，参数量: 310.28M
+[11-02 18:39:28] (distill/distill_utils.py, line  90)=> [加载教师模型] 已冻结参数: 310.28M
+[11-02 18:39:28] (distill/train_distill.py, line 158)=> 教师模型加载成功
+[11-02 18:39:28] (distill/train_distill.py, line 163)=> ======== 蒸馏配置摘要 ========
+蒸馏类型: normal
+教师模型: var_d16.pth (深度=16)
+损失权重: 任务=0.50, 蒸馏=0.50
+蒸馏温度: 4.0
+==============================
+[11-02 18:39:28] (distill/train_distill.py, line 170)=> ============================================================\n
+[11-02 18:39:28] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[11-02 18:39:28] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=231405120
+[11-02 18:39:28] (rain/utils/lr_control.py, line 105)=> 
+[11-02 18:39:28] (distill/train_distill.py, line 185)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00010117187500000001, 'weight_decay': 0}\n
+[11-02 18:39:28] (l/distillation_losses.py, line  45)=> [蒸馏损失] 类型=normal, 温度=4.0
+[11-02 18:39:28] (l/distillation_losses.py, line  46)=> [尺度权重] [2.0, 1.8, 1.6, 1.4, 1.2, 1.0, 0.8, 0.6, 0.4, 0.2]
+[11-02 18:39:28] (/distillation_trainer.py, line  65)=> [蒸馏训练器] 教师模型已冻结
+[11-02 18:39:28] (/distillation_trainer.py, line  66)=> [蒸馏训练器] 教师参数: 310.28M (310.28M已冻结)
+[11-02 18:39:28] (distill/distill_utils.py, line 166)=> [兼容性检查] 教师模型参数: 310.28M
+[11-02 18:39:28] (distill/distill_utils.py, line 167)=> [兼容性检查] 学生模型参数: 231.41M
+[11-02 18:39:28] (distill/distill_utils.py, line 168)=> [兼容性检查] 压缩比: 74.58%
+[11-02 18:39:28] (distill/distill_utils.py, line 175)=> [兼容性检查] 词汇表大小: 4096
+[11-02 18:39:28] (distill/distill_utils.py, line 180)=> [兼容性检查] 序列长度: 680
+[11-02 18:39:28] (distill/distill_utils.py, line 185)=> [兼容性检查] patch配置: (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+[11-02 18:39:28] (distill/distill_utils.py, line 187)=> [兼容性检查] 通过
+[11-02 18:39:28] (/distillation_trainer.py, line  73)=> [蒸馏训练器] 初始化完成
+[11-02 18:39:28] (/distillation_trainer.py, line  74)=> [蒸馏训练器] 蒸馏类型: normal
+[11-02 18:39:28] (/distillation_trainer.py, line  75)=> [蒸馏训练器] 损失权重: 任务=0.50, 蒸馏=0.50
+[11-02 18:39:28] (distill/train_distill.py, line 202)=> [训练器] 使用蒸馏训练器 (DistillationVARTrainer)
+[11-02 18:39:28] (distill/train_distill.py, line 203)=> [蒸馏模式] normal 蒸馏，权重 0.5/0.5
+[11-02 18:39:32] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [   0/4947]  eta: 4:51:44  tlr: 5.1e-07  tnm: 0.00  Lm: 9.328 (9.328)  Lt: 8.608 (8.608)  Accm: 0.05 (0.05)  Acct: 0.06 (0.06)  TaskL: 9.3279 (9.3279)  DistillL: 3591.0466 (3591.0466)  TotalL: 3600.3745 (3600.3745)  time: 3.5385  data: 0.2717
+
+
+
+
+
+
+
+=======================================================   RESTART [11-02 19:28:06]   =======================================================
+[11-02 19:28:06] (_train/utils/arg_util.py, line 241)=> [tf32] [precis] torch.get_float32_matmul_precision(): high
+[11-02 19:28:06] (_train/utils/arg_util.py, line 242)=> [tf32] [ conv ] torch.backends.cudnn.allow_tf32: True
+[11-02 19:28:06] (_train/utils/arg_util.py, line 243)=> [tf32] [matmul] torch.backends.cuda.matmul.allow_tf32: True
+[11-02 19:28:06] (_train/utils/arg_util.py, line 190)=> [蒸馏参数验证] 通过 - 类型:normal, 权重:0.5/0.5
+[11-02 19:28:06] (distill/train_distill.py, line 269)=> [参数验证] 蒸馏参数验证通过
+[11-02 19:28:06] (distill/train_distill.py, line  63)=> global bs=259, local bs=37
+[11-02 19:28:06] (distill/train_distill.py, line  64)=> initial args:\n{
+  data_path           : /home/project/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00010117187500000001
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 259
+  batch_size          : 37
+  glb_batch_size      : 259
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  ckpt_save_interval  : 3
+  cmd                 : --enable_distillation=1 --teacher_model_path=/home/project/daily/AR/model_zoo/var_d16.pth --teacher_depth=16 --distill_type=normal --distill_alpha=0.5 --distill_beta=0.5 --depth=16 --bs=256 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth --data_path=/home/project/ImageNet-1K --local_out_dir_path=/home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  branch              : main
+  commit_id           : 1bf7cb2895b8461062f9dbaf1daffb729258724e
+  commit_msg          : 25.9.25
+  acc_mean            : None
+  acc_tail            : None
+  L_mean              : None
+  L_tail              : None
+  vacc_mean           : None
+  vacc_tail           : None
+  vL_mean             : None
+  vL_tail             : None
+  grad_norm           : None
+  cur_lr              : None
+  cur_wd              : None
+  cur_it              : 
+  cur_ep              : 
+  remain_time         : 
+  finish_time         : 
+  local_out_dir_path  : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  tb_log_dir_path     : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b259ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/log.txt
+  last_ckpt_path      : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  enable_distillation : True
+  teacher_model_path  : /home/project/daily/AR/model_zoo/var_d16.pth
+  teacher_depth       : 16
+  distill_type        : normal
+  distill_alpha       : 0.5
+  distill_beta        : 0.5
+  distill_temperature : 4.0
+  scale_weights_str   : 2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2
+  use_feature_distill : False
+  feature_layers_str  : 4,8,12,15
+  use_attention_distill: False
+  distill_warmup_epochs: 5
+  distill_schedule    : constant
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+
+[11-02 19:28:06] (distill/train_distill.py, line  68)=> [build PT data] ...\n
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  34)=> [Dataset] len(train_set)=1281167, len(val_set)=50000, num_classes=1000
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  48)=> Transform [train] = 
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> RandomCrop(size=(256, 256), padding=None)
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7fce0fd79bd0>
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  48)=> Transform [val] = 
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> Resize(size=288, interpolation=lanczos, max_size=None, antialias=True)
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> CenterCrop(size=(256, 256))
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> ToTensor()
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  51)=> <function normalize_01_into_pm1 at 0x7fce0fd79bd0>
+[11-02 19:28:08] (/VAR_train/utils/data.py, line  54)=> ---------------------------
+
+[11-02 19:28:08] (distill/train_distill.py, line  91)=> [auto_resume] no ckpt found @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-best*.pth
+[11-02 19:28:08] (distill/train_distill.py, line  91)=> [auto_resume quit]
+[11-02 19:28:08] (distill/train_distill.py, line  92)=> [dataloader multi processing] ...     [dataloader multi processing](*) finished! (0.00s)
+[11-02 19:28:08] (distill/train_distill.py, line  98)=> [dataloader] gbs=259, lbs=37, iters_train=4947, types(tr, va)=('DatasetFolder', 'DatasetFolder')
+[11-02 19:28:08] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[11-02 19:28:08] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[11-02 19:28:08] (distill/train_distill.py, line 123)=> [学生模型] 首次训练，加载初始权重: /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+[11-02 19:28:09] (distill/train_distill.py, line 135)=> [学生模型] 加载原始模型权重...
+[11-02 19:28:09] (distill/train_distill.py, line 153)=> [INIT] VAR model = VAR(
+  drop_path_rate=0.0666667
+  (word_embed): Linear(in_features=32, out_features=1024, bias=True)
+  (class_emb): Embedding(1001, 1024)
+  (lvl_embed): Embedding(10, 1024)
+  (shared_ada_lin): Identity()
+  (blocks): ModuleList(
+    (0): AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): Identity()
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+    (1-15): 15 x AdaLNSelfAttn(
+      shared_aln=False
+      (drop_path): DropPath((drop_prob=...))
+      (attn): SelfAttention(
+        using_flash=False, using_xform=False, attn_l2_norm=True
+        (mat_qkv): Linear(in_features=1024, out_features=1920, bias=False)
+        (proj): Linear(in_features=640, out_features=1024, bias=True)
+        (proj_drop): Identity()
+      )
+      (ffn): FFN(
+        fused_mlp_func=False
+        (fc1): Linear(in_features=1024, out_features=2458, bias=True)
+        (act): GELU(approximate='tanh')
+        (fc2): Linear(in_features=2458, out_features=1024, bias=True)
+        (drop): Identity()
+      )
+      (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+      (ada_lin): Sequential(
+        (0): SiLU()
+        (1): Linear(in_features=1024, out_features=6144, bias=True)
+      )
+    )
+  )
+  (head_nm): AdaLNBeforeHead(
+    (ln_wo_grad): LayerNorm((1024,), eps=1e-06, elementwise_affine=False)
+    (ada_lin): Sequential(
+      (0): SiLU()
+      (1): Linear(in_features=1024, out_features=2048, bias=True)
+    )
+  )
+  (head): Linear(in_features=1024, out_features=4096, bias=True)
+)\n\n
+[11-02 19:28:09] (distill/train_distill.py, line 155)=> [INIT][#para] VAE=108.95, VAE.enc=44.11, VAE.dec=64.65, VAE.quant=0.17
+[11-02 19:28:09] (distill/train_distill.py, line 156)=> [INIT][#para] VAR=231.41\n\n
+[11-02 19:28:09] (distill/train_distill.py, line 161)=> \n============================================================
+[11-02 19:28:09] (distill/train_distill.py, line 162)=> 开始加载教师模型...
+[11-02 19:28:09] (distill/distill_utils.py, line  31)=> [加载教师模型] 路径: /home/project/daily/AR/model_zoo/var_d16.pth
+[11-02 19:28:09] (distill/distill_utils.py, line  32)=> [加载教师模型] 深度: 16
+[11-02 19:28:09] (distill/distill_utils.py, line  39)=> [加载教师模型] 构建模型架构...
+[11-02 19:28:09] (distill/distill_utils.py, line  46)=> [加载教师模型] 临时设置 sparsity=0 (原值=0.4)
+[11-02 19:28:09] (/VAR_train/models/var.py, line 102)=> 
+[constructor]  ==== flash_if_available=True (0/16), fused_if_available=True (fusing_add_ln=0/16, fusing_mlp=0/16) ==== 
+    [VAR config ] embed_dim=1024, num_heads=16, depth=16, mlp_ratio=4.0
+    [drop ratios ] drop_rate=0.0, attn_drop_rate=0.0, drop_path_rate=0.0666667 (tensor([0.0000, 0.0044, 0.0089, 0.0133, 0.0178, 0.0222, 0.0267, 0.0311, 0.0356,
+        0.0400, 0.0444, 0.0489, 0.0533, 0.0578, 0.0622, 0.0667]))
+
+[11-02 19:28:10] (/VAR_train/models/var.py, line 259)=> [init_weights] VAR with init_std=0.0180422
+[11-02 19:28:10] (distill/distill_utils.py, line  62)=> [加载教师模型] 恢复 sparsity=0.4
+[11-02 19:28:10] (distill/distill_utils.py, line  65)=> [加载教师模型] 加载权重...
+[11-02 19:28:10] (distill/distill_utils.py, line  79)=> [加载教师模型] 直接加载模型权重
+[11-02 19:28:10] (distill/distill_utils.py, line  89)=> [加载教师模型] 成功加载，参数量: 310.28M
+[11-02 19:28:10] (distill/distill_utils.py, line  90)=> [加载教师模型] 已冻结参数: 310.28M
+[11-02 19:28:10] (distill/train_distill.py, line 165)=> 教师模型加载成功
+[11-02 19:28:10] (distill/train_distill.py, line 170)=> ======== 蒸馏配置摘要 ========
+蒸馏类型: normal
+教师模型: var_d16.pth (深度=16)
+损失权重: 任务=0.50, 蒸馏=0.50
+蒸馏温度: 4.0
+==============================
+[11-02 19:28:10] (distill/train_distill.py, line 177)=> ============================================================\n
+[11-02 19:28:10] (rain/utils/lr_control.py, line  99)=> [get_param_groups] param_groups = 
+{ 'D': { 'lr_sc': 1.0,
+         'params': "('word_embed.weight, class_emb.weight, blocks.0.attn.mat_qkv.weight, blocks.0.attn.proj.weight, blocks.0.ffn.fc1.weight, blocks.0.ffn.fc2.weight, blocks.0.ada_lin.1.weight, '\n"
+                   " 'blocks.1.attn.mat_qkv.weight, blocks.1.attn.proj.weight, blocks.1.ffn.fc1.weight, blocks.1.ffn.fc2.weight, blocks.1.ada_lin.1.weight, blocks.2.attn.mat_qkv.weight, blocks.2.attn.proj.weight, '\n"
+                   " 'blocks.2.ffn.fc1.weight, blocks.2.ffn.fc2.weight, blocks.2.ada_lin.1.weight, blocks.3.attn.mat_qkv.weight, blocks.3.attn.proj.weight, blocks.3.ffn.fc1.weight, blocks.3.ffn.fc2.weight, '\n"
+                   " 'blocks.3.ada_lin.1.weight, blocks.4.attn.mat_qkv.weight, blocks.4.attn.proj.weight, blocks.4.ffn.fc1.weight, blocks.4.ffn.fc2.weight, blocks.4.ada_lin.1.weight, blocks.5.attn.mat_qkv.weight, '\n"
+                   " 'blocks.5.attn.proj.weight, blocks.5.ffn.fc1.weight, blocks.5.ffn.fc2.weight, blocks.5.ada_lin.1.weight, blocks.6.attn.mat_qkv.weight, blocks.6.attn.proj.weight, blocks.6.ffn.fc1.weight, '\n"
+                   " 'blocks.6.ffn.fc2.weight, blocks.6.ada_lin.1.weight, blocks.7.attn.mat_qkv.weight, blocks.7.attn.proj.weight, blocks.7.ffn.fc1.weight, blocks.7.ffn.fc2.weight, blocks.7.ada_lin.1.weight, '\n"
+                   " 'blocks.8.attn.mat_qkv.weight, blocks.8.attn.proj.weight, blocks.8.ffn.fc1.weight, blocks.8.ffn.fc2.weight, blocks.8.ada_lin.1.weight, blocks.9.attn.mat_qkv.weight, blocks.9.attn.proj.weight, '\n"
+                   " 'blocks.9.ffn.fc1.weight, blocks.9.ffn.fc2.weight, blocks.9.ada_lin.1.weight, blocks.10.attn.mat_qkv.weight, blocks.10.attn.proj.weight, blocks.10.ffn.fc1.weight, blocks.10.ffn.fc2.weight, '\n"
+                   " 'blocks.10.ada_lin.1.weight, blocks.11.attn.mat_qkv.weight, blocks.11.attn.proj.weight, blocks.11.ffn.fc1.weight, blocks.11.ffn.fc2.weight, blocks.11.ada_lin.1.weight, '\n"
+                   " 'blocks.12.attn.mat_qkv.weight, blocks.12.attn.proj.weight, blocks.12.ffn.fc1.weight, blocks.12.ffn.fc2.weight, blocks.12.ada_lin.1.weight, blocks.13.attn.mat_qkv.weight, '\n"
+                   " 'blocks.13.attn.proj.weight, blocks.13.ffn.fc1.weight, blocks.13.ffn.fc2.weight, blocks.13.ada_lin.1.weight, blocks.14.attn.mat_qkv.weight, blocks.14.attn.proj.weight, blocks.14.ffn.fc1.weight, '\n"
+                   " 'blocks.14.ffn.fc2.weight, blocks.14.ada_lin.1.weight, blocks.15.attn.mat_qkv.weight, blocks.15.attn.proj.weight, blocks.15.ffn.fc1.weight, blocks.15.ffn.fc2.weight, blocks.15.ada_lin.1.weight, '\n"
+                   " 'head_nm.ada_lin.1.weight, head.weight')",
+         'wd_sc': 1.0},
+  'ND': { 'lr_sc': 1.0,
+          'params': "('pos_start, pos_1LC, word_embed.bias, lvl_embed.weight, blocks.0.attn.scale_mul_1H11, blocks.0.attn.q_bias, blocks.0.attn.v_bias, blocks.0.attn.proj.bias, blocks.0.ffn.fc1.bias, '\n"
+                    " 'blocks.0.ffn.fc2.bias, blocks.0.ada_lin.1.bias, blocks.1.attn.scale_mul_1H11, blocks.1.attn.q_bias, blocks.1.attn.v_bias, blocks.1.attn.proj.bias, blocks.1.ffn.fc1.bias, blocks.1.ffn.fc2.bias, '\n"
+                    " 'blocks.1.ada_lin.1.bias, blocks.2.attn.scale_mul_1H11, blocks.2.attn.q_bias, blocks.2.attn.v_bias, blocks.2.attn.proj.bias, blocks.2.ffn.fc1.bias, blocks.2.ffn.fc2.bias, blocks.2.ada_lin.1.bias, '\n"
+                    " 'blocks.3.attn.scale_mul_1H11, blocks.3.attn.q_bias, blocks.3.attn.v_bias, blocks.3.attn.proj.bias, blocks.3.ffn.fc1.bias, blocks.3.ffn.fc2.bias, blocks.3.ada_lin.1.bias, '\n"
+                    " 'blocks.4.attn.scale_mul_1H11, blocks.4.attn.q_bias, blocks.4.attn.v_bias, blocks.4.attn.proj.bias, blocks.4.ffn.fc1.bias, blocks.4.ffn.fc2.bias, blocks.4.ada_lin.1.bias, '\n"
+                    " 'blocks.5.attn.scale_mul_1H11, blocks.5.attn.q_bias, blocks.5.attn.v_bias, blocks.5.attn.proj.bias, blocks.5.ffn.fc1.bias, blocks.5.ffn.fc2.bias, blocks.5.ada_lin.1.bias, '\n"
+                    " 'blocks.6.attn.scale_mul_1H11, blocks.6.attn.q_bias, blocks.6.attn.v_bias, blocks.6.attn.proj.bias, blocks.6.ffn.fc1.bias, blocks.6.ffn.fc2.bias, blocks.6.ada_lin.1.bias, '\n"
+                    " 'blocks.7.attn.scale_mul_1H11, blocks.7.attn.q_bias, blocks.7.attn.v_bias, blocks.7.attn.proj.bias, blocks.7.ffn.fc1.bias, blocks.7.ffn.fc2.bias, blocks.7.ada_lin.1.bias, '\n"
+                    " 'blocks.8.attn.scale_mul_1H11, blocks.8.attn.q_bias, blocks.8.attn.v_bias, blocks.8.attn.proj.bias, blocks.8.ffn.fc1.bias, blocks.8.ffn.fc2.bias, blocks.8.ada_lin.1.bias, '\n"
+                    " 'blocks.9.attn.scale_mul_1H11, blocks.9.attn.q_bias, blocks.9.attn.v_bias, blocks.9.attn.proj.bias, blocks.9.ffn.fc1.bias, blocks.9.ffn.fc2.bias, blocks.9.ada_lin.1.bias, '\n"
+                    " 'blocks.10.attn.scale_mul_1H11, blocks.10.attn.q_bias, blocks.10.attn.v_bias, blocks.10.attn.proj.bias, blocks.10.ffn.fc1.bias, blocks.10.ffn.fc2.bias, blocks.10.ada_lin.1.bias, '\n"
+                    " 'blocks.11.attn.scale_mul_1H11, blocks.11.attn.q_bias, blocks.11.attn.v_bias, blocks.11.attn.proj.bias, blocks.11.ffn.fc1.bias, blocks.11.ffn.fc2.bias, blocks.11.ada_lin.1.bias, '\n"
+                    " 'blocks.12.attn.scale_mul_1H11, blocks.12.attn.q_bias, blocks.12.attn.v_bias, blocks.12.attn.proj.bias, blocks.12.ffn.fc1.bias, blocks.12.ffn.fc2.bias, blocks.12.ada_lin.1.bias, '\n"
+                    " 'blocks.13.attn.scale_mul_1H11, blocks.13.attn.q_bias, blocks.13.attn.v_bias, blocks.13.attn.proj.bias, blocks.13.ffn.fc1.bias, blocks.13.ffn.fc2.bias, blocks.13.ada_lin.1.bias, '\n"
+                    " 'blocks.14.attn.scale_mul_1H11, blocks.14.attn.q_bias, blocks.14.attn.v_bias, blocks.14.attn.proj.bias, blocks.14.ffn.fc1.bias, blocks.14.ffn.fc2.bias, blocks.14.ada_lin.1.bias, '\n"
+                    " 'blocks.15.attn.scale_mul_1H11, blocks.15.attn.q_bias, blocks.15.attn.v_bias, blocks.15.attn.proj.bias, blocks.15.ffn.fc1.bias, blocks.15.ffn.fc2.bias, blocks.15.ada_lin.1.bias, '\n"
+                    " 'head_nm.ada_lin.1.bias, head.bias')",
+          'wd_sc': 0.0}}
+
+[11-02 19:28:10] (rain/utils/lr_control.py, line 104)=> [get_param_groups][rank0] type(model).__name__='VAR' count=202, numel=231405120
+[11-02 19:28:10] (rain/utils/lr_control.py, line 105)=> 
+[11-02 19:28:10] (distill/train_distill.py, line 192)=> [INIT] optim=functools.partial(<class 'torch.optim.adamw.AdamW'>, betas=(0.9, 0.95), fused=True), opt_kw={'lr': 0.00010117187500000001, 'weight_decay': 0}\n
+[11-02 19:28:10] (l/distillation_losses.py, line  45)=> [蒸馏损失] 类型=normal, 温度=4.0
+[11-02 19:28:10] (l/distillation_losses.py, line  46)=> [尺度权重] [2.0, 1.8, 1.6, 1.4, 1.2, 1.0, 0.8, 0.6, 0.4, 0.2]
+[11-02 19:28:10] (/distillation_trainer.py, line  65)=> [蒸馏训练器] 教师模型已冻结
+[11-02 19:28:10] (/distillation_trainer.py, line  66)=> [蒸馏训练器] 教师参数: 310.28M (310.28M已冻结)
+[11-02 19:28:10] (distill/distill_utils.py, line 166)=> [兼容性检查] 教师模型参数: 310.28M
+[11-02 19:28:10] (distill/distill_utils.py, line 167)=> [兼容性检查] 学生模型参数: 231.41M
+[11-02 19:28:10] (distill/distill_utils.py, line 168)=> [兼容性检查] 压缩比: 74.58%
+[11-02 19:28:10] (distill/distill_utils.py, line 175)=> [兼容性检查] 词汇表大小: 4096
+[11-02 19:28:10] (distill/distill_utils.py, line 180)=> [兼容性检查] 序列长度: 680
+[11-02 19:28:10] (distill/distill_utils.py, line 185)=> [兼容性检查] patch配置: (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+[11-02 19:28:10] (distill/distill_utils.py, line 187)=> [兼容性检查] 通过
+[11-02 19:28:10] (/distillation_trainer.py, line  73)=> [蒸馏训练器] 初始化完成
+[11-02 19:28:10] (/distillation_trainer.py, line  74)=> [蒸馏训练器] 蒸馏类型: normal
+[11-02 19:28:10] (/distillation_trainer.py, line  75)=> [蒸馏训练器] 损失权重: 任务=0.50, 蒸馏=0.50
+[11-02 19:28:10] (distill/train_distill.py, line 209)=> [训练器] 使用蒸馏训练器 (DistillationVARTrainer)
+[11-02 19:28:10] (distill/train_distill.py, line 210)=> [蒸馏模式] normal 蒸馏，权重 0.5/0.5
+[11-02 19:28:10] (distill/train_distill.py, line 224)=> [训练器] 使用初始状态，从 epoch 0 开始
+[11-02 19:28:14] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [   0/4947]  eta: 4:51:10  tlr: 5.1e-07  tnm: 0.00  Lm: 9.391 (9.391)  Lt: 8.621 (8.621)  Accm: 0.06 (0.06)  Acct: 0.02 (0.02)  TaskL: 9.3906 (9.3906)  DistillL: 3634.2036 (3634.2036)  TotalL: 3643.5942 (3643.5942)  time: 3.5315  data: 0.2724
+[11-02 19:46:27] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [1236/4947]  eta: 0:54:49  tlr: 6.3e-05  tnm: 0.00  Lm: 8.373 (8.373)  Lt: 7.923 (7.923)  Accm: 0.63 (0.63)  Acct: 0.56 (0.56)  TaskL: 8.3734 (8.3734)  DistillL: 2439.0920 (2439.0920)  TotalL: 2447.4654 (2447.4654)  time: 0.8814  data: 0.2857
+[11-02 20:04:12] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [2473/4947]  eta: 0:36:01  tlr: 0.0001  tnm: 0.00  Lm: 7.356 (7.871)  Lt: 7.225 (7.465)  Accm: 1.20 (1.25)  Acct: 1.11 (1.47)  TaskL: 7.3561 (7.8714)  DistillL: 1243.9805 (1888.4210)  TotalL: 1251.3366 (1896.2924)  time: 0.8804  data: 0.2500
+[11-02 20:21:55] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [3709/4947]  eta: 0:17:55  tlr: 0.0001  tnm: 0.00  Lm: 7.130 (7.630)  Lt: 6.887 (7.187)  Accm: 1.67 (1.47)  Acct: 2.20 (2.00)  TaskL: 7.1302 (7.6296)  DistillL: 1015.5297 (1541.2832)  TotalL: 1022.6414 (1548.9128)  time: 0.8574  data: 0.2558
+[11-02 20:39:37] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   0/20]  [4946/4947]  eta: 0:00:00  tlr: 0.0001  tnm: 0.00  Lm: 6.904 (7.445)  Lt: 6.549 (6.977)  Accm: 2.13 (1.75)  Acct: 3.28 (2.50)  TaskL: 6.9042 (7.4453)  DistillL: 787.0789 (1314.7114)  TotalL: 793.9463 (1322.1567)  time: 0.8641  data: 0.2557
+[11-02 20:39:37] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   0/20]   Total time:      1:11:26   (0.866 s / it)
+[11-02 20:39:37] (distill/train_distill.py, line 361)=>      [ep0]  (training )  Lm: 7.386 (7.386), Lt: 6.914 (6.914),  Acc m&t: 1.80 2.54,  Remain: 22:14:49,  Finish: 2025-11-03 18:54
+[11-02 20:39:38] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [   0/4947]  eta: 1:09:30  tlr: 0.0001  tnm: 0.00  Lm: 6.631 (6.631)  Lt: 6.041 (6.041)  Accm: 3.22 (3.22)  Acct: 4.85 (4.85)  TaskL: 6.6312 (6.6312)  DistillL: 452.2152 (452.2152)  TotalL: 458.8463 (458.8463)  time: 0.8430  data: 0.2526
+[11-02 20:57:21] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [1236/4947]  eta: 0:53:13  tlr: 0.0001  tnm: 0.00  Lm: 6.620 (6.620)  Lt: 6.026 (6.026)  Accm: 3.17 (3.17)  Acct: 4.68 (4.68)  TaskL: 6.6201 (6.6201)  DistillL: 428.8725 (428.8725)  TotalL: 435.4926 (435.4926)  time: 0.8652  data: 0.2417
+[11-02 21:15:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [2473/4947]  eta: 0:35:28  tlr: 0.0001  tnm: 0.00  Lm: 6.609 (6.597)  Lt: 6.012 (5.992)  Accm: 3.11 (3.12)  Acct: 4.77 (4.71)  TaskL: 6.6091 (6.5970)  DistillL: 405.5297 (403.5292)  TotalL: 412.1389 (410.1262)  time: 0.8510  data: 0.2438
+[11-02 21:32:43] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [3709/4947]  eta: 0:17:43  tlr: 9.9e-05  tnm: 0.00  Lm: 6.580 (6.564)  Lt: 5.968 (5.964)  Accm: 3.17 (3.23)  Acct: 4.81 (4.90)  TaskL: 6.5799 (6.5637)  DistillL: 379.1862 (387.9258)  TotalL: 385.7661 (394.4895)  time: 0.8446  data: 0.2508
+[11-02 21:50:23] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   1/20]  [4946/4947]  eta: 0:00:00  tlr: 9.8e-05  tnm: 0.00  Lm: 6.551 (6.558)  Lt: 5.924 (5.954)  Accm: 3.22 (3.26)  Acct: 4.85 (4.93)  TaskL: 6.5506 (6.5580)  DistillL: 352.8427 (376.0297)  TotalL: 359.3934 (382.5877)  time: 0.8597  data: 0.2498
+[11-02 21:50:23] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   1/20]   Total time:      1:10:46   (0.858 s / it)
+[11-02 21:50:23] (distill/train_distill.py, line 361)=>      [ep1]  (training )  Lm: 6.571 (6.571), Lt: 5.942 (5.942),  Acc m&t: 3.24 5.00,  Remain: 20:57:41,  Finish: 2025-11-03 18:48
+[11-02 21:50:24] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [   0/4947]  eta: 1:10:14  tlr: 9.8e-05  tnm: 0.00  Lm: 6.495 (6.495)  Lt: 5.783 (5.783)  Accm: 3.48 (3.48)  Acct: 5.49 (5.49)  TaskL: 6.4951 (6.4951)  DistillL: 308.7675 (308.7675)  TotalL: 315.2626 (315.2626)  time: 0.8520  data: 0.2513
+[11-02 22:08:08] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [1236/4947]  eta: 0:53:12  tlr: 9.7e-05  tnm: 0.00  Lm: 6.533 (6.533)  Lt: 5.897 (5.897)  Accm: 3.31 (3.31)  Acct: 5.14 (5.14)  TaskL: 6.5325 (6.5325)  DistillL: 295.5358 (295.5358)  TotalL: 302.0683 (302.0683)  time: 0.8645  data: 0.2593
+[11-02 22:25:49] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [2473/4947]  eta: 0:35:25  tlr: 9.6e-05  tnm: 0.00  Lm: 6.495 (6.517)  Lt: 5.835 (5.877)  Accm: 3.48 (3.47)  Acct: 5.49 (5.39)  TaskL: 6.4951 (6.5169)  DistillL: 282.3040 (290.4201)  TotalL: 288.8741 (296.9370)  time: 0.8501  data: 0.2548
+[11-02 22:43:27] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [3709/4947]  eta: 0:17:42  tlr: 9.4e-05  tnm: 0.00  Lm: 6.490 (6.487)  Lt: 5.830 (5.864)  Accm: 3.64 (3.58)  Acct: 5.57 (5.46)  TaskL: 6.4903 (6.4873)  DistillL: 295.5358 (297.3254)  TotalL: 302.0683 (303.8127)  time: 0.8605  data: 0.2384
+[11-02 23:01:08] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   2/20]  [4946/4947]  eta: 0:00:00  tlr: 9.3e-05  tnm: 0.00  Lm: 6.495 (6.497)  Lt: 5.835 (5.875)  Accm: 3.48 (3.54)  Acct: 5.49 (5.41)  TaskL: 6.4951 (6.4968)  DistillL: 282.3040 (293.8112)  TotalL: 288.8741 (300.3081)  time: 0.8700  data: 0.2499
+[11-02 23:01:08] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   2/20]   Total time:      1:10:44   (0.858 s / it)
+[11-02 23:03:38] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 214.6108, Logits相似度: 0.1955
+[11-02 23:03:38] (distill/train_distill.py, line 332)=>  [*] [ep2]  (val 50000)  Lm: 6.5117, Lt: 5.8420, Acc m&t: 3.39 5.34,  Val cost: 150.02s
+[11-02 23:03:38] (distill/train_distill.py, line 340)=> [saving ckpt] ep3 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep003.pth (best)
+[11-02 23:03:43] (distill/train_distill.py, line 361)=>      [ep2]  (training )  Lm: 6.512 (6.512), Lt: 5.842 (5.842),  Acc m&t: 3.39 5.34,  Remain: 19:49:25,  Finish: 2025-11-03 18:50
+[11-02 23:03:44] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [   0/4947]  eta: 1:14:04  tlr: 9.3e-05  tnm: 0.00  Lm: 6.532 (6.532)  Lt: 5.863 (5.863)  Accm: 3.11 (3.11)  Acct: 5.25 (5.25)  TaskL: 6.5324 (6.5324)  DistillL: 256.7407 (256.7407)  TotalL: 263.2730 (263.2730)  time: 0.8985  data: 0.2587
+[11-02 23:21:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [1236/4947]  eta: 0:53:12  tlr: 9.2e-05  tnm: 0.00  Lm: 6.481 (6.481)  Lt: 5.850 (5.850)  Accm: 3.48 (3.48)  Acct: 5.38 (5.38)  TaskL: 6.4805 (6.4805)  DistillL: 281.9327 (281.9327)  TotalL: 288.4133 (288.4133)  time: 0.8793  data: 0.2439
+[11-02 23:39:06] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [2473/4947]  eta: 0:35:22  tlr: 9.1e-05  tnm: 0.00  Lm: 6.500 (6.487)  Lt: 5.837 (5.825)  Accm: 3.55 (3.50)  Acct: 5.51 (5.59)  TaskL: 6.4996 (6.4869)  DistillL: 266.2198 (276.6951)  TotalL: 272.7194 (283.1820)  time: 0.8660  data: 0.2494
+[11-02 23:56:47] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [3709/4947]  eta: 0:17:42  tlr: 9e-05  tnm: 0.00  Lm: 6.516 (6.507)  Lt: 5.846 (5.832)  Accm: 3.33 (3.40)  Acct: 5.40 (5.51)  TaskL: 6.5160 (6.5072)  DistillL: 261.4802 (267.3980)  TotalL: 267.9962 (273.9052)  time: 0.8729  data: 0.2592
+[11-03 00:14:29] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   3/20]  [4946/4947]  eta: 0:00:00  tlr: 8.8e-05  tnm: 0.00  Lm: 6.506 (6.507)  Lt: 5.837 (5.819)  Accm: 3.43 (3.41)  Acct: 5.51 (5.56)  TaskL: 6.5062 (6.5070)  DistillL: 257.8505 (265.4885)  TotalL: 264.3567 (271.9955)  time: 0.8630  data: 0.2574
+[11-03 00:14:29] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   3/20]   Total time:      1:10:45   (0.858 s / it)
+[11-03 00:14:29] (distill/train_distill.py, line 361)=>      [ep3]  (training )  Lm: 6.495 (6.495), Lt: 5.823 (5.823),  Acc m&t: 3.44 5.41,  Remain: 18:36:01,  Finish: 2025-11-03 18:50
+[11-03 00:14:30] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [   0/4947]  eta: 1:14:13  tlr: 8.8e-05  tnm: 0.00  Lm: 6.455 (6.455)  Lt: 5.788 (5.788)  Accm: 3.46 (3.46)  Acct: 5.65 (5.65)  TaskL: 6.4548 (6.4548)  DistillL: 247.8365 (247.8365)  TotalL: 254.2914 (254.2914)  time: 0.9003  data: 0.3421
+[11-03 00:32:09] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [1236/4947]  eta: 0:52:59  tlr: 8.7e-05  tnm: 0.00  Lm: 6.459 (6.459)  Lt: 5.746 (5.746)  Accm: 3.52 (3.52)  Acct: 5.71 (5.71)  TaskL: 6.4593 (6.4593)  DistillL: 256.3512 (256.3512)  TotalL: 262.8105 (262.8105)  time: 0.8643  data: 0.2507
+[11-03 00:49:47] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [2473/4947]  eta: 0:35:17  tlr: 8.6e-05  tnm: 0.00  Lm: 6.455 (6.439)  Lt: 5.740 (5.744)  Accm: 3.59 (3.65)  Acct: 5.76 (5.79)  TaskL: 6.4548 (6.4387)  DistillL: 247.8365 (252.2832)  TotalL: 254.2914 (258.7219)  time: 0.8560  data: 0.2392
+[11-03 01:07:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [3709/4947]  eta: 0:17:39  tlr: 8.5e-05  tnm: 0.00  Lm: 6.459 (6.456)  Lt: 5.752 (5.749)  Accm: 3.52 (3.60)  Acct: 5.71 (5.74)  TaskL: 6.4593 (6.4557)  DistillL: 245.9918 (249.8917)  TotalL: 252.4180 (256.3474)  time: 0.8735  data: 0.2490
+[11-03 01:25:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   4/20]  [4946/4947]  eta: 0:00:00  tlr: 8.3e-05  tnm: 0.00  Lm: 6.464 (6.469)  Lt: 5.764 (5.767)  Accm: 3.46 (3.56)  Acct: 5.65 (5.67)  TaskL: 6.4638 (6.4690)  DistillL: 244.1471 (245.5098)  TotalL: 250.5446 (251.9789)  time: 0.8583  data: 0.2464
+[11-03 01:25:05] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   4/20]   Total time:      1:10:36   (0.856 s / it)
+[11-03 01:25:05] (distill/train_distill.py, line 361)=>      [ep4]  (training )  Lm: 6.462 (6.462), Lt: 5.774 (5.774),  Acc m&t: 3.58 5.68,  Remain: 17:36:32,  Finish: 2025-11-03 19:01
+[11-03 01:25:06] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [   0/4947]  eta: 1:15:49  tlr: 8.3e-05  tnm: 0.00  Lm: 6.507 (6.507)  Lt: 5.841 (5.841)  Accm: 3.06 (3.06)  Acct: 4.89 (4.89)  TaskL: 6.5074 (6.5074)  DistillL: 233.4824 (233.4824)  TotalL: 239.9898 (239.9898)  time: 0.9196  data: 0.3640
+[11-03 01:42:46] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [1236/4947]  eta: 0:53:03  tlr: 8.2e-05  tnm: 0.00  Lm: 6.497 (6.497)  Lt: 5.813 (5.813)  Accm: 3.27 (3.27)  Acct: 5.30 (5.30)  TaskL: 6.4969 (6.4969)  DistillL: 233.7436 (233.7436)  TotalL: 240.2404 (240.2404)  time: 0.8552  data: 0.2416
+[11-03 02:00:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [2473/4947]  eta: 0:35:20  tlr: 8.1e-05  tnm: 0.00  Lm: 6.507 (6.506)  Lt: 5.785 (5.789)  Accm: 3.13 (3.23)  Acct: 5.42 (5.34)  TaskL: 6.5074 (6.5059)  DistillL: 233.4824 (225.5345)  TotalL: 239.9898 (232.0403)  time: 0.8512  data: 0.2392
+[11-03 02:18:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [3709/4947]  eta: 0:17:40  tlr: 8e-05  tnm: 0.00  Lm: 6.497 (6.486)  Lt: 5.763 (5.772)  Accm: 3.31 (3.30)  Acct: 5.46 (5.38)  TaskL: 6.4969 (6.4862)  DistillL: 230.2925 (225.9265)  TotalL: 236.7599 (232.4127)  time: 0.8566  data: 0.2454
+[11-03 02:35:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   5/20]  [4946/4947]  eta: 0:00:00  tlr: 7.9e-05  tnm: 0.00  Lm: 6.486 (6.469)  Lt: 5.741 (5.751)  Accm: 3.49 (3.43)  Acct: 5.51 (5.61)  TaskL: 6.4863 (6.4686)  DistillL: 227.1026 (225.7350)  TotalL: 233.5299 (232.2036)  time: 0.8621  data: 0.2466
+[11-03 02:35:42] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   5/20]   Total time:      1:10:37   (0.857 s / it)
+[11-03 02:38:08] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 180.4120, Logits相似度: 0.1957
+[11-03 02:38:08] (distill/train_distill.py, line 332)=>  [*] [ep5]  (val 50000)  Lm: 6.4745, Lt: 5.7742, Acc m&t: 3.49 5.58,  Val cost: 145.29s
+[11-03 02:38:08] (distill/train_distill.py, line 340)=> [saving ckpt] ep6 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep006.pth (best)
+[11-03 02:38:15] (distill/train_distill.py, line 361)=>      [ep5]  (training )  Lm: 6.462 (6.475), Lt: 5.774 (5.774),  Acc m&t: 3.58 5.68,  Remain: 16:33:24,  Finish: 2025-11-03 19:09
+[11-03 02:38:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [   0/4947]  eta: 1:08:38  tlr: 7.9e-05  tnm: 0.00  Lm: 6.449 (6.449)  Lt: 5.760 (5.760)  Accm: 3.84 (3.84)  Acct: 5.89 (5.89)  TaskL: 6.4492 (6.4492)  DistillL: 252.7564 (252.7564)  TotalL: 259.2057 (259.2057)  time: 0.8326  data: 0.2487
+[11-03 02:55:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [1236/4947]  eta: 0:52:56  tlr: 7.7e-05  tnm: 0.00  Lm: 6.479 (6.479)  Lt: 5.798 (5.798)  Accm: 3.60 (3.60)  Acct: 5.72 (5.72)  TaskL: 6.4793 (6.4793)  DistillL: 228.5746 (228.5746)  TotalL: 235.0539 (235.0539)  time: 0.8548  data: 0.2509
+[11-03 03:13:36] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [2473/4947]  eta: 0:35:20  tlr: 7.6e-05  tnm: 0.00  Lm: 6.509 (6.490)  Lt: 5.785 (5.794)  Accm: 3.36 (3.51)  Acct: 5.66 (5.70)  TaskL: 6.5094 (6.4896)  DistillL: 227.3181 (228.1558)  TotalL: 233.8283 (234.6454)  time: 0.8739  data: 0.2539
+[11-03 03:31:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [3709/4947]  eta: 0:17:41  tlr: 7.5e-05  tnm: 0.00  Lm: 6.504 (6.492)  Lt: 5.773 (5.782)  Accm: 3.43 (3.51)  Acct: 5.69 (5.70)  TaskL: 6.5041 (6.4919)  DistillL: 219.3827 (223.9787)  TotalL: 225.8872 (230.4706)  time: 0.8497  data: 0.2422
+[11-03 03:48:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   6/20]  [4946/4947]  eta: 0:00:00  tlr: 7.4e-05  tnm: 0.00  Lm: 6.500 (6.494)  Lt: 5.781 (5.782)  Accm: 3.41 (3.49)  Acct: 5.69 (5.70)  TaskL: 6.5001 (6.4935)  DistillL: 211.4474 (219.9143)  TotalL: 217.9461 (226.4078)  time: 0.8607  data: 0.2432
+[11-03 03:48:57] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   6/20]   Total time:      1:10:41   (0.857 s / it)
+[11-03 03:48:57] (distill/train_distill.py, line 361)=>      [ep6]  (training )  Lm: 6.461 (6.461), Lt: 5.763 (5.763),  Acc m&t: 3.58 5.72,  Remain: 15:22:21,  Finish: 2025-11-03 19:11
+[11-03 03:48:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [   0/4947]  eta: 1:08:18  tlr: 7.4e-05  tnm: 0.00  Lm: 6.502 (6.502)  Lt: 5.887 (5.887)  Accm: 3.35 (3.35)  Acct: 4.69 (4.69)  TaskL: 6.5024 (6.5024)  DistillL: 198.6389 (198.6389)  TotalL: 205.1414 (205.1414)  time: 0.8286  data: 0.2502
+[11-03 04:06:37] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [1236/4947]  eta: 0:52:58  tlr: 7.2e-05  tnm: 0.00  Lm: 6.515 (6.515)  Lt: 5.839 (5.839)  Accm: 3.42 (3.42)  Acct: 5.17 (5.17)  TaskL: 6.5146 (6.5146)  DistillL: 206.0976 (206.0976)  TotalL: 212.6122 (212.6122)  time: 0.8490  data: 0.2426
+[11-03 04:24:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [2473/4947]  eta: 0:35:18  tlr: 7.1e-05  tnm: 0.00  Lm: 6.502 (6.488)  Lt: 5.791 (5.782)  Accm: 3.48 (3.47)  Acct: 5.65 (5.43)  TaskL: 6.5024 (6.4879)  DistillL: 213.5562 (211.5428)  TotalL: 220.0831 (218.0308)  time: 0.8557  data: 0.2477
+[11-03 04:41:57] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [3709/4947]  eta: 0:17:41  tlr: 7e-05  tnm: 0.00  Lm: 6.488 (6.484)  Lt: 5.802 (5.790)  Accm: 3.43 (3.45)  Acct: 5.54 (5.43)  TaskL: 6.4880 (6.4843)  DistillL: 209.6153 (210.0757)  TotalL: 216.1155 (216.5601)  time: 0.8373  data: 0.2470
+[11-03 04:59:34] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   7/20]  [4946/4947]  eta: 0:00:00  tlr: 6.9e-05  tnm: 0.00  Lm: 6.474 (6.449)  Lt: 5.791 (5.770)  Accm: 3.48 (3.65)  Acct: 5.65 (5.59)  TaskL: 6.4735 (6.4488)  DistillL: 213.5562 (211.0709)  TotalL: 220.0831 (217.5197)  time: 0.8467  data: 0.2492
+[11-03 04:59:34] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   7/20]   Total time:      1:10:37   (0.857 s / it)
+[11-03 04:59:34] (distill/train_distill.py, line 361)=>      [ep7]  (training )  Lm: 6.438 (6.438), Lt: 5.750 (5.750),  Acc m&t: 3.65 5.72,  Remain: 14:00:31,  Finish: 2025-11-03 19:00
+[11-03 04:59:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [   0/4947]  eta: 1:14:53  tlr: 6.9e-05  tnm: 0.00  Lm: 6.426 (6.426)  Lt: 5.728 (5.728)  Accm: 3.53 (3.53)  Acct: 5.56 (5.56)  TaskL: 6.4257 (6.4257)  DistillL: 249.4401 (249.4401)  TotalL: 255.8658 (255.8658)  time: 0.9083  data: 0.2503
+[11-03 05:17:16] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [1236/4947]  eta: 0:53:04  tlr: 6.8e-05  tnm: 0.00  Lm: 6.423 (6.423)  Lt: 5.721 (5.721)  Accm: 3.69 (3.69)  Acct: 5.77 (5.77)  TaskL: 6.4234 (6.4234)  DistillL: 236.3851 (236.3851)  TotalL: 242.8085 (242.8085)  time: 0.8600  data: 0.2465
+[11-03 05:34:56] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [2473/4947]  eta: 0:35:21  tlr: 6.6e-05  tnm: 0.00  Lm: 6.421 (6.414)  Lt: 5.728 (5.728)  Accm: 3.76 (3.71)  Acct: 5.79 (5.78)  TaskL: 6.4211 (6.4145)  DistillL: 237.7570 (236.8424)  TotalL: 244.1536 (243.2569)  time: 0.8716  data: 0.2502
+[11-03 05:52:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [3709/4947]  eta: 0:17:41  tlr: 6.5e-05  tnm: 0.00  Lm: 6.423 (6.425)  Lt: 5.721 (5.725)  Accm: 3.64 (3.66)  Acct: 5.86 (5.82)  TaskL: 6.4234 (6.4245)  DistillL: 230.5436 (228.3525)  TotalL: 236.9524 (234.7770)  time: 0.8617  data: 0.2531
+[11-03 06:10:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   8/20]  [4946/4947]  eta: 0:00:00  tlr: 6.4e-05  tnm: 0.00  Lm: 6.425 (6.425)  Lt: 5.728 (5.735)  Accm: 3.74 (3.68)  Acct: 5.90 (5.83)  TaskL: 6.4248 (6.4246)  DistillL: 223.3301 (223.8981)  TotalL: 229.7511 (230.3227)  time: 0.8445  data: 0.2438
+[11-03 06:10:15] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   8/20]   Total time:      1:10:40   (0.857 s / it)
+[11-03 06:12:40] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 166.3371, Logits相似度: 0.1956
+[11-03 06:12:40] (distill/train_distill.py, line 332)=>  [*] [ep8]  (val 50000)  Lm: 6.4419, Lt: 5.7556, Acc m&t: 3.67 5.73,  Val cost: 144.85s
+[11-03 06:12:40] (distill/train_distill.py, line 340)=> [saving ckpt] ep9 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep009.pth (best)
+[11-03 06:12:47] (distill/train_distill.py, line 361)=>      [ep8]  (training )  Lm: 6.438 (6.442), Lt: 5.750 (5.756),  Acc m&t: 3.67 5.73,  Remain: 12:38:14,  Finish: 2025-11-03 18:48
+[11-03 06:12:48] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [   0/4947]  eta: 1:18:05  tlr: 6.4e-05  tnm: 0.00  Lm: 6.430 (6.430)  Lt: 5.739 (5.739)  Accm: 3.53 (3.53)  Acct: 5.50 (5.50)  TaskL: 6.4296 (6.4296)  DistillL: 231.9090 (231.9090)  TotalL: 238.3385 (238.3385)  time: 0.9472  data: 0.2565
+[11-03 06:30:26] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [1236/4947]  eta: 0:52:55  tlr: 6.3e-05  tnm: 0.00  Lm: 6.469 (6.469)  Lt: 5.801 (5.801)  Accm: 3.43 (3.43)  Acct: 5.24 (5.24)  TaskL: 6.4689 (6.4689)  DistillL: 221.3236 (221.3236)  TotalL: 227.7925 (227.7925)  time: 0.8583  data: 0.2397
+[11-03 06:48:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [2473/4947]  eta: 0:35:16  tlr: 6.1e-05  tnm: 0.00  Lm: 6.430 (6.452)  Lt: 5.814 (5.805)  Accm: 3.53 (3.49)  Acct: 5.50 (5.34)  TaskL: 6.4296 (6.4519)  DistillL: 210.7383 (214.8258)  TotalL: 217.2465 (221.2777)  time: 0.8395  data: 0.2477
+[11-03 07:05:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [3709/4947]  eta: 0:17:40  tlr: 6e-05  tnm: 0.00  Lm: 6.438 (6.451)  Lt: 5.793 (5.797)  Accm: 3.57 (3.59)  Acct: 5.53 (5.46)  TaskL: 6.4380 (6.4505)  DistillL: 216.9552 (216.9124)  TotalL: 223.4325 (223.3629)  time: 0.8595  data: 0.2439
+[11-03 07:23:24] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [   9/20]  [4946/4947]  eta: 0:00:00  tlr: 5.9e-05  tnm: 0.00  Lm: 6.446 (6.458)  Lt: 5.778 (5.793)  Accm: 3.56 (3.58)  Acct: 5.55 (5.49)  TaskL: 6.4464 (6.4585)  DistillL: 210.7383 (214.2368)  TotalL: 217.2465 (220.6953)  time: 0.8532  data: 0.2469
+[11-03 07:23:24] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [   9/20]   Total time:      1:10:36   (0.856 s / it)
+[11-03 07:23:24] (distill/train_distill.py, line 361)=>      [ep9]  (training )  Lm: 6.438 (6.442), Lt: 5.743 (5.743),  Acc m&t: 3.68 5.87,  Remain: 11:35:02,  Finish: 2025-11-03 18:58
+[11-03 07:23:25] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [   0/4947]  eta: 1:28:17  tlr: 5.9e-05  tnm: 0.00  Lm: 6.353 (6.353)  Lt: 5.683 (5.683)  Accm: 3.95 (3.95)  Acct: 5.90 (5.90)  TaskL: 6.3528 (6.3528)  DistillL: 202.3443 (202.3443)  TotalL: 208.6971 (208.6971)  time: 1.0709  data: 0.5157
+[11-03 07:41:00] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [1236/4947]  eta: 0:52:48  tlr: 5.8e-05  tnm: 0.00  Lm: 6.326 (6.326)  Lt: 5.669 (5.669)  Accm: 4.29 (4.29)  Acct: 6.30 (6.30)  TaskL: 6.3259 (6.3259)  DistillL: 218.1882 (218.1882)  TotalL: 224.5142 (224.5142)  time: 0.8681  data: 0.2437
+[11-03 07:58:39] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [2473/4947]  eta: 0:35:15  tlr: 5.7e-05  tnm: 0.00  Lm: 6.353 (6.386)  Lt: 5.683 (5.700)  Accm: 3.95 (3.98)  Acct: 5.90 (6.15)  TaskL: 6.3528 (6.3864)  DistillL: 234.0322 (229.3974)  TotalL: 240.3313 (235.7838)  time: 0.8502  data: 0.2352
+[11-03 08:16:18] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [3709/4947]  eta: 0:17:39  tlr: 5.5e-05  tnm: 0.00  Lm: 6.386 (6.394)  Lt: 5.721 (5.714)  Accm: 3.88 (3.93)  Acct: 5.94 (6.11)  TaskL: 6.3856 (6.3944)  DistillL: 224.3277 (225.7038)  TotalL: 230.6864 (232.0982)  time: 0.8389  data: 0.2447
+[11-03 08:34:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  10/20]  [4946/4947]  eta: 0:00:00  tlr: 5.4e-05  tnm: 0.00  Lm: 6.418 (6.404)  Lt: 5.683 (5.704)  Accm: 3.80 (3.86)  Acct: 5.93 (6.07)  TaskL: 6.4183 (6.4038)  DistillL: 214.6233 (222.0270)  TotalL: 221.0415 (228.4309)  time: 0.8577  data: 0.2388
+[11-03 08:34:01] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  10/20]   Total time:      1:10:36   (0.856 s / it)
+[11-03 08:34:01] (distill/train_distill.py, line 361)=>      [ep10]  (training )  Lm: 6.438 (6.452), Lt: 5.743 (5.757),  Acc m&t: 3.68 5.87,  Remain: 10:36:55,  Finish: 2025-11-03 19:10
+[11-03 08:34:01] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [   0/4947]  eta: 1:09:00  tlr: 5.4e-05  tnm: 0.00  Lm: 6.553 (6.553)  Lt: 5.833 (5.833)  Accm: 2.96 (2.96)  Acct: 5.35 (5.35)  TaskL: 6.5533 (6.5533)  DistillL: 179.8928 (179.8928)  TotalL: 186.4461 (186.4461)  time: 0.8371  data: 0.2810
+[11-03 08:51:42] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [1236/4947]  eta: 0:53:03  tlr: 5.3e-05  tnm: 0.00  Lm: 6.462 (6.462)  Lt: 5.778 (5.778)  Accm: 3.52 (3.52)  Acct: 5.77 (5.77)  TaskL: 6.4618 (6.4618)  DistillL: 191.8812 (191.8812)  TotalL: 198.3430 (198.3430)  time: 0.8540  data: 0.2510
+[11-03 09:09:18] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [2473/4947]  eta: 0:35:17  tlr: 5.2e-05  tnm: 0.00  Lm: 6.373 (6.432)  Lt: 5.722 (5.720)  Accm: 3.70 (3.58)  Acct: 6.20 (5.96)  TaskL: 6.3731 (6.4322)  DistillL: 203.8697 (198.6996)  TotalL: 210.2399 (205.1318)  time: 0.8476  data: 0.2443
+[11-03 09:26:58] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [3709/4947]  eta: 0:17:40  tlr: 5e-05  tnm: 0.00  Lm: 6.444 (6.453)  Lt: 5.745 (5.732)  Accm: 3.64 (3.58)  Acct: 5.83 (5.84)  TaskL: 6.4438 (6.4528)  DistillL: 196.8379 (196.4762)  TotalL: 203.2804 (202.9290)  time: 0.8637  data: 0.2616
+[11-03 09:44:37] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  11/20]  [4946/4947]  eta: 0:00:00  tlr: 4.9e-05  tnm: 0.00  Lm: 6.412 (6.445)  Lt: 5.755 (5.737)  Accm: 3.70 (3.62)  Acct: 5.93 (5.86)  TaskL: 6.4117 (6.4446)  DistillL: 190.5364 (195.2883)  TotalL: 196.9481 (201.7329)  time: 0.8551  data: 0.2364
+[11-03 09:44:37] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  11/20]   Total time:      1:10:36   (0.856 s / it)
+[11-03 09:47:02] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 157.8367, Logits相似度: 0.1954
+[11-03 09:47:02] (distill/train_distill.py, line 332)=>  [*] [ep11]  (val 50000)  Lm: 6.4228, Lt: 5.7210, Acc m&t: 3.74 5.95,  Val cost: 145.06s
+[11-03 09:47:02] (distill/train_distill.py, line 340)=> [saving ckpt] ep12 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep012.pth (best)
+[11-03 09:47:09] (distill/train_distill.py, line 361)=>      [ep11]  (training )  Lm: 6.423 (6.423), Lt: 5.721 (5.721),  Acc m&t: 3.74 5.95,  Remain: 9:10:02,  Finish: 2025-11-03 18:54
+[11-03 09:47:10] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [   0/4947]  eta: 1:08:08  tlr: 4.9e-05  tnm: 0.00  Lm: 6.382 (6.382)  Lt: 5.663 (5.663)  Accm: 4.28 (4.28)  Acct: 6.63 (6.63)  TaskL: 6.3817 (6.3817)  DistillL: 192.2237 (192.2237)  TotalL: 198.6054 (198.6054)  time: 0.8265  data: 0.2436
+[11-03 10:04:48] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [1236/4947]  eta: 0:52:57  tlr: 4.8e-05  tnm: 0.00  Lm: 6.414 (6.414)  Lt: 5.683 (5.683)  Accm: 3.93 (3.93)  Acct: 6.29 (6.29)  TaskL: 6.4139 (6.4139)  DistillL: 192.5284 (192.5284)  TotalL: 198.9423 (198.9423)  time: 0.8534  data: 0.2443
+[11-03 10:22:28] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [2473/4947]  eta: 0:35:18  tlr: 4.7e-05  tnm: 0.00  Lm: 6.446 (6.434)  Lt: 5.670 (5.678)  Accm: 3.58 (3.81)  Acct: 6.23 (6.27)  TaskL: 6.4460 (6.4344)  DistillL: 192.8331 (193.4786)  TotalL: 199.2791 (199.9130)  time: 0.8570  data: 0.2540
+[11-03 10:40:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [3709/4947]  eta: 0:17:39  tlr: 4.6e-05  tnm: 0.00  Lm: 6.415 (6.422)  Lt: 5.686 (5.703)  Accm: 3.62 (3.77)  Acct: 6.09 (6.08)  TaskL: 6.4149 (6.4217)  DistillL: 194.1061 (196.0904)  TotalL: 200.5668 (202.5121)  time: 0.8491  data: 0.2472
+[11-03 10:57:46] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  12/20]  [4946/4947]  eta: 0:00:00  tlr: 4.4e-05  tnm: 0.00  Lm: 6.446 (6.430)  Lt: 5.703 (5.712)  Accm: 3.67 (3.75)  Acct: 5.94 (6.02)  TaskL: 6.4460 (6.4297)  DistillL: 195.3791 (198.9756)  TotalL: 201.8545 (205.4052)  time: 0.8534  data: 0.2472
+[11-03 10:57:46] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  12/20]   Total time:      1:10:37   (0.856 s / it)
+[11-03 10:57:46] (distill/train_distill.py, line 361)=>      [ep12]  (training )  Lm: 6.423 (6.440), Lt: 5.721 (5.735),  Acc m&t: 3.74 5.95,  Remain: 8:14:17,  Finish: 2025-11-03 19:12
+[11-03 10:57:47] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [   0/4947]  eta: 1:15:20  tlr: 4.4e-05  tnm: 0.00  Lm: 6.411 (6.411)  Lt: 5.699 (5.699)  Accm: 3.72 (3.72)  Acct: 5.98 (5.98)  TaskL: 6.4106 (6.4106)  DistillL: 195.3645 (195.3645)  TotalL: 201.7752 (201.7752)  time: 0.9139  data: 0.3584
+[11-03 11:15:27] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [1236/4947]  eta: 0:53:00  tlr: 4.3e-05  tnm: 0.00  Lm: 6.401 (6.401)  Lt: 5.647 (5.647)  Accm: 3.85 (3.85)  Acct: 6.17 (6.17)  TaskL: 6.4011 (6.4011)  DistillL: 200.8921 (200.8921)  TotalL: 207.2933 (207.2933)  time: 0.8527  data: 0.2464
+[11-03 11:33:05] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [2473/4947]  eta: 0:35:18  tlr: 4.2e-05  tnm: 0.00  Lm: 6.392 (6.385)  Lt: 5.699 (5.676)  Accm: 3.97 (3.94)  Acct: 5.98 (5.98)  TaskL: 6.3916 (6.3851)  DistillL: 206.4198 (204.0608)  TotalL: 212.8113 (210.4460)  time: 0.8479  data: 0.2399
+[11-03 11:50:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [3709/4947]  eta: 0:17:40  tlr: 4.1e-05  tnm: 0.00  Lm: 6.401 (6.421)  Lt: 5.716 (5.724)  Accm: 3.85 (3.74)  Acct: 5.78 (5.74)  TaskL: 6.4011 (6.4205)  DistillL: 200.8921 (198.1125)  TotalL: 207.2933 (204.5330)  time: 0.8538  data: 0.2489
+[11-03 12:08:27] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  13/20]  [4946/4947]  eta: 0:00:00  tlr: 3.9e-05  tnm: 0.00  Lm: 6.411 (6.439)  Lt: 5.733 (5.729)  Accm: 3.72 (3.66)  Acct: 5.70 (5.73)  TaskL: 6.4106 (6.4387)  DistillL: 195.3645 (195.5029)  TotalL: 201.7752 (201.9416)  time: 0.8665  data: 0.2462
+[11-03 12:08:27] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  13/20]   Total time:      1:10:40   (0.857 s / it)
+[11-03 12:08:27] (distill/train_distill.py, line 361)=>      [ep13]  (training )  Lm: 6.423 (6.437), Lt: 5.721 (5.731),  Acc m&t: 3.74 5.95,  Remain: 7:02:32,  Finish: 2025-11-03 19:10
+[11-03 12:08:27] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [   0/4947]  eta: 1:07:49  tlr: 3.9e-05  tnm: 0.00  Lm: 6.512 (6.512)  Lt: 5.812 (5.812)  Accm: 3.24 (3.24)  Acct: 5.17 (5.17)  TaskL: 6.5119 (6.5119)  DistillL: 177.6335 (177.6335)  TotalL: 184.1454 (184.1454)  time: 0.8225  data: 0.2448
+[11-03 12:26:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [1236/4947]  eta: 0:52:53  tlr: 3.8e-05  tnm: 0.00  Lm: 6.511 (6.511)  Lt: 5.790 (5.790)  Accm: 3.20 (3.20)  Acct: 5.24 (5.24)  TaskL: 6.5113 (6.5113)  DistillL: 177.7964 (177.7964)  TotalL: 184.3077 (184.3077)  time: 0.8545  data: 0.2497
+[11-03 12:43:45] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [2473/4947]  eta: 0:35:18  tlr: 3.7e-05  tnm: 0.00  Lm: 6.512 (6.512)  Lt: 5.812 (5.801)  Accm: 3.24 (3.25)  Acct: 5.30 (5.31)  TaskL: 6.5119 (6.5122)  DistillL: 177.9594 (179.7081)  TotalL: 184.4701 (186.2204)  time: 0.8511  data: 0.2456
+[11-03 13:01:26] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [3709/4947]  eta: 0:17:40  tlr: 3.6e-05  tnm: 0.00  Lm: 6.511 (6.499)  Lt: 5.790 (5.784)  Accm: 3.29 (3.32)  Acct: 5.38 (5.44)  TaskL: 6.5113 (6.4992)  DistillL: 180.7454 (183.9639)  TotalL: 187.2578 (190.4632)  time: 0.8667  data: 0.2479
+[11-03 13:19:04] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  14/20]  [4946/4947]  eta: 0:00:00  tlr: 3.5e-05  tnm: 0.00  Lm: 6.511 (6.484)  Lt: 5.769 (5.773)  Accm: 3.35 (3.35)  Acct: 5.46 (5.49)  TaskL: 6.5107 (6.4840)  DistillL: 183.5315 (187.2645)  TotalL: 190.0456 (193.7485)  time: 0.8475  data: 0.2493
+[11-03 13:19:04] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  14/20]   Total time:      1:10:37   (0.857 s / it)
+[11-03 13:21:30] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 150.4858, Logits相似度: 0.1955
+[11-03 13:21:30] (distill/train_distill.py, line 332)=>  [*] [ep14]  (val 50000)  Lm: 6.4616, Lt: 5.7697, Acc m&t: 3.56 5.65,  Val cost: 144.98s
+[11-03 13:21:30] (distill/train_distill.py, line 340)=> [saving ckpt] ep15 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep015.pth (best)
+[11-03 13:21:37] (distill/train_distill.py, line 361)=>      [ep14]  (training )  Lm: 6.423 (6.462), Lt: 5.721 (5.770),  Acc m&t: 3.74 5.95,  Remain: 5:46:15,  Finish: 2025-11-03 19:05
+[11-03 13:21:38] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [   0/4947]  eta: 1:14:38  tlr: 3.5e-05  tnm: 0.00  Lm: 6.369 (6.369)  Lt: 5.701 (5.701)  Accm: 3.78 (3.78)  Acct: 5.76 (5.76)  TaskL: 6.3688 (6.3688)  DistillL: 220.5612 (220.5612)  TotalL: 226.9300 (226.9300)  time: 0.9053  data: 0.2472
+[11-03 13:39:15] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [1236/4947]  eta: 0:52:53  tlr: 3.3e-05  tnm: 0.00  Lm: 6.339 (6.339)  Lt: 5.633 (5.633)  Accm: 3.98 (3.98)  Acct: 6.18 (6.18)  TaskL: 6.3391 (6.3391)  DistillL: 217.7419 (217.7419)  TotalL: 224.0810 (224.0810)  time: 0.8577  data: 0.2625
+[11-03 13:56:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [2473/4947]  eta: 0:35:17  tlr: 3.2e-05  tnm: 0.00  Lm: 6.369 (6.361)  Lt: 5.696 (5.654)  Accm: 4.06 (4.01)  Acct: 6.21 (6.19)  TaskL: 6.3688 (6.3610)  DistillL: 214.9226 (208.0727)  TotalL: 221.2320 (214.4337)  time: 0.8600  data: 0.2473
+[11-03 14:14:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [3709/4947]  eta: 0:17:40  tlr: 3.1e-05  tnm: 0.00  Lm: 6.387 (6.378)  Lt: 5.699 (5.670)  Accm: 3.92 (3.93)  Acct: 6.07 (6.12)  TaskL: 6.3868 (6.3777)  DistillL: 209.9752 (207.3115)  TotalL: 216.3438 (213.6892)  time: 0.8639  data: 0.2447
+[11-03 14:32:14] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  15/20]  [4946/4947]  eta: 0:00:00  tlr: 3e-05  tnm: 0.00  Lm: 6.405 (6.393)  Lt: 5.696 (5.667)  Accm: 3.78 (3.87)  Acct: 6.19 (6.14)  TaskL: 6.4048 (6.3927)  DistillL: 205.0279 (205.2680)  TotalL: 211.4557 (211.6608)  time: 0.8847  data: 0.2434
+[11-03 14:32:14] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  15/20]   Total time:      1:10:36   (0.856 s / it)
+[11-03 14:32:14] (distill/train_distill.py, line 361)=>      [ep15]  (training )  Lm: 6.420 (6.420), Lt: 5.719 (5.719),  Acc m&t: 3.74 5.96,  Remain: 4:50:50,  Finish: 2025-11-03 19:23
+[11-03 14:32:14] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [   0/4947]  eta: 1:09:37  tlr: 3e-05  tnm: 0.00  Lm: 6.368 (6.368)  Lt: 5.727 (5.727)  Accm: 4.02 (4.02)  Acct: 5.69 (5.69)  TaskL: 6.3677 (6.3677)  DistillL: 202.0425 (202.0425)  TotalL: 208.4102 (208.4102)  time: 0.8445  data: 0.2614
+[11-03 14:49:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [1236/4947]  eta: 0:52:55  tlr: 2.8e-05  tnm: 0.00  Lm: 6.396 (6.396)  Lt: 5.752 (5.752)  Accm: 4.02 (4.02)  Acct: 5.75 (5.75)  TaskL: 6.3956 (6.3956)  DistillL: 203.1382 (203.1382)  TotalL: 209.5338 (209.5338)  time: 0.8610  data: 0.2575
+[11-03 15:07:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [2473/4947]  eta: 0:35:21  tlr: 2.7e-05  tnm: 0.00  Lm: 6.424 (6.423)  Lt: 5.751 (5.751)  Accm: 4.01 (3.91)  Acct: 5.81 (5.88)  TaskL: 6.4235 (6.4227)  DistillL: 202.0425 (197.4849)  TotalL: 208.4102 (203.9076)  time: 0.8691  data: 0.2554
+[11-03 15:25:12] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [3709/4947]  eta: 0:17:40  tlr: 2.6e-05  tnm: 0.00  Lm: 6.442 (6.432)  Lt: 5.764 (5.759)  Accm: 3.86 (3.84)  Acct: 5.75 (5.83)  TaskL: 6.4421 (6.4322)  DistillL: 194.1103 (192.3941)  TotalL: 200.5326 (198.8263)  time: 0.8519  data: 0.2495
+[11-03 15:42:53] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  16/20]  [4946/4947]  eta: 0:00:00  tlr: 2.5e-05  tnm: 0.00  Lm: 6.424 (6.430)  Lt: 5.751 (5.734)  Accm: 3.81 (3.84)  Acct: 5.81 (5.90)  TaskL: 6.4235 (6.4297)  DistillL: 187.3293 (191.3811)  TotalL: 193.7490 (197.8108)  time: 0.8547  data: 0.2452
+[11-03 15:42:53] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  16/20]   Total time:      1:10:39   (0.857 s / it)
+[11-03 15:42:53] (distill/train_distill.py, line 361)=>      [ep16]  (training )  Lm: 6.420 (6.425), Lt: 5.719 (5.722),  Acc m&t: 3.74 5.96,  Remain: 3:32:02,  Finish: 2025-11-03 19:14
+[11-03 15:42:54] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [   0/4947]  eta: 1:09:52  tlr: 2.5e-05  tnm: 0.00  Lm: 6.484 (6.484)  Lt: 5.815 (5.815)  Accm: 3.57 (3.57)  Acct: 5.85 (5.85)  TaskL: 6.4839 (6.4839)  DistillL: 198.4275 (198.4275)  TotalL: 204.9113 (204.9113)  time: 0.8475  data: 0.2638
+[11-03 16:00:35] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [1236/4947]  eta: 0:53:05  tlr: 2.4e-05  tnm: 0.00  Lm: 6.436 (6.436)  Lt: 5.743 (5.743)  Accm: 3.71 (3.71)  Acct: 5.89 (5.89)  TaskL: 6.4362 (6.4362)  DistillL: 190.7354 (190.7354)  TotalL: 197.1716 (197.1716)  time: 0.8656  data: 0.2579
+[11-03 16:18:13] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [2473/4947]  eta: 0:35:19  tlr: 2.2e-05  tnm: 0.00  Lm: 6.457 (6.443)  Lt: 5.733 (5.740)  Accm: 3.62 (3.68)  Acct: 5.93 (5.97)  TaskL: 6.4568 (6.4431)  DistillL: 198.4275 (195.2969)  TotalL: 204.9113 (201.7400)  time: 0.8400  data: 0.2510
+[11-03 16:35:52] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [3709/4947]  eta: 0:17:40  tlr: 2.1e-05  tnm: 0.00  Lm: 6.470 (6.457)  Lt: 5.748 (5.746)  Accm: 3.59 (3.63)  Acct: 5.92 (5.96)  TaskL: 6.4704 (6.4572)  DistillL: 190.7354 (187.3117)  TotalL: 197.1716 (193.7689)  time: 0.8641  data: 0.2649
+[11-03 16:53:29] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  17/20]  [4946/4947]  eta: 0:00:00  tlr: 2e-05  tnm: 0.00  Lm: 6.457 (6.451)  Lt: 5.733 (5.743)  Accm: 3.62 (3.67)  Acct: 5.93 (6.01)  TaskL: 6.4568 (6.4512)  DistillL: 189.2079 (187.6909)  TotalL: 195.6347 (194.1421)  time: 0.8371  data: 0.2362
+[11-03 16:53:29] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  17/20]   Total time:      1:10:36   (0.856 s / it)
+[11-03 16:55:55] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 144.7954, Logits相似度: 0.1957
+[11-03 16:55:55] (distill/train_distill.py, line 332)=>  [*] [ep17]  (val 50000)  Lm: 6.4028, Lt: 5.7054, Acc m&t: 3.80 5.92,  Val cost: 145.35s
+[11-03 16:55:55] (distill/train_distill.py, line 340)=> [saving ckpt] ep18 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep018.pth (best)
+[11-03 16:56:02] (distill/train_distill.py, line 361)=>      [ep17]  (training )  Lm: 6.403 (6.403), Lt: 5.705 (5.705),  Acc m&t: 3.80 5.96,  Remain: 2:16:53,  Finish: 2025-11-03 19:10
+[11-03 16:56:03] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [   0/4947]  eta: 1:16:03  tlr: 2e-05  tnm: 0.00  Lm: 6.458 (6.458)  Lt: 5.780 (5.780)  Accm: 3.56 (3.56)  Acct: 5.91 (5.91)  TaskL: 6.4576 (6.4576)  DistillL: 173.3356 (173.3356)  TotalL: 179.7932 (179.7932)  time: 0.9226  data: 0.2533
+[11-03 17:13:41] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [1236/4947]  eta: 0:52:57  tlr: 1.9e-05  tnm: 0.00  Lm: 6.451 (6.451)  Lt: 5.754 (5.754)  Accm: 3.61 (3.61)  Acct: 5.91 (5.91)  TaskL: 6.4512 (6.4512)  DistillL: 176.2732 (176.2732)  TotalL: 182.7244 (182.7244)  time: 0.8568  data: 0.2460
+[11-03 17:31:20] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [2473/4947]  eta: 0:35:18  tlr: 1.7e-05  tnm: 0.00  Lm: 6.458 (6.453)  Lt: 5.744 (5.750)  Accm: 3.56 (3.56)  Acct: 5.90 (5.76)  TaskL: 6.4576 (6.4534)  DistillL: 179.2108 (182.0891)  TotalL: 185.6556 (188.5425)  time: 0.8513  data: 0.2481
+[11-03 17:48:59] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [3709/4947]  eta: 0:17:40  tlr: 1.6e-05  tnm: 0.00  Lm: 6.458 (6.456)  Lt: 5.737 (5.745)  Accm: 3.51 (3.51)  Acct: 5.80 (5.75)  TaskL: 6.4578 (6.4561)  DistillL: 180.9946 (182.2614)  TotalL: 187.4490 (188.7175)  time: 0.8421  data: 0.2483
+[11-03 18:06:40] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  18/20]  [4946/4947]  eta: 0:00:00  tlr: 1.5e-05  tnm: 0.00  Lm: 6.458 (6.466)  Lt: 5.744 (5.757)  Accm: 3.45 (3.49)  Acct: 5.70 (5.74)  TaskL: 6.4580 (6.4660)  DistillL: 179.2108 (179.8932)  TotalL: 185.6556 (186.3593)  time: 0.8604  data: 0.2459
+[11-03 18:06:40] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  18/20]   Total time:      1:10:38   (0.857 s / it)
+[11-03 18:06:40] (distill/train_distill.py, line 361)=>      [ep18]  (training )  Lm: 6.403 (6.411), Lt: 5.705 (5.712),  Acc m&t: 3.80 5.98,  Remain: 1:10:46,  Finish: 2025-11-03 19:17
+[11-03 18:06:41] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [   0/4947]  eta: 1:15:05  tlr: 1.5e-05  tnm: 0.00  Lm: 6.463 (6.463)  Lt: 5.745 (5.745)  Accm: 3.29 (3.29)  Acct: 5.35 (5.35)  TaskL: 6.4629 (6.4629)  DistillL: 197.9295 (197.9295)  TotalL: 204.3924 (204.3924)  time: 0.9108  data: 0.2394
+[11-03 18:24:18] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [1236/4947]  eta: 0:52:53  tlr: 1.4e-05  tnm: 0.00  Lm: 6.378 (6.378)  Lt: 5.690 (5.690)  Accm: 3.85 (3.85)  Acct: 5.95 (5.95)  TaskL: 6.3783 (6.3783)  DistillL: 207.8119 (207.8119)  TotalL: 214.1902 (214.1902)  time: 0.8564  data: 0.2413
+[11-03 18:41:59] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [2473/4947]  eta: 0:35:19  tlr: 1.3e-05  tnm: 0.00  Lm: 6.451 (6.403)  Lt: 5.684 (5.688)  Accm: 3.57 (3.75)  Acct: 6.04 (5.98)  TaskL: 6.4515 (6.4027)  DistillL: 197.9295 (198.9873)  TotalL: 204.3924 (205.3900)  time: 0.8440  data: 0.2487
+[11-03 18:59:40] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [3709/4947]  eta: 0:17:40  tlr: 1.1e-05  tnm: 0.00  Lm: 6.410 (6.394)  Lt: 5.660 (5.669)  Accm: 3.81 (3.83)  Acct: 6.30 (6.13)  TaskL: 6.4097 (6.3940)  DistillL: 198.9492 (199.2327)  TotalL: 205.3646 (205.6267)  time: 0.8522  data: 0.2423
+[11-03 19:17:18] (/VAR_train/utils/misc.py, line 314)=> [Ep]: [  19/20]  [4946/4947]  eta: 0:00:00  tlr: 1e-05  tnm: 0.00  Lm: 6.368 (6.384)  Lt: 5.636 (5.654)  Accm: 3.86 (3.83)  Acct: 6.31 (6.17)  TaskL: 6.3679 (6.3839)  DistillL: 197.9295 (195.5083)  TotalL: 204.3924 (201.8922)  time: 0.8584  data: 0.2476
+[11-03 19:17:18] (/VAR_train/utils/misc.py, line 336)=> [Ep]: [  19/20]   Total time:      1:10:38   (0.857 s / it)
+[11-03 19:19:44] (/distillation_trainer.py, line 334)=> [验证蒸馏] 蒸馏损失: 140.9252, Logits相似度: 0.1958
+[11-03 19:19:44] (distill/train_distill.py, line 332)=>  [*] [ep19]  (val 50000)  Lm: 6.4057, Lt: 5.7065, Acc m&t: 3.79 6.01,  Val cost: 145.09s
+[11-03 19:19:44] (distill/train_distill.py, line 340)=> [saving ckpt] ep20 ...     [saving ckpt](*) finished!  @ /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-ep020.pth (best)
+[11-03 19:19:51] (distill/train_distill.py, line 361)=>      [ep19]  (training )  Lm: 6.403 (6.406), Lt: 5.705 (5.707),  Acc m&t: 3.80 6.01,  Remain: 0:00:13,  Finish: 2025-11-03 19:17
+[11-03 19:19:51] (distill/train_distill.py, line 367)=> \n\n
+[11-03 19:19:51] (distill/train_distill.py, line 368)=>   [*] [蒸馏训练完成]  总耗时: 23.9h,   Lm: 6.403 (6.405708258492606),   Lt: 5.705 (5.706524767194476)
+[11-03 19:19:51] (distill/train_distill.py, line 379)=>   [*] [蒸馏统计]  总步数: 98940
+[11-03 19:19:51] (distill/train_distill.py, line 380)=>                    平均任务损失: 6.4146
+[11-03 19:19:51] (distill/train_distill.py, line 381)=>                    平均蒸馏损失: 186.1497
+[11-03 19:19:51] (distill/train_distill.py, line 382)=>                    平均相似度: 0.9524
+[11-03 19:19:51] (distill/train_distill.py, line 384)=> \n\n
+[11-03 19:19:57] (distill/train_distill.py, line 391)=> final args:
+
+{
+  data_path           : /home/project/ImageNet-1K
+  exp_name            : text
+  vfast               : 0
+  vae_path            : /home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth
+  var_path            : /home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth
+  tfast               : 0
+  depth               : 16
+  sparsity            : 0.4
+  ini                 : -1
+  hd                  : 0.02
+  aln                 : 0.5
+  alng                : 0.001
+  fp16                : 1
+  tblr                : 0.0001
+  tlr                 : 0.00010117187500000001
+  twd                 : 0.05
+  twde                : 0.05
+  tclip               : 2.0
+  ls                  : 0.0
+  maxlayer            : 16
+  bs                  : 259
+  batch_size          : 37
+  glb_batch_size      : 259
+  ac                  : 1
+  ep                  : 20
+  wp                  : 0.4
+  wp0                 : 0.005
+  wpe                 : 0.1
+  sche                : lin0
+  opt                 : adamw
+  afuse               : True
+  saln                : False
+  anorm               : True
+  fuse                : True
+  pn                  : 1_2_3_4_5_6_8_10_13_16
+  patch_size          : 16
+  patch_nums          : (1, 2, 3, 4, 5, 6, 8, 10, 13, 16)
+  resos               : (16, 32, 48, 64, 80, 96, 128, 160, 208, 256)
+  data_load_reso      : 256
+  mid_reso            : 1.125
+  hflip               : False
+  workers             : 0
+  pg                  : 0.0
+  pg0                 : 4
+  pgwp                : 0.06666666666666667
+  ckpt_save_interval  : 3
+  cmd                 : --enable_distillation=1 --teacher_model_path=/home/project/daily/AR/model_zoo/var_d16.pth --teacher_depth=16 --distill_type=normal --distill_alpha=0.5 --distill_beta=0.5 --depth=16 --bs=256 --ep=20 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/prune_d16_0.4sparsity_150i_256eva_scale.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth --data_path=/home/project/ImageNet-1K --local_out_dir_path=/home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  branch              : main
+  commit_id           : 1bf7cb2895b8461062f9dbaf1daffb729258724e
+  commit_msg          : 25.9.25
+  acc_mean            : 3.7856006835188185
+  acc_tail            : 6.012608749525888
+  L_mean              : 6.405708258492606
+  L_tail              : 5.706524767194476
+  vacc_mean           : 3.8300883769989014
+  vacc_tail           : 6.224358558654785
+  vL_mean             : 6.383810043334961
+  vL_tail             : 5.640880584716797
+  grad_norm           : 0.0
+  cur_lr              : 1.0117187500000001e-05
+  cur_wd              : 0.05
+  cur_it              : 4947/4947
+  cur_ep              : 20/20
+  remain_time         : -
+  finish_time         : 2025-11-03 19:18
+  local_out_dir_path  : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256
+  tb_log_dir_path     : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b259ep20adamlr0.0001wd0.05
+  log_txt_path        : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/log.txt
+  last_ckpt_path      : /home/project/real_prune/VAR_train/train_result/fix_distill_d16_normal_256/ar-ckpt-last.pth
+  tf32                : True
+  seed                : None
+  transfer            : False
+  enable_distillation : True
+  teacher_model_path  : /home/project/daily/AR/model_zoo/var_d16.pth
+  teacher_depth       : 16
+  distill_type        : normal
+  distill_alpha       : 0.5
+  distill_beta        : 0.5
+  distill_temperature : 4.0
+  scale_weights_str   : 2.0,1.8,1.6,1.4,1.2,1.0,0.8,0.6,0.4,0.2
+  use_feature_distill : False
+  feature_layers_str  : 4,8,12,15
+  use_attention_distill: False
+  distill_warmup_epochs: 5
+  distill_schedule    : constant
+  same_seed_for_all_ranks: 0
+  local_debug         : False
+  dbg_nan             : False
+}
+

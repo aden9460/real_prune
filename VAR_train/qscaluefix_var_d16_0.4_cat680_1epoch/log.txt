@@ -1,0 +1,9 @@
+{
+"is_master": true,
+"name": "text",
+"cmd": "--depth=16 --bs=256 --ep=1 --fp16=1 --alng=1e-3 --wpe=0.1 --sparsity=0.4 --local_out_dir_path=/home/project/real_prune/VAR_train/qscaluefix_var_d16_0.4_cat680_1epoch --data_path=/home/project/ImageNet-1K --var_path=/home/project/real_prune/slimgpt_pub_prune/sparsity_model/real_d16_0.4sparsity_100i_cat680_scale_slimgpt_fix_prune.pth --vae_path=/home/project/daily/AR/model_zoo/vae_ch160v4096z32.pth",
+"commit": "47e3e1552586935e2af7cbeec34c6a14ab127eec",
+"branch": "main",
+"tb_log_dir_path": "/home/project/real_prune/VAR_train/qscaluefix_var_d16_0.4_cat680_1epoch/tb-VARd16__pn1_2_3_4_5_6_8_10_13_16__b259ep1adamlr0.0001wd0.05"
+}
+{'it': '4947/4947', 'ep': '1/1', 'lr': 1.0117187500000001e-05, 'wd': 0.05, 'grad_norm': 1.8326922178268432, 'L_mean': 6.6472353254045755, 'L_tail': 6.014453288487026, 'acc_mean': 3.246082216501236, 'acc_tail': 5.0295609555074146, 'vL_mean': 6.284584045410156, 'vL_tail': 5.58391809463501, 'vacc_mean': 4.109617710113525, 'vacc_tail': 6.42938232421875, 'remain_time': '-', 'finish_time': '2025-11-14 14:07'}
